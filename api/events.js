@@ -4,24 +4,21 @@ const fallbackEvents = [
     badge: 'SÁB · 24 AGO · 22:00',
     venue: 'Audio Club · São Paulo, SP',
     attendeesLabel: '1,2 mil pessoas já vão',
-    tags: ['Techno', 'House', 'Eletrônica'],
-    image: '/assets/event-techno.webp'
+    tags: ['Techno', 'House', 'Eletrônica']
   },
   {
     name: 'Sunset Club Opening',
     badge: 'SEX · 23 AGO · 23:00',
     venue: 'Selina · Rio de Janeiro, RJ',
     attendeesLabel: '842 pessoas já vão',
-    tags: ['House', 'Deep House', 'Indie Dance'],
-    image: '/assets/event-sunset.webp'
+    tags: ['House', 'Deep House', 'Indie Dance']
   },
   {
     name: 'Rooftop Sessions by Rolê',
     badge: 'DOM · 25 AGO · 20:00',
     venue: 'Vista Rooftop · Belo Horizonte, MG',
     attendeesLabel: '653 pessoas já vão',
-    tags: ['Hip Hop', 'Funk', 'Open Format'],
-    image: '/assets/event-rooftop.webp'
+    tags: ['Hip Hop', 'Funk', 'Open Format']
   }
 ];
 
@@ -34,8 +31,7 @@ function normalizeEvent(event, index) {
     venue: event.venue || event.location || event.place || fallback.venue,
     attendees: Number(event.attendees || event.attendee_count || event.participants_count || 0),
     attendeesLabel: event.attendeesLabel || event.attendees_label || undefined,
-    tags: Array.isArray(event.tags) ? event.tags : (Array.isArray(event.genres) ? event.genres : fallback.tags),
-    image: event.image || event.cover_url || event.coverUrl || event.image_url || fallback.image
+    tags: Array.isArray(event.tags) ? event.tags : (Array.isArray(event.genres) ? event.genres : fallback.tags)
   };
 }
 
@@ -65,7 +61,7 @@ export default async function handler(req, res) {
     const events = rawEvents.slice(0, limit).map(normalizeEvent);
     res.setHeader('Cache-Control', 'public, max-age=30, s-maxage=180, stale-while-revalidate=3600');
     return res.status(200).json({ events, source: 'upstream' });
-  } catch (error) {
+  } catch {
     res.setHeader('Cache-Control', 'public, max-age=30, s-maxage=60');
     return res.status(200).json({ events: fallbackEvents.slice(0, limit), source: 'fallback', warning: 'upstream_unavailable' });
   }
