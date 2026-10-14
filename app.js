@@ -37,11 +37,10 @@
   });
 
   const bindStoreLinks = () => {
-    const entries = [
+    [
       ['[data-app-store]', config.APP_STORE_URL],
       ['[data-play-store]', config.GOOGLE_PLAY_URL]
-    ];
-    entries.forEach(([selector, url]) => {
+    ].forEach(([selector, url]) => {
       document.querySelectorAll(selector).forEach((el) => {
         if (url) {
           el.href = url;
@@ -61,46 +60,22 @@
   bindStoreLinks();
 
   const mockEvents = [
-    {
-      name: 'Techno District by KØDA',
-      badge: 'SÁB · 24 AGO · 22:00',
-      venue: 'Audio Club · São Paulo, SP',
-      attendeesLabel: '1,2 mil pessoas já vão',
-      tags: ['Techno', 'House', 'Eletrônica'],
-      image: '/assets/event-techno.webp'
-    },
-    {
-      name: 'Sunset Club Opening',
-      badge: 'SEX · 23 AGO · 23:00',
-      venue: 'Selina · Rio de Janeiro, RJ',
-      attendeesLabel: '842 pessoas já vão',
-      tags: ['House', 'Deep House', 'Indie Dance'],
-      image: '/assets/event-sunset.webp'
-    },
-    {
-      name: 'Rooftop Sessions by Rolê',
-      badge: 'DOM · 25 AGO · 20:00',
-      venue: 'Vista Rooftop · Belo Horizonte, MG',
-      attendeesLabel: '653 pessoas já vão',
-      tags: ['Hip Hop', 'Funk', 'Open Format'],
-      image: '/assets/event-rooftop.webp'
-    }
+    { name: 'Techno District by KØDA', badge: 'SÁB · 24 AGO · 22:00', venue: 'Audio Club · São Paulo, SP', attendeesLabel: '1,2 mil pessoas já vão', tags: ['Techno', 'House', 'Eletrônica'] },
+    { name: 'Sunset Club Opening', badge: 'SEX · 23 AGO · 23:00', venue: 'Selina · Rio de Janeiro, RJ', attendeesLabel: '842 pessoas já vão', tags: ['House', 'Deep House', 'Indie Dance'] },
+    { name: 'Rooftop Sessions by Rolê', badge: 'DOM · 25 AGO · 20:00', venue: 'Vista Rooftop · Belo Horizonte, MG', attendeesLabel: '653 pessoas já vão', tags: ['Hip Hop', 'Funk', 'Open Format'] }
   ];
 
-  const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, (char) => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#039;', '"': '&quot;'
-  })[char]);
+  const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#039;', '"': '&quot;' })[char]);
 
   const renderEvents = (events) => {
     const grid = document.querySelector('[data-events-grid]');
     if (!grid) return;
     grid.innerHTML = events.slice(0, 3).map((event, index) => {
-      const image = event.image || mockEvents[index % mockEvents.length].image;
       const tags = Array.isArray(event.tags) ? event.tags : [];
       return `
-        <article class="event-card reveal is-visible">
+        <article class="event-card theme-${index % 3}">
           <div class="event-card-media">
-            <img src="${escapeHtml(image)}" alt="${escapeHtml(event.name)}" loading="lazy" />
+            <img src="/assets/role-icon.png" alt="" />
             <span class="event-badge">${escapeHtml(event.badge || event.dateLabel || 'Próximo Rolê')}</span>
           </div>
           <div class="event-card-body">
@@ -151,20 +126,14 @@
     const original = contactButton.innerHTML;
     contactButton.textContent = 'Abrindo WhatsApp…';
     if (contactStatus) contactStatus.textContent = '';
-
     try {
       if (!contactToken) contactToken = await getContactToken();
       if (!contactToken) throw new Error('Não foi possível validar esta sessão.');
-
       const response = await fetch(config.CONTACT_URL || '/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin',
-        body: JSON.stringify({
-          token: contactToken,
-          startedAt,
-          website: ''
-        })
+        body: JSON.stringify({ token: contactToken, startedAt, website: '' })
       });
       const payload = await response.json().catch(() => ({}));
       if (!response.ok || !payload.url) throw new Error(payload.error || 'Contato temporariamente indisponível.');
