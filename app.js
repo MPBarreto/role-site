@@ -60,10 +60,28 @@ import config from './config.js';
   };
   bindStoreLinks();
 
-  const mockEvents = [
-    { name: 'Techno District by KØDA', badge: 'SÁB · 24 AGO · 22:00', venue: 'Audio Club · São Paulo, SP', attendeesLabel: '1,2 mil pessoas já vão', tags: ['Techno', 'House', 'Eletrônica'] },
-    { name: 'Sunset Club Opening', badge: 'SEX · 23 AGO · 23:00', venue: 'Selina · Rio de Janeiro, RJ', attendeesLabel: '842 pessoas já vão', tags: ['House', 'Deep House', 'Indie Dance'] },
-    { name: 'Rooftop Sessions by Rolê', badge: 'DOM · 25 AGO · 20:00', venue: 'Vista Rooftop · Belo Horizonte, MG', attendeesLabel: '653 pessoas já vão', tags: ['Hip Hop', 'Funk', 'Open Format'] }
+  const featureCards = [
+    {
+      name: 'Descubra onde ir',
+      badge: 'DESCOBERTA',
+      venue: 'Encontre eventos por cidade, estilo e data.',
+      attendeesLabel: 'A programação em um só lugar',
+      tags: ['Eventos', 'Cidades', 'Estilos']
+    },
+    {
+      name: 'Conecte-se antes da noite',
+      badge: 'CONEXÕES',
+      venue: 'Veja quem também vai e escolheu participar da experiência social.',
+      attendeesLabel: 'Participação opcional',
+      tags: ['Match', 'Conversa', 'Privacidade']
+    },
+    {
+      name: 'Entre com seu ingresso',
+      badge: 'CHECK-IN',
+      venue: 'Acesse o ingresso digital no app e valide a entrada por QR Code.',
+      attendeesLabel: 'Do ingresso à entrada',
+      tags: ['Ingresso', 'QR Code', 'Check-in']
+    }
   ];
 
   const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#039;', '"': '&quot;' })[char]);
@@ -99,10 +117,9 @@ import config from './config.js';
       if (!response.ok) throw new Error('events unavailable');
       const payload = await response.json();
       const events = Array.isArray(payload) ? payload : payload.events;
-      if (!Array.isArray(events) || !events.length) throw new Error('empty events');
-      renderEvents(events);
+      renderEvents(Array.isArray(events) && events.length ? events : featureCards);
     } catch (_) {
-      renderEvents(mockEvents);
+      renderEvents(featureCards);
     }
   };
   loadEvents();

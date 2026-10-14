@@ -8,7 +8,7 @@ Site institucional/comercial do Rolê, desenvolvido a partir dos mockups aprovad
 - Dor orientada à solução
 - Solução e jornada: evento → ingresso → pessoas → match → conversa → check-in
 - Benefícios para casa e público
-- Próximos eventos via API com fallback local
+- Eventos reais via API; sem feed disponível, cards explicam os recursos do app
 - CTA para App Store / Google Play
 - FAQ
 - Footer e WhatsApp protegido por endpoint server-side
@@ -43,6 +43,8 @@ Configure em produção:
 
 - `EVENTS_API_URL`: endpoint público/privado que retorna os próximos eventos.
 - `EVENTS_API_TOKEN`: opcional, enviado como Bearer token pelo proxy server-side.
+
+Sem eventos configurados ou quando a origem estiver indisponível, o site apresenta os recursos de descoberta, conexões sociais e check-in no lugar de exibir uma agenda fictícia.
 
 O adaptador aceita uma lista direta ou `{ events: [...] }` / `{ data: [...] }` e normaliza campos comuns como `title`, `cover_url`, `location`, `attendee_count` e `genres`.
 
