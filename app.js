@@ -49,6 +49,16 @@
     });
   }
 
+  function configureProducerLinks() {
+    const producerUrl = config.PRODUCER_SIGNUP_URL || '';
+    if (!producerUrl) return;
+    $$('[data-producer-link]').forEach(el => {
+      el.href = producerUrl;
+      el.target = '_blank';
+      el.rel = 'noopener';
+    });
+  }
+
   function formatEventDate(iso) {
     if (!iso) return 'PRÓXIMO ROLÊ';
     const date = new Date(iso);
@@ -119,7 +129,7 @@
       grid.innerHTML = '';
       events.forEach(event => grid.appendChild(renderEvent(event)));
       updateHeroFromEvent(events[0]);
-    } catch (error) {
+    } catch {
       grid.innerHTML = '';
       const fallback = [
         { name: 'Sunset Club', badge: 'SÁB · 22:00', venue: 'São Paulo, SP', attendeesLabel: 'Novos encontros começam aqui', tags: ['House', 'Sunset', 'Conexões'] },
@@ -141,12 +151,6 @@
   }
 
   async function openContact() {
-    const producerUrl = config.PRODUCER_SIGNUP_URL || '';
-    const trigger = document.activeElement;
-    if (trigger?.hasAttribute?.('data-producer-link') && producerUrl) {
-      window.open(producerUrl, '_blank', 'noopener');
-      return;
-    }
     try {
       const token = await getContactToken();
       const endpoint = config.CONTACT_URL || '/api/contact';
@@ -163,13 +167,17 @@
     }
   }
 
-  $$('[data-contact-trigger], [data-producer-link]').forEach(el => el.addEventListener('click', event => {
-    const producerUrl = config.PRODUCER_SIGNUP_URL || '';
-    if (el.hasAttribute('data-producer-link') && producerUrl) return;
+  $$('[data-contact-trigger]').forEach(el => el.addEventListener('click', event => {
+    event.preventDefault();
+    openContact();
+  }));
+  $$('[data-producer-link]').forEach(el => el.addEventListener('click', event => {
+    if (config.PRODUCER_SIGNUP_URL) return;
     event.preventDefault();
     openContact();
   }));
 
   configureStoreLinks();
+  configureProducerLinks();
   loadEvents();
 })();
