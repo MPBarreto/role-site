@@ -16,25 +16,23 @@ Site institucional/comercial do Rolê, desenvolvido a partir dos mockups aprovad
 ## Rodar localmente
 
 ```bash
-python3 -m http.server 4173
+npm install
+npm run dev
 ```
 
-Abra `http://localhost:4173`.
+Abra o endereço mostrado pelo Vite, normalmente `http://localhost:5173`.
 
-> As rotas `/api/*` são Vercel Functions. Em um servidor estático local elas não rodam; o site usa fallback para eventos e o WhatsApp fica indisponível até executar em ambiente Vercel/compatível.
+Para gerar a versão de produção, use `npm run build`; os arquivos ficam em `dist/`. `npm run preview` abre essa versão localmente.
+
+As rotas `/api/*` continuam como Vercel Functions. O servidor do Vite não executa essas funções: para validar eventos reais e o contato do WhatsApp localmente, use `vercel dev` com as variáveis do servidor configuradas.
 
 ## Configuração das lojas
 
-Edite `config.js`:
+Copie `.env.example` para `.env.local` e configure os valores públicos do Vite:
 
-```js
-window.ROLE_CONFIG = {
-  APP_STORE_URL: "https://apps.apple.com/...",
-  GOOGLE_PLAY_URL: "https://play.google.com/store/apps/...",
-  EVENTS_API_URL: "/api/events",
-  CONTACT_TOKEN_URL: "/api/contact-token",
-  CONTACT_URL: "/api/contact"
-};
+```env
+VITE_APP_STORE_URL=https://apps.apple.com/...
+VITE_GOOGLE_PLAY_URL=https://play.google.com/store/apps/...
 ```
 
 Enquanto as URLs estiverem vazias, os botões aparecem visualmente, mas não redirecionam para uma loja incorreta.
@@ -69,7 +67,7 @@ SITE_HOST=seu-dominio.com
 ## Antes de publicar
 
 - Trocar `example.com` em `robots.txt` e `sitemap.xml` pelo domínio final.
-- Inserir URLs oficiais da App Store e Google Play em `config.js`.
+- Inserir URLs oficiais da App Store e Google Play em `.env.local`.
 - Configurar variáveis do WhatsApp e API de eventos.
 - Substituir as páginas legais provisórias pelo texto jurídico aprovado.
 
@@ -83,4 +81,4 @@ SITE_HOST=seu-dominio.com
 - Signal Lime: `#B8FF3D`
 - Tipografia: Inter/system sans
 
-A logo e o ícone em `assets/` são os arquivos oficiais fornecidos para o projeto.
+A logo, o ícone, o manifesto e os arquivos de SEO ficam em `public/`; os arquivos públicos mantêm seus caminhos no site publicado.

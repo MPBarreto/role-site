@@ -1,5 +1,6 @@
+import config from './config.js';
+
 (() => {
-  const config = window.ROLE_CONFIG || {};
   const startedAt = Date.now();
   let contactToken = null;
 
