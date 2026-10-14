@@ -1,0 +1,13 @@
+{
+  "name": "role-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site institucional e comercial do app Rolê",
+  "scripts": {
+    "dev": "python3 -m http.server 4173",
+    "check": "node --check app.js && node --check api/events.js && node --check api/contact.js && node --check api/contact-token.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
