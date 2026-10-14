@@ -1,38 +1,23 @@
-const fallbackEvents = [
-  {
-    name: 'Techno District by KØDA',
-    badge: 'SÁB · 24 AGO · 22:00',
-    venue: 'Audio Club · São Paulo, SP',
-    attendeesLabel: '1,2 mil pessoas já vão',
-    tags: ['Techno', 'House', 'Eletrônica']
-  },
-  {
-    name: 'Sunset Club Opening',
-    badge: 'SEX · 23 AGO · 23:00',
-    venue: 'Selina · Rio de Janeiro, RJ',
-    attendeesLabel: '842 pessoas já vão',
-    tags: ['House', 'Deep House', 'Indie Dance']
-  },
-  {
-    name: 'Rooftop Sessions by Rolê',
-    badge: 'DOM · 25 AGO · 20:00',
-    venue: 'Vista Rooftop · Belo Horizonte, MG',
-    attendeesLabel: '653 pessoas já vão',
-    tags: ['Hip Hop', 'Funk', 'Open Format']
-  }
+const FALLBACK_EVENTS = [
+  { name: 'Sunset Club', badge: 'SÁB · 22:00', venue: 'São Paulo, SP', attendeesLabel: 'Novos encontros começam aqui', tags: ['House', 'Sunset', 'Conexões'] },
+  { name: 'After Hours', badge: 'SEX · 23:30', venue: 'Curitiba, PR', attendeesLabel: 'Descubra quem também vai', tags: ['Eletrônica', 'Club', 'Late night'] },
+  { name: 'Baile do Céu', badge: 'SÁB · 21:00', venue: 'São Paulo, SP', attendeesLabel: 'Seu próximo Rolê', tags: ['Funk', 'Open format', 'Dance'] }
 ];
 
-function normalizeEvent(event, index) {
-  const fallback = fallbackEvents[index % fallbackEvents.length];
-  return {
-    id: event.id || event.slug || index,
-    name: event.name || event.title || fallback.name,
-    badge: event.badge || event.dateLabel || event.date_label || fallback.badge,
-    venue: event.venue || event.location || event.place || fallback.venue,
-    attendees: Number(event.attendees || event.attendee_count || event.participants_count || 0),
-    attendeesLabel: event.attendeesLabel || event.attendees_label || undefined,
-    tags: Array.isArray(event.tags) ? event.tags : (Array.isArray(event.genres) ? event.genres : fallback.tags)
-  };
+const DEFAULT_SUPABASE_URL = 'https://zilnfxbgzrwzqvspfkev.supabase.co';
+const DEFAULT_SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_t-4MPj54cKvKn-78FeToyA_rk8Xbsvw';
+
+function publicCoverUrl(baseUrl, path) {
+  if (!path) return null;
+  return `${baseUrl}/storage/v1/object/public/role-event-covers/${String(path).split('/').map(encodeURIComponent).join('/')}`;
+}
+function authHeaders(key) {
+  return { Accept: 'application/json', apikey: key, Authorization: `Bearer ${key}` };
+}
+async function fetchJson(url, headers) {
+  const response = await fetch(url, { headers });
+  if (!response.ok) throw new Error(`${response.status}:${url}`);
+  return response.json();
 }
 
 export default async function handler(req, res) {
@@ -41,28 +26,67 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const limit = Math.max(1, Math.min(Number(req.query?.limit || 3), 12));
-  const upstream = process.env.EVENTS_API_URL;
-
-  if (!upstream) {
-    res.setHeader('Cache-Control', 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400');
-    return res.status(200).json({ events: fallbackEvents.slice(0, limit), source: 'fallback' });
-  }
+  const limit = Math.max(1, Math.min(Number(req.query?.limit || 6), 12));
+  const baseUrl = (process.env.SUPABASE_URL || DEFAULT_SUPABASE_URL).replace(/\/$/, '');
+  const publishableKey = process.env.SUPABASE_PUBLISHABLE_KEY || DEFAULT_SUPABASE_PUBLISHABLE_KEY;
 
   try {
-    const headers = { Accept: 'application/json' };
-    if (process.env.EVENTS_API_TOKEN) headers.Authorization = `Bearer ${process.env.EVENTS_API_TOKEN}`;
-    const url = new URL(upstream);
-    url.searchParams.set('limit', String(limit));
-    const response = await fetch(url, { headers });
-    if (!response.ok) throw new Error(`Upstream returned ${response.status}`);
-    const payload = await response.json();
-    const rawEvents = Array.isArray(payload) ? payload : (payload.events || payload.data || []);
-    const events = rawEvents.slice(0, limit).map(normalizeEvent);
-    res.setHeader('Cache-Control', 'public, max-age=30, s-maxage=180, stale-while-revalidate=3600');
-    return res.status(200).json({ events, source: 'upstream' });
-  } catch {
-    res.setHeader('Cache-Control', 'public, max-age=30, s-maxage=60');
-    return res.status(200).json({ events: fallbackEvents.slice(0, limit), source: 'fallback', warning: 'upstream_unavailable' });
+    const headers = authHeaders(publishableKey);
+    const now = new Date().toISOString();
+    const eventsUrl = new URL(`${baseUrl}/rest/v1/events`);
+    eventsUrl.searchParams.set('select', 'id,title,category,venue_name,city,starts_at,currency,cover_image_path,vibe_tags,public_share_code');
+    eventsUrl.searchParams.set('status', 'eq.published');
+    eventsUrl.searchParams.set('starts_at', `gt.${now}`);
+    eventsUrl.searchParams.set('order', 'starts_at.asc');
+    eventsUrl.searchParams.set('limit', String(limit));
+
+    const events = await fetchJson(eventsUrl, headers);
+    if (!Array.isArray(events) || !events.length) {
+      res.setHeader('Cache-Control', 'public, max-age=30, s-maxage=120, stale-while-revalidate=600');
+      return res.status(200).json({ events: FALLBACK_EVENTS.slice(0, limit), source: 'fallback' });
+    }
+
+    const ids = events.map(event => event.id);
+    const ticketUrl = new URL(`${baseUrl}/rest/v1/event_ticket_types`);
+    ticketUrl.searchParams.set('select', 'event_id,price_minor,inventory_sold,status');
+    ticketUrl.searchParams.set('event_id', `in.(${ids.join(',')})`);
+    ticketUrl.searchParams.set('status', 'eq.active');
+    const ticketTypes = await fetchJson(ticketUrl, headers);
+
+    const ticketStats = new Map();
+    for (const ticket of ticketTypes || []) {
+      const current = ticketStats.get(ticket.event_id) || { sold: 0, minPriceMinor: null };
+      current.sold += Number(ticket.inventory_sold || 0);
+      const price = Number(ticket.price_minor);
+      if (Number.isFinite(price)) current.minPriceMinor = current.minPriceMinor === null ? price : Math.min(current.minPriceMinor, price);
+      ticketStats.set(ticket.event_id, current);
+    }
+
+    const normalized = events.map(event => {
+      const stat = ticketStats.get(event.id) || { sold: 0, minPriceMinor: null };
+      return {
+        id: event.id,
+        name: event.title,
+        title: event.title,
+        category: event.category,
+        venueName: event.venue_name,
+        city: event.city,
+        venue: [event.venue_name, event.city].filter(Boolean).join(' · '),
+        startsAt: event.starts_at,
+        currency: event.currency || 'BRL',
+        coverUrl: publicCoverUrl(baseUrl, event.cover_image_path),
+        tags: Array.isArray(event.vibe_tags) ? event.vibe_tags : [],
+        shareCode: event.public_share_code,
+        sold: stat.sold,
+        attendees: stat.sold,
+        minPriceMinor: stat.minPriceMinor
+      };
+    });
+
+    res.setHeader('Cache-Control', 'public, max-age=30, s-maxage=180, stale-while-revalidate=900');
+    return res.status(200).json({ events: normalized, source: 'supabase' });
+  } catch (error) {
+    res.setHeader('Cache-Control', 'public, max-age=20, s-maxage=60');
+    return res.status(200).json({ events: FALLBACK_EVENTS.slice(0, limit), source: 'fallback', warning: 'events_source_unavailable' });
   }
 }
