@@ -2,9 +2,9 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rolê — Ingressos, conexões e noites que fazem o público voltar</title>
-  <meta name="description" content="O Rolê une gestão de ingressos, descoberta de eventos e matches entre quem vai para a mesma noite. Venda antes, aumente o comparecimento e crie recorrência." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rolê — Venda ingressos. Crie conexões.</title>
+  <meta name="description" content="O Rolê une gestão de ingressos, descoberta de eventos e matches entre quem vai para a mesma noite — ajudando sua casa a vender antes, aumentar o comparecimento e criar recorrência." />
   <meta name="theme-color" content="#09070D" />
   <meta property="og:title" content="Rolê — Venda ingressos. Crie conexões." />
   <meta property="og:description" content="Ticketing por baixo. Experiência social por cima." />
@@ -12,8 +12,6 @@
   <link rel="icon" href="/assets/role-icon.png" />
   <link rel="apple-touch-icon" href="/assets/role-icon.png" />
   <link rel="manifest" href="/manifest.webmanifest" />
-  <link rel="preload" as="image" href="/assets/nightlife-bg.webp" fetchpriority="high" />
-  <link rel="preload" as="image" href="/assets/hero-phones.webp" fetchpriority="high" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
@@ -21,9 +19,7 @@
 
   <header class="site-header" data-header>
     <div class="container nav-wrap">
-      <a href="#top" class="brand" aria-label="Rolê — início">
-        <img src="/assets/logo-role-white.png" alt="Rolê" width="154" height="51" />
-      </a>
+      <a class="brand" href="#top" aria-label="Rolê — início"><img src="/assets/logo-role-white.png" alt="Rolê" /></a>
       <nav class="main-nav" aria-label="Navegação principal">
         <a href="#como-funciona">Como funciona</a>
         <a href="#beneficios">Benefícios</a>
@@ -34,23 +30,16 @@
         <a class="btn btn-ghost btn-small" href="#app">Baixe o app</a>
         <a class="btn btn-primary btn-small" href="#contato">Leve o Rolê para sua casa</a>
       </div>
-      <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" data-menu-toggle>
-        <span></span><span></span><span></span>
-      </button>
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" data-menu-toggle><span></span><span></span><span></span></button>
     </div>
     <div class="mobile-menu" data-mobile-menu>
-      <a href="#como-funciona">Como funciona</a>
-      <a href="#beneficios">Benefícios</a>
-      <a href="#eventos">Eventos</a>
-      <a href="#faq">FAQ</a>
-      <a href="#app">Baixe o app</a>
-      <a href="#contato">Leve o Rolê para sua casa</a>
+      <a href="#como-funciona">Como funciona</a><a href="#beneficios">Benefícios</a><a href="#eventos">Eventos</a><a href="#faq">FAQ</a><a href="#app">Baixe o app</a><a href="#contato">Leve o Rolê para sua casa</a>
     </div>
   </header>
 
   <main id="main">
     <section class="hero section" id="top" aria-labelledby="hero-title">
-      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="ambient ambient-hero" aria-hidden="true"><img src="/assets/role-icon.png" alt="" /></div>
       <div class="container hero-grid">
         <div class="hero-copy reveal">
           <p class="eyebrow">Ticketing + conexões</p>
@@ -60,13 +49,41 @@
             <a class="btn btn-primary" href="#contato">Leve o Rolê para sua casa <span aria-hidden="true">→</span></a>
             <a class="btn btn-ghost" href="#como-funciona"><span class="play-dot" aria-hidden="true">▶</span> Veja como funciona</a>
           </div>
-          <ul class="feature-pills" aria-label="Recursos principais">
-            <li>Ingressos</li><li>Matches</li><li>Check-in</li><li>Dados</li>
-          </ul>
+          <ul class="feature-pills" aria-label="Recursos principais"><li>Ingressos</li><li>Matches</li><li>Check-in</li><li>Dados</li></ul>
         </div>
-        <figure class="hero-art reveal reveal-delay-1">
-          <img src="/assets/hero-phones.webp" alt="Telas do Rolê mostrando compra de ingressos e pessoas que também vão ao evento" width="905" height="815" fetchpriority="high" />
-        </figure>
+
+        <div class="phones-stage reveal reveal-delay-1" aria-label="Prévia do aplicativo Rolê">
+          <article class="phone phone-event">
+            <div class="phone-top"><span>9:41</span><img src="/assets/logo-role-white.png" alt="" /><span>♡</span></div>
+            <div class="event-cover coded-cover cover-techno"><img src="/assets/role-icon.png" alt="" /><span>Em alta</span></div>
+            <div class="phone-body">
+              <p class="phone-kicker">SÁB · 24 AGO · 22:00</p>
+              <h3>Techno District<br />by KØDA</h3>
+              <p class="phone-muted">⌖ Audio Club · São Paulo, SP</p>
+              <div class="chips"><span>Techno</span><span>House</span><span>Eletrônica</span></div>
+              <h4>Ingressos</h4>
+              <div class="ticket-row"><span><b>Pista</b><small>R$ 70,00</small></span><span class="qty">− &nbsp;1&nbsp; +</span></div>
+              <div class="ticket-row"><span><b>Área VIP</b><small>R$ 120,00</small></span><span class="qty">+</span></div>
+              <button type="button" tabindex="-1">Finalizar compra</button>
+            </div>
+          </article>
+
+          <article class="phone phone-people">
+            <div class="phone-top"><span>9:41</span><img src="/assets/logo-role-white.png" alt="" /><span>⌕</span></div>
+            <div class="phone-body">
+              <h3 class="people-title">Pessoas que também vão</h3>
+              <div class="story-row"><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="people-list">
+                <div><i class="avatar a1"></i><span><b>Luísa</b><small>Também vai · Techno District</small></span><em>+</em></div>
+                <div><i class="avatar a2"></i><span><b>Rafa</b><small>Também vai · Techno District</small></span><em>+</em></div>
+                <div><i class="avatar a3"></i><span><b>Marina</b><small>Também vai · Techno District</small></span><em>+</em></div>
+                <div><i class="avatar a4"></i><span><b>João</b><small>Também vai · Techno District</small></span><em>+</em></div>
+                <div><i class="avatar a5"></i><span><b>Bea</b><small>Também vai · Techno District</small></span><em>+</em></div>
+              </div>
+            </div>
+            <div class="phone-nav"><span>⌂</span><span>⌕</span><span>◎</span><span>○</span></div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -77,80 +94,54 @@
           <h2 id="pain-title">Seu público não escolhe <span>uma noite só pela atração.</span></h2>
           <p>Ele quer saber onde vale a pena estar, quem também vai e se aquela noite realmente promete. Quando o ingresso termina na compra, sua casa perde a chance de transformar expectativa em presença e presença em recorrência.</p>
           <div class="pain-cards">
-            <article class="mini-card">
-              <span class="icon-badge" aria-hidden="true">↗</span>
-              <h3>Venda de última hora</h3>
-              <p>Pouca previsibilidade antes da noite.</p>
-            </article>
-            <article class="mini-card">
-              <span class="icon-badge" aria-hidden="true">◇</span>
-              <h3>Eventos parecidos</h3>
-              <p>Difícil diferenciar só pela programação.</p>
-            </article>
-            <article class="mini-card">
-              <span class="icon-badge" aria-hidden="true">↻</span>
-              <h3>Tudo recomeça do zero</h3>
-              <p>Pouco vínculo entre uma noite e a próxima.</p>
-            </article>
+            <article class="mini-card"><span class="icon-badge">↗</span><h3>Venda de última hora</h3><p>Pouca previsibilidade antes da noite.</p></article>
+            <article class="mini-card"><span class="icon-badge">◇</span><h3>Eventos parecidos</h3><p>Difícil diferenciar só pela programação.</p></article>
+            <article class="mini-card"><span class="icon-badge">↻</span><h3>Tudo recomeça do zero</h3><p>Pouco vínculo entre uma noite e a próxima.</p></article>
           </div>
           <p class="section-punch">O ingresso pode ser o início da experiência — <span>não o fim da venda.</span></p>
         </div>
-        <div class="pain-photo reveal reveal-delay-1" role="img" aria-label="Pessoas aproveitando uma noite em uma casa de eventos"></div>
+        <div class="club-scene pain-scene reveal reveal-delay-1" aria-hidden="true"><img src="/assets/role-icon.png" alt="" /><div class="crowd"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
       </div>
     </section>
 
     <section class="solution section" id="como-funciona" aria-labelledby="solution-title">
-      <div class="container solution-inner">
+      <div class="container">
         <div class="section-heading centered reveal">
           <p class="eyebrow">Conheça o Rolê</p>
           <h2 id="solution-title">Ticketing por baixo.<br /><span>Experiência social por cima.</span></h2>
           <p>Sua casa cria e vende ingressos normalmente. Depois da compra, o participante descobre quem também vai, dá match e conversa antes da noite começar. No mesmo app, ele também faz o check-in.</p>
         </div>
 
-        <figure class="journey-art reveal reveal-delay-1">
-          <img src="/assets/solution-flow.webp" alt="Jornada do Rolê: descobrir evento, comprar ingresso, ver quem vai, dar match, conversar e fazer check-in" width="1600" height="510" loading="lazy" />
-        </figure>
-
-        <ol class="journey-mobile" aria-label="Jornada do público">
-          <li><span>1</span><strong>Descobre o evento</strong></li>
-          <li><span>2</span><strong>Compra o ingresso</strong></li>
-          <li><span>3</span><strong>Vê quem também vai</strong></li>
-          <li><span>4</span><strong>Dá match</strong></li>
-          <li><span>5</span><strong>Conversa</strong></li>
-          <li><span>6</span><strong>Faz check-in</strong></li>
+        <ol class="journey reveal reveal-delay-1" aria-label="Jornada do público no Rolê">
+          <li><div class="mini-phone"><span class="mini-bar"></span><div class="mini-art cover-techno"><img src="/assets/role-icon.png" alt="" /></div><b>Techno District</b><small>Ver ingressos</small></div><p><em>1</em>Descobre o evento</p></li>
+          <li><div class="mini-phone"><span class="mini-bar"></span><b>Ingressos</b><div class="mini-line"></div><div class="mini-line"></div><small>Finalizar compra</small></div><p><em>2</em>Compra o ingresso</p></li>
+          <li><div class="mini-phone"><span class="mini-bar"></span><b>Pessoas que vão</b><div class="mini-avatars"><i></i><i></i><i></i><i></i></div><div class="mini-line"></div><div class="mini-line"></div></div><p><em>3</em>Vê quem também vai</p></li>
+          <li><div class="mini-phone match-card"><span class="mini-bar"></span><img src="/assets/role-icon.png" alt="" /><strong>É match!</strong><small>Enviar mensagem</small></div><p><em>4</em>Dá match</p></li>
+          <li><div class="mini-phone"><span class="mini-bar"></span><b>Luísa</b><div class="bubble left"></div><div class="bubble right"></div><div class="bubble left short"></div></div><p><em>5</em>Conversa</p></li>
+          <li><div class="mini-phone qr-phone"><span class="mini-bar"></span><b>Seu ingresso</b><div class="fake-qr"></div><strong>✓ Check-in</strong></div><p><em>6</em>Faz check-in</p></li>
         </ol>
-
-        <p class="section-punch centered">O evento começa <span>antes do show.</span></p>
+        <p class="section-punch centered reveal">O evento começa <span>antes do show.</span></p>
       </div>
     </section>
 
     <section class="benefits section" id="beneficios" aria-labelledby="benefits-title">
       <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Valor para os dois lados</p>
-          <h2 id="benefits-title">Melhor para a casa.<br /><span>Mais interessante para quem vai.</span></h2>
-        </div>
+        <div class="section-heading reveal"><p class="eyebrow">Valor para os dois lados</p><h2 id="benefits-title">Melhor para a casa.<br /><span>Mais interessante para quem vai.</span></h2></div>
         <div class="benefit-grid">
-          <article class="benefit-panel reveal">
-            <h3>Para <span>sua casa</span></h3>
-            <ul>
-              <li><i aria-hidden="true">↗</i><div><strong>Mais venda antecipada</strong><span>Mais motivos para decidir antes da última hora.</span></div></li>
-              <li><i aria-hidden="true">◎</i><div><strong>Mais comparecimento</strong><span>Expectativa e interação aumentam o compromisso.</span></div></li>
-              <li><i aria-hidden="true">☆</i><div><strong>Mais diferenciação</strong><span>Sua noite oferece algo além do ingresso.</span></div></li>
-              <li><i aria-hidden="true">↻</i><div><strong>Mais recorrência</strong><span>Boas experiências fazem o público voltar.</span></div></li>
-              <li><i aria-hidden="true">▥</i><div><strong>Operação integrada</strong><span>Eventos, ingressos, participantes e check-in em um só fluxo.</span></div></li>
-            </ul>
-          </article>
-          <article class="benefit-panel reveal reveal-delay-1">
-            <h3>Para o <span>público</span></h3>
-            <ul>
-              <li><i aria-hidden="true">⌖</i><div><strong>Descobre onde ir</strong><span>Eventos em uma experiência visual e social.</span></div></li>
-              <li><i aria-hidden="true">◎</i><div><strong>Vê quem também vai</strong><span>Mais contexto antes da noite.</span></div></li>
-              <li><i aria-hidden="true">♡</i><div><strong>Dá match</strong><span>Conexões entre pessoas do mesmo evento.</span></div></li>
-              <li><i aria-hidden="true">◌</i><div><strong>Conversa antes do evento</strong><span>A expectativa começa antes da chegada.</span></div></li>
-              <li><i aria-hidden="true">◇</i><div><strong>Ingresso no mesmo app</strong><span>Compra, interação e check-in sem atrito.</span></div></li>
-            </ul>
-          </article>
+          <article class="benefit-panel reveal"><h3>Para <span>sua casa</span></h3><ul>
+            <li><i>↗</i><div><strong>Mais venda antecipada</strong><span>Mais motivos para decidir antes da última hora.</span></div></li>
+            <li><i>◎</i><div><strong>Mais comparecimento</strong><span>Expectativa e interação aumentam o compromisso.</span></div></li>
+            <li><i>☆</i><div><strong>Mais diferenciação</strong><span>Sua noite oferece algo além do ingresso.</span></div></li>
+            <li><i>↻</i><div><strong>Mais recorrência</strong><span>Boas experiências fazem o público voltar.</span></div></li>
+            <li><i>▥</i><div><strong>Operação integrada</strong><span>Eventos, ingressos, participantes e check-in em um só fluxo.</span></div></li>
+          </ul></article>
+          <article class="benefit-panel reveal reveal-delay-1"><h3>Para o <span>público</span></h3><ul>
+            <li><i>⌖</i><div><strong>Descobre onde ir</strong><span>Eventos em uma experiência visual e social.</span></div></li>
+            <li><i>◎</i><div><strong>Vê quem também vai</strong><span>Mais contexto antes da noite.</span></div></li>
+            <li><i>♡</i><div><strong>Dá match</strong><span>Conexões entre pessoas do mesmo evento.</span></div></li>
+            <li><i>◌</i><div><strong>Conversa antes do evento</strong><span>A expectativa começa antes da chegada.</span></div></li>
+            <li><i>◇</i><div><strong>Ingresso no mesmo app</strong><span>Compra, interação e check-in sem atrito.</span></div></li>
+          </ul></article>
         </div>
         <p class="section-punch centered reveal">O match é o mecanismo. <span>Mais presença e recorrência são o resultado.</span></p>
       </div>
@@ -158,40 +149,15 @@
 
     <section class="events-app section" id="eventos" aria-labelledby="events-title">
       <div class="container">
-        <div class="events-head reveal">
-          <div>
-            <p class="eyebrow">Já tem Rolê marcado</p>
-            <h2 id="events-title">Veja o que está acontecendo <span>nos próximos dias.</span></h2>
-            <p>Eventos, pessoas e novas conexões em um só lugar.</p>
-          </div>
-          <a class="btn btn-ghost btn-small" href="#app">Ver todos os eventos <span aria-hidden="true">→</span></a>
-        </div>
+        <div class="events-head reveal"><div><p class="eyebrow">Já tem Rolê marcado</p><h2 id="events-title">Veja o que está acontecendo <span>nos próximos dias.</span></h2><p>Eventos, pessoas e novas conexões em um só lugar.</p></div><a class="btn btn-ghost btn-small" href="#app">Ver todos os eventos →</a></div>
         <div class="event-grid" data-events-grid aria-live="polite"></div>
 
         <div class="download-block" id="app">
-          <div class="download-copy reveal">
-            <p class="eyebrow">Para quem vai</p>
-            <h2>Baixe o app e dê match no seu <span>próximo Rolê.</span></h2>
-            <p>Descubra eventos, veja quem também vai e comece a conexão antes da noite começar.</p>
-            <div class="store-row">
-              <a class="store-badge" data-app-store href="#app" aria-label="Baixar o Rolê na App Store">
-                <span class="store-icon" aria-hidden="true"></span><span><small>Baixar na</small><strong>App Store</strong></span>
-              </a>
-              <a class="store-badge" data-play-store href="#app" aria-label="Baixar o Rolê no Google Play">
-                <span class="play-triangle" aria-hidden="true"></span><span><small>Disponível no</small><strong>Google Play</strong></span>
-              </a>
-            </div>
-          </div>
+          <div class="download-copy reveal"><p class="eyebrow">Para quem vai</p><h2>Baixe o app e dê match no seu <span>próximo Rolê.</span></h2><p>Descubra eventos, veja quem também vai e comece a conexão antes da noite começar.</p><div class="store-row"><a class="store-badge" data-app-store href="#app"><span class="store-icon"></span><span><small>Baixar na</small><strong>App Store</strong></span></a><a class="store-badge" data-play-store href="#app"><span class="play-triangle"></span><span><small>Disponível no</small><strong>Google Play</strong></span></a></div></div>
           <div class="download-visual reveal reveal-delay-1">
-            <img class="download-phones" src="/assets/hero-phones.webp" alt="Telas do Rolê para descobrir eventos e pessoas" loading="lazy" />
-            <div class="qr-card" aria-label="QR code para baixar o Rolê">
-              <div class="qr-placeholder" aria-hidden="true">
-                <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                <img src="/assets/role-icon.png" alt="" />
-              </div>
-              <strong>Escaneie para baixar</strong>
-              <small data-qr-status>QR configurável quando as lojas estiverem publicadas.</small>
-            </div>
+            <div class="download-phone one"><img src="/assets/logo-role-white.png" alt="" /><div class="coded-cover cover-techno"><img src="/assets/role-icon.png" alt="" /></div><b>Techno District</b><span>Pessoas que também vão</span></div>
+            <div class="download-phone two"><img src="/assets/logo-role-white.png" alt="" /><b>Pessoas que também vão</b><div class="mini-people"><i></i><i></i><i></i><i></i></div><strong>92% match</strong></div>
+            <div class="qr-card"><div class="fake-qr qr-large"><img src="/assets/role-icon.png" alt="" /></div><strong>Escaneie para baixar</strong><small>QR configurável quando as lojas estiverem publicadas.</small></div>
           </div>
         </div>
       </div>
@@ -199,86 +165,33 @@
 
     <section class="faq section" id="faq" aria-labelledby="faq-title">
       <div class="container faq-grid">
-        <div class="faq-content reveal">
-          <p class="eyebrow">Dúvidas comuns</p>
-          <h2 id="faq-title">Perguntas <span>frequentes</span></h2>
-          <p class="faq-intro">Tudo o que sua casa precisa saber para começar.</p>
-
-          <div class="accordion" data-accordion>
-            <details open>
-              <summary><b>01</b><span>O Rolê substitui minha plataforma de ingressos?</span><i aria-hidden="true"></i></summary>
-              <p>Sim. O Rolê permite cadastrar eventos, criar ingressos, acompanhar participantes e realizar check-in, enquanto adiciona uma camada social à experiência.</p>
-            </details>
-            <details open>
-              <summary><b>02</b><span>Como funcionam os matches?</span><i aria-hidden="true"></i></summary>
-              <p>Depois da compra, participantes que optarem pela experiência social podem descobrir outras pessoas do mesmo evento. Quando o interesse é recíproco, acontece o match.</p>
-            </details>
-            <details>
-              <summary><b>03</b><span>Todo comprador precisa participar dos matches?</span><i aria-hidden="true"></i></summary>
-              <p>Não. A experiência social é opcional. O participante pode utilizar normalmente seu ingresso e o check-in sem aparecer para outras pessoas.</p>
-            </details>
-            <details>
-              <summary><b>04</b><span>Como minha equipe faz o check-in?</span><i aria-hidden="true"></i></summary>
-              <p>A casa pode autorizar atendentes para acessar o leitor de QR Code e validar ingressos na entrada, com permissões vinculadas à própria casa.</p>
-            </details>
-            <details>
-              <summary><b>05</b><span>Como começo?</span><i aria-hidden="true"></i></summary>
-              <p>Fale com nosso time. Avaliamos seus próximos eventos e ajudamos a configurar a operação inicial da casa no Rolê.</p>
-            </details>
+        <div class="faq-content reveal"><p class="eyebrow">Dúvidas comuns</p><h2 id="faq-title">Perguntas <span>frequentes</span></h2><p class="faq-intro">Tudo o que sua casa precisa saber para começar.</p>
+          <div class="accordion">
+            <details open><summary><b>01</b><span>O Rolê substitui minha plataforma de ingressos?</span><i></i></summary><p>Sim. O Rolê permite cadastrar eventos, criar ingressos, acompanhar participantes e realizar check-in, enquanto adiciona uma camada social à experiência.</p></details>
+            <details open><summary><b>02</b><span>Como funcionam os matches?</span><i></i></summary><p>Depois da compra, participantes que optarem pela experiência social podem descobrir outras pessoas do mesmo evento. Quando o interesse é recíproco, acontece o match.</p></details>
+            <details><summary><b>03</b><span>Todo comprador precisa participar dos matches?</span><i></i></summary><p>Não. A experiência social é opcional. O participante pode usar ingresso e check-in sem aparecer para outras pessoas.</p></details>
+            <details><summary><b>04</b><span>Como minha equipe faz o check-in?</span><i></i></summary><p>A casa pode autorizar atendentes para validar ingressos por QR Code na entrada, com permissões vinculadas à própria casa.</p></details>
+            <details><summary><b>05</b><span>Como começo?</span><i></i></summary><p>Fale com nosso time. Avaliamos seus próximos eventos e ajudamos a configurar a operação inicial.</p></details>
           </div>
-
-          <a class="btn btn-primary" href="#contato">Quero levar o Rolê para minha casa <span aria-hidden="true">→</span></a>
+          <a class="btn btn-primary" href="#contato">Quero levar o Rolê para minha casa →</a>
         </div>
-        <div class="faq-photo reveal reveal-delay-1" aria-hidden="true">
-          <img src="/assets/role-icon.png" alt="" />
-        </div>
+        <div class="club-scene faq-scene reveal reveal-delay-1" aria-hidden="true"><img src="/assets/role-icon.png" alt="" /><div class="crowd"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer" id="contato">
-    <div class="footer-bg" aria-hidden="true"></div>
+    <div class="footer-glow" aria-hidden="true"><img src="/assets/role-icon.png" alt="" /></div>
     <div class="container footer-grid">
-      <div class="footer-brand">
-        <img src="/assets/logo-role-white.png" alt="Rolê" width="174" height="58" />
-        <p>Vai pelo evento.<br /><span>Fica pelas conexões.</span></p>
-      </div>
-      <div class="footer-column">
-        <h2>Produto</h2>
-        <a href="#como-funciona">Como funciona</a>
-        <a href="#beneficios">Para produtores</a>
-        <a href="#faq">FAQ</a>
-      </div>
-      <div class="footer-column">
-        <h2>App</h2>
-        <a data-app-store href="#app">App Store</a>
-        <a data-play-store href="#app">Google Play</a>
-      </div>
-      <div class="footer-column">
-        <h2>Legal</h2>
-        <a href="/termos.html">Termos de Uso</a>
-        <a href="/privacidade.html">Privacidade</a>
-        <a href="/reembolsos.html">Reembolsos</a>
-      </div>
-      <div class="footer-contact">
-        <h2>Fale conosco</h2>
-        <button class="btn btn-primary whatsapp-btn" type="button" data-whatsapp>
-          <span aria-hidden="true">◉</span> Conversar no WhatsApp <span aria-hidden="true">→</span>
-        </button>
-        <p class="contact-status" data-contact-status aria-live="polite"></p>
-        <div class="store-row store-row-small">
-          <a class="store-badge" data-app-store href="#app"><span class="store-icon" aria-hidden="true"></span><span><small>Baixar na</small><strong>App Store</strong></span></a>
-          <a class="store-badge" data-play-store href="#app"><span class="play-triangle" aria-hidden="true"></span><span><small>Disponível no</small><strong>Google Play</strong></span></a>
-        </div>
-      </div>
+      <div class="footer-brand"><img src="/assets/logo-role-white.png" alt="Rolê" /><p>Vai pelo evento.<br /><span>Fica pelas conexões.</span></p></div>
+      <div class="footer-column"><h2>Produto</h2><a href="#como-funciona">Como funciona</a><a href="#beneficios">Para produtores</a><a href="#faq">FAQ</a></div>
+      <div class="footer-column"><h2>App</h2><a data-app-store href="#app">App Store</a><a data-play-store href="#app">Google Play</a></div>
+      <div class="footer-column"><h2>Legal</h2><a href="/termos.html">Termos de Uso</a><a href="/privacidade.html">Privacidade</a><a href="/reembolsos.html">Reembolsos</a></div>
+      <div class="footer-contact"><h2>Fale conosco</h2><button class="btn btn-primary whatsapp-btn" type="button" data-whatsapp>◉ Conversar no WhatsApp →</button><p class="contact-status" data-contact-status aria-live="polite"></p><div class="store-row store-row-small"><a class="store-badge" data-app-store href="#app"><span class="store-icon"></span><span><small>Baixar na</small><strong>App Store</strong></span></a><a class="store-badge" data-play-store href="#app"><span class="play-triangle"></span><span><small>Disponível no</small><strong>Google Play</strong></span></a></div></div>
     </div>
-    <div class="container footer-bottom">
-      <small>© 2026 Rolê. Todos os direitos reservados.</small>
-      <span>noite • pessoas • reciprocidade</span>
-    </div>
+    <div class="container footer-bottom"><small>© 2026 Rolê. Todos os direitos reservados.</small><span>noite • pessoas • reciprocidade</span></div>
   </footer>
 
-  <script src="/config.js"></script>
-  <script src="/app.js" defer></script>
+  <script src="/config.js"></script><script src="/app.js" defer></script>
 </body>
 </html>
