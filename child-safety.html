@@ -85,7 +85,7 @@
           <section>
             <h3>Dentro do aplicativo</h3>
             <p>Use a opção <strong>Denunciar</strong> no perfil ou no evento relacionado. Descreva o motivo com informações suficientes para localizar e analisar o caso. O Rolê registra o contexto selecionado e a descrição enviada para revisão. Denúncias de perfil e evento podem ser acompanhadas na área Segurança do app.</p>
-            <p>Conversas privadas não são anexadas automaticamente a uma denúncia de perfil ou evento. Se a preocupação envolver uma conversa ou não houver uma opção adequada no app, escreva para <a href="mailto:suporte@eyby.com.br?subject=Seguranca%20infantil%20no%20Role">suporte@eyby.com.br</a> com o nome ou identificador da conta, data aproximada e descrição segura do ocorrido. <strong>Não anexe imagens ou vídeos de abuso.</strong></p>
+            <p>Conversas privadas não são anexadas automaticamente a uma denúncia de perfil ou evento. Se a preocupação envolver uma conversa ou não houver uma opção adequada no app, escreva para <a href="#contato" data-protected-email data-email-user="c3Vwb3J0ZQ==" data-email-host="ZXlieS5jb20uYnI=" aria-label="Abrir e-mail para o canal de segurança infantil">suporte [arroba] eyby [ponto] com.br</a> com o nome ou identificador da conta, data aproximada e descrição segura do ocorrido. <strong>Não anexe imagens ou vídeos de abuso.</strong></p>
           </section>
         </div>
 
@@ -112,12 +112,24 @@
           <p class="legal-part-label">7 · Contato</p>
           <h2>Canal de segurança infantil.</h2>
           <section>
-            <p>Para comunicar uma preocupação de segurança infantil, entre em contato com a EYBY pelo e-mail <a href="mailto:suporte@eyby.com.br?subject=Seguranca%20infantil%20no%20Role">suporte@eyby.com.br</a>. Inclua apenas informações necessárias para localizar e avaliar o relato; não envie material de abuso sexual infantil.</p>
+            <p>Para comunicar uma preocupação de segurança infantil, entre em contato com a EYBY pelo e-mail <a href="#contato" data-protected-email data-email-user="c3Vwb3J0ZQ==" data-email-host="ZXlieS5jb20uYnI=" aria-label="Abrir e-mail para o canal de segurança infantil">suporte [arroba] eyby [ponto] com.br</a>. Inclua apenas informações necessárias para localizar e avaliar o relato; não envie material de abuso sexual infantil.</p>
             <p>Este canal também atende solicitações da equipe de segurança do Google Play sobre os padrões do Rolê.</p>
           </section>
         </div>
       </article>
     </div>
   </main>
+  <script>
+    document.querySelectorAll('[data-protected-email]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        const user = atob(link.dataset.emailUser);
+        const host = atob(link.dataset.emailHost);
+        const address = `${user}@${host}`;
+        const subject = encodeURIComponent('Seguranca infantil no Role');
+        window.location.href = `mailto:${address}?subject=${subject}`;
+      });
+    });
+  </script>
 </body>
 </html>
