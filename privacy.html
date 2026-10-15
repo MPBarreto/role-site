@@ -1,36 +1,306 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="robots" content="noindex">
-  <title>Privacidade — Rolê</title>
-  <link rel="canonical" href="https://role.events/privacy">
-  <link rel="icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/styles.css">
-  <style>.legal{max-width:850px;margin:0 auto;padding:140px 24px 100px}.legal img{width:130px;margin-bottom:45px}.legal h1{font-size:48px}.legal p{color:#b8b2bb;font-size:18px}.legal a{color:#ff2b8a}</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Política de Privacidade — Rolê</title>
+  <meta name="description" content="Política de Privacidade do Rolê aplicável ao Brasil, à União Europeia e ao Espaço Econômico Europeu." />
+  <meta name="theme-color" content="#09070D" />
+  <link rel="canonical" href="https://role.events/privacy" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .legal-shell{width:min(1180px,calc(100% - 48px));margin:0 auto;padding:42px 0 110px}
+    .legal-top{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 0 52px}.legal-top img{width:118px;height:auto}.legal-top-actions{display:flex;align-items:center;gap:20px}.legal-back{color:#b8b2bb;text-decoration:none;font-weight:700}.legal-back:hover{color:#fff}
+    .legal-hero{max-width:900px;padding:28px 0 62px}.legal-kicker{margin:0 0 16px;color:#ff2b8a;font-size:.82rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.legal-hero h1{margin:0;font-size:clamp(3rem,7vw,6.2rem);line-height:.92;letter-spacing:-.065em}.legal-hero h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}.legal-intro{max-width:800px;margin:28px 0 0;color:#c7c2ca;font-size:1.12rem;line-height:1.7}.legal-updated{margin-top:18px;color:#7f7884;font-size:.92rem}
+    .legal-layout{display:grid;grid-template-columns:250px minmax(0,790px);gap:72px;align-items:start}.legal-nav{position:sticky;top:28px;border-top:1px solid rgba(255,255,255,.12);padding-top:20px}.legal-nav strong{display:block;margin-bottom:14px;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:#817985}.legal-nav a{display:block;padding:7px 0;color:#b8b2bb;text-decoration:none;font-size:.94rem}.legal-nav a:hover{color:#ff2b8a}
+    .legal-content{min-width:0}.legal-part{margin:0 0 72px;padding-top:6px}.legal-part-label{margin:0 0 12px;color:#ff2b8a;font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.legal-part>h2{margin:0 0 28px;font-size:clamp(2rem,4vw,3.25rem);letter-spacing:-.04em;line-height:1.02}.legal-content section{scroll-margin-top:30px;margin:0 0 50px}.legal-content h3{margin:0 0 16px;font-size:1.45rem;letter-spacing:-.025em}.legal-content h4{margin:24px 0 10px;font-size:1.02rem}.legal-content p,.legal-content li{color:#b8b2bb;font-size:1rem;line-height:1.75}.legal-content p{margin:0 0 14px}.legal-content ul,.legal-content ol{margin:12px 0 18px;padding-left:22px}.legal-content li+li{margin-top:8px}.legal-content strong{color:#f7f5f8}.legal-content a{color:#ff5f9d}.legal-note{margin:22px 0;padding:18px 0;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12)}.legal-table{width:100%;border-collapse:collapse;margin:18px 0 24px}.legal-table th,.legal-table td{text-align:left;vertical-align:top;padding:14px 12px;border-bottom:1px solid rgba(255,255,255,.1);color:#b8b2bb;line-height:1.55}.legal-table th{color:#f7f5f8;font-size:.82rem;text-transform:uppercase;letter-spacing:.06em}.legal-table td:first-child{color:#f7f5f8;font-weight:700}.legal-identity{display:grid;gap:7px;margin:16px 0 0;padding:18px 0;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1)}.legal-identity span{color:#b8b2bb}.legal-identity .pending{font-style:italic;color:#817985}.legal-end{padding-top:28px;border-top:1px solid rgba(255,255,255,.12)}
+    @media(max-width:900px){.legal-layout{grid-template-columns:1fr;gap:34px}.legal-nav{position:static;display:grid;grid-template-columns:1fr 1fr;gap:0 18px}.legal-nav strong{grid-column:1/-1}.legal-shell{width:min(100% - 32px,1180px)}.legal-top{padding-bottom:34px}.legal-table{display:block;overflow-x:auto}}
+    @media(max-width:560px){.legal-nav{grid-template-columns:1fr}.legal-top{align-items:flex-start}.legal-top-actions{flex-direction:column;align-items:flex-end}.legal-hero{padding-top:12px}.legal-content p,.legal-content li{font-size:.98rem}}
+  </style>
 </head>
 <body>
-  <main class="legal">
-    <a href="/"><img src="/assets/logo/logo-role-branco.webp" alt="Rolê"></a>
-    <h1>Política de Privacidade</h1>
-    <p>Conteúdo jurídico em revisão para publicação. Esta página foi criada para preservar a arquitetura do site e não deve ser considerada a versão final da Política de Privacidade.</p>
-    <p><a href="/">Voltar ao site</a></p>
-    <p><button class="consent-settings-trigger" type="button" data-consent-settings hidden>Preferências de cookies</button></p>
+  <main class="legal-shell">
+    <header class="legal-top">
+      <a href="/" aria-label="Voltar ao site do Rolê"><img src="/assets/logo/logo-role-branco.webp" alt="Rolê" /></a>
+      <div class="legal-top-actions"><button class="consent-settings-trigger" type="button" data-consent-settings hidden>Preferências de cookies</button><a class="legal-back" href="/">Voltar ao site</a></div>
+    </header>
+
+    <div class="legal-hero">
+      <p class="legal-kicker">Privacidade · Rolê</p>
+      <h1>Política de <span>Privacidade.</span></h1>
+      <p class="legal-intro">Esta Política explica como o Rolê trata dados pessoais de usuários, compradores de ingressos, participantes, produtores, casas de eventos e visitantes do site. Ela foi estruturada para atender à LGPD no Brasil e, quando aplicável, ao GDPR/RGPD, à legislação espanhola de proteção de dados e às regras europeias de privacidade eletrônica.</p>
+      <p class="legal-updated">Última atualização: 15 de outubro de 2026.</p>
+    </div>
+
+    <div class="legal-layout">
+      <nav class="legal-nav" aria-label="Índice da Política de Privacidade">
+        <strong>Nesta página</strong>
+        <a href="#controlador">Quem controla seus dados</a>
+        <a href="#dados">Dados que tratamos</a>
+        <a href="#finalidades">Finalidades e bases legais</a>
+        <a href="#social">Matches, chat e perfis</a>
+        <a href="#pagamentos">Pagamentos e produtores</a>
+        <a href="#cookies">Cookies e publicidade</a>
+        <a href="#compartilhamento">Compartilhamento</a>
+        <a href="#internacional">Transferências internacionais</a>
+        <a href="#retencao">Retenção</a>
+        <a href="#direitos">Seus direitos</a>
+        <a href="#seguranca">Segurança e incidentes</a>
+        <a href="#europa">Regras específicas da Europa</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <article class="legal-content">
+        <div class="legal-part" id="controlador">
+          <p class="legal-part-label">1 · Responsável pelo tratamento</p>
+          <h2>Quem controla seus dados.</h2>
+          <section>
+            <p>O Rolê é operado pela <strong>Eyby Desenvolvimento e Licenciamento de Software Ltda.</strong> (“Eyby”, “Rolê”, “nós”), que atua como controladora dos dados pessoais tratados para operação da plataforma, gestão de contas, experiência social, venda e emissão de ingressos, segurança, suporte, marketing próprio e demais finalidades descritas nesta Política.</p>
+            <p>Para reduzir coleta automatizada dos dados cadastrais da empresa, os dados completos de identificação são carregados por mecanismo protegido após o acesso humano à página:</p>
+            <div class="legal-identity" data-legal-identity aria-live="polite">
+              <span class="pending">Carregando identificação da controladora…</span>
+            </div>
+            <p>Quando um Produtor utiliza dados de participantes para finalidades próprias, determinadas por ele e além da mera operação técnica do Rolê, o Produtor poderá atuar como controlador independente e será responsável por informar suas próprias condições de tratamento.</p>
+          </section>
+        </div>
+
+        <div class="legal-part" id="dados">
+          <p class="legal-part-label">2 · Dados pessoais</p>
+          <h2>Quais dados podemos tratar.</h2>
+          <section>
+            <h3>2.1. Dados fornecidos por você</h3>
+            <ul>
+              <li><strong>Conta e identidade:</strong> nome, nome de exibição, e-mail, telefone, data de nascimento ou confirmação de maioridade, foto e dados de autenticação.</li>
+              <li><strong>Perfil social:</strong> biografia, fotos, preferências de exibição, interesses e demais informações que você opte por adicionar ao perfil.</li>
+              <li><strong>Eventos e ingressos:</strong> eventos visualizados, compras, tipo e lote de ingresso, titularidade, transferências, QR Code, status e registros de check-in.</li>
+              <li><strong>Interações sociais:</strong> decisões de curtir ou passar, matches, bloqueios, denúncias e mensagens enviadas pelo chat.</li>
+              <li><strong>Suporte:</strong> conteúdo de solicitações, reclamações, anexos e histórico de atendimento.</li>
+              <li><strong>Produtores:</strong> dados profissionais, empresariais, cadastrais, fiscais, bancários, de representantes e integrantes da equipe autorizada.</li>
+            </ul>
+          </section>
+          <section>
+            <h3>2.2. Dados coletados automaticamente</h3>
+            <p>Podemos tratar endereço IP, identificadores do dispositivo e sessão, sistema operacional, versão do aplicativo, idioma, data e hora de acesso, eventos técnicos, logs de segurança, falhas, páginas ou telas acessadas e informações necessárias para prevenção de fraude e funcionamento da plataforma.</p>
+            <p>Dados de localização precisa somente serão tratados se uma funcionalidade efetivamente exigir esse acesso e após a permissão correspondente do sistema operacional. O Rolê não exibe a localização individual precisa de um usuário para outros participantes como parte da experiência social padrão.</p>
+          </section>
+          <section>
+            <h3>2.3. Dados recebidos de terceiros</h3>
+            <p>Podemos receber informações de provedores de autenticação, lojas de aplicativos, processadores de pagamento, ferramentas antifraude, produtores de eventos e parceiros técnicos, estritamente na medida necessária para autenticar, processar pagamentos, emitir ingressos, prevenir fraude, prestar suporte ou cumprir obrigações legais.</p>
+          </section>
+          <section>
+            <h3>2.4. Categorias especiais de dados</h3>
+            <p>O Rolê não exige categorias especiais de dados pessoais como condição para compra de ingressos ou uso básico da plataforma. Caso uma funcionalidade opcional venha a solicitar ou inferir informação considerada sensível pela LGPD ou categoria especial pelo GDPR — por exemplo, dados que revelem orientação sexual, saúde, religião, origem racial ou étnica — o tratamento deverá possuir fundamento jurídico específico e, quando exigido, <strong>consentimento explícito, destacado e revogável</strong>.</p>
+            <p>Não utilizamos categorias especiais de dados para segmentação de publicidade comportamental.</p>
+          </section>
+        </div>
+
+        <div class="legal-part" id="finalidades">
+          <p class="legal-part-label">3 · Finalidades e bases legais</p>
+          <h2>Por que usamos seus dados.</h2>
+          <section>
+            <table class="legal-table">
+              <thead><tr><th>Finalidade</th><th>Exemplos</th><th>Base jurídica principal</th></tr></thead>
+              <tbody>
+                <tr><td>Executar o serviço</td><td>Criar conta, autenticar, vender e emitir ingressos, permitir transferência, check-in, suporte e funcionalidades solicitadas.</td><td>Execução de contrato ou diligências pré-contratuais; cumprimento de obrigação legal quando aplicável.</td></tr>
+                <tr><td>Experiência social</td><td>Mostrar perfil a participantes quando você optar por participar, processar likes, matches e habilitar chat.</td><td>Consentimento para participação/visibilidade quando aplicável e execução do serviço social solicitado.</td></tr>
+                <tr><td>Pagamentos</td><td>Autorizar cobrança, estorno, reembolso, repasse, conciliação e contestação.</td><td>Execução de contrato; obrigação legal; interesse legítimo na prevenção de fraude e defesa de direitos.</td></tr>
+                <tr><td>Segurança e integridade</td><td>Detecção de fraude, abuso, spam, duplicação de ingresso, invasões, denúncias e riscos à comunidade.</td><td>Interesse legítimo, proteção de direitos e obrigações legais.</td></tr>
+                <tr><td>Cumprimento legal</td><td>Registros fiscais, contábeis, defesa em processos, ordens de autoridades e requisitos regulatórios.</td><td>Obrigação legal/regulatória e exercício regular de direitos.</td></tr>
+                <tr><td>Melhoria do produto</td><td>Métricas agregadas, desempenho, correção de falhas e entendimento de uso.</td><td>Interesse legítimo para dados estritamente necessários; consentimento quando envolver cookies ou tecnologias que o exijam.</td></tr>
+                <tr><td>Marketing</td><td>Comunicações promocionais e medição de campanhas.</td><td>Consentimento quando exigido; interesse legítimo apenas onde a legislação permitir e com direito de oposição.</td></tr>
+              </tbody>
+            </table>
+            <p>Quando utilizarmos <strong>interesse legítimo</strong>, realizaremos avaliação de necessidade, proporcionalidade e impacto sobre os direitos do titular. Você poderá se opor a esse tratamento nos casos previstos em lei.</p>
+            <p>Quando a base jurídica for <strong>consentimento</strong>, recusar ou retirar o consentimento não prejudicará o uso de funcionalidades que não dependam daquele tratamento. A retirada não afeta a licitude do tratamento realizado antes da revogação.</p>
+          </section>
+        </div>
+
+        <div class="legal-part" id="social">
+          <p class="legal-part-label">4 · Experiência social</p>
+          <h2>Perfis, matches e conversas.</h2>
+          <section>
+            <h3>4.1. Participação opcional</h3>
+            <p>Comprar um ingresso não obriga você a participar da experiência social. Você poderá manter o ingresso e realizar check-in sem necessariamente disponibilizar seu perfil para descoberta por outras pessoas.</p>
+            <p>Quando você opta por participar, o Rolê pode mostrar aos demais participantes daquele contexto as informações de perfil autorizadas, permitindo que usuários indiquem interesse. A decisão individual de curtir ou passar permanece privada até que exista reciprocidade ou outra condição expressamente prevista na funcionalidade.</p>
+          </section>
+          <section>
+            <h3>4.2. Matching e perfilamento</h3>
+            <p>O Rolê poderá organizar ou recomendar perfis com base em informações do evento, preferências informadas e sinais de uso da própria funcionalidade. Esse processamento pode constituir perfilamento para fins de recomendação, mas <strong>não produz decisões com efeitos jurídicos ou efeitos similarmente significativos sobre você</strong>.</p>
+            <p>Não vendemos suas decisões de deslizar, seus matches ou o conteúdo de seus chats a anunciantes. Produtores e casas de eventos não recebem acesso a likes, matches ou conversas privadas por administrarem um evento.</p>
+          </section>
+          <section>
+            <h3>4.3. Mensagens, denúncias e segurança</h3>
+            <p>Mensagens são tratadas para entregar a comunicação solicitada, manter a funcionalidade, prevenir abuso, responder a denúncias e cumprir obrigações legais. O acesso humano ao conteúdo deverá ser restrito a situações justificadas, como suporte solicitado, investigação de denúncia, segurança ou obrigação legal.</p>
+            <p>Bloqueios e denúncias podem gerar registros necessários para impedir novos contatos, investigar violações e proteger a comunidade.</p>
+          </section>
+        </div>
+
+        <div class="legal-part" id="pagamentos">
+          <p class="legal-part-label">5 · Ingressos, pagamentos e produtores</p>
+          <h2>Dados financeiros e operação de eventos.</h2>
+          <section>
+            <h3>5.1. Pagamentos</h3>
+            <p>Pagamentos podem ser processados pela <strong>Stripe</strong> e por instituições integrantes do arranjo de pagamento. Dados completos de cartão são normalmente coletados e processados diretamente pelo provedor de pagamento, sem necessidade de o Rolê armazenar o número integral do cartão ou código de segurança.</p>
+            <p>O Rolê pode receber identificadores da transação, meio de pagamento, status, últimos dígitos ou representação mascarada, valores, moeda, país, informações antifraude e dados necessários para estornos, reembolsos, chargebacks, repasses e conciliação.</p>
+          </section>
+          <section>
+            <h3>5.2. Informações compartilhadas com o Produtor</h3>
+            <p>Para viabilizar o Evento, o Produtor poderá receber dados estritamente necessários para gestão de ingressos, atendimento e check-in, como nome do titular, tipo de ingresso, status, identificador da compra e presença. O escopo dependerá da função operacional do usuário da equipe do Produtor.</p>
+            <p>O Produtor não recebe, por essa condição, acesso ao conteúdo de chats, decisões de curtir/passar, matches ou outros dados sociais privados.</p>
+          </section>
+        </div>
+
+        <div class="legal-part" id="cookies">
+          <p class="legal-part-label">6 · Cookies e tecnologias semelhantes</p>
+          <h2>Você controla o rastreamento opcional.</h2>
+          <section>
+            <p>O site e o aplicativo podem utilizar armazenamento local, cookies, SDKs ou tecnologias equivalentes. Tecnologias estritamente necessárias podem ser usadas para segurança, autenticação, manutenção de preferências e funcionamento do serviço sem consentimento quando a legislação permitir.</p>
+            <p>Ferramentas de <strong>medição de audiência</strong> e <strong>marketing/publicidade</strong> que não sejam estritamente necessárias só serão ativadas após consentimento quando essa for a exigência legal. No site, as categorias opcionais são apresentadas de forma separada e podem ser aceitas ou recusadas no mesmo nível.</p>
+            <p>Atualmente, a infraestrutura do site pode habilitar, quando configurada e consentida:</p>
+            <ul>
+              <li><strong>Google Analytics 4 / Google Tag Manager:</strong> medição de audiência, eventos de navegação e gestão de tags conforme as escolhas realizadas.</li>
+              <li><strong>Meta Pixel:</strong> medição de campanhas e publicidade, apenas quando a categoria de marketing for autorizada.</li>
+            </ul>
+            <p>Você pode alterar sua escolha a qualquer momento pelo botão <strong>“Preferências de cookies”</strong> disponível nesta página. Revogar consentimento impede novos carregamentos opcionais; cookies já gravados por terceiros podem também precisar ser apagados pelo navegador, conforme o funcionamento do fornecedor.</p>
+            <p>A aceitação desta Política não substitui nem agrupa o consentimento para cookies, marketing ou outras finalidades que exijam manifestação específica.</p>
+          </section>
+        </div>
+
+        <div class="legal-part" id="compartilhamento">
+          <p class="legal-part-label">7 · Destinatários</p>
+          <h2>Com quem podemos compartilhar dados.</h2>
+          <section>
+            <p>Não vendemos dados pessoais. Podemos compartilhá-los, na medida necessária, com:</p>
+            <ul>
+              <li><strong>Produtores e casas de eventos</strong>, para emissão, operação, suporte e check-in de ingressos;</li>
+              <li><strong>provedores de pagamento e antifraude</strong>, incluindo Stripe;</li>
+              <li><strong>provedores de infraestrutura, banco de dados, hospedagem e entrega</strong>, incluindo fornecedores utilizados para operar o Rolê;</li>
+              <li><strong>fornecedores de autenticação, comunicação, suporte, observabilidade e segurança</strong>;</li>
+              <li><strong>Google e Meta</strong>, somente para funcionalidades de analytics/marketing habilitadas conforme suas preferências;</li>
+              <li><strong>consultores, auditores, seguradoras e assessores jurídicos</strong>, quando necessário para obrigações profissionais e defesa de direitos;</li>
+              <li><strong>autoridades públicas, reguladores e tribunais</strong>, quando houver obrigação legal, ordem válida ou fundamento jurídico aplicável;</li>
+              <li><strong>sucessores empresariais</strong>, em reorganização, fusão, aquisição ou venda de ativos, observadas salvaguardas adequadas.</li>
+            </ul>
+            <p>Suboperadores e fornecedores contratados devem tratar os dados conforme instruções, obrigações de confidencialidade, segurança e proteção de dados compatíveis com sua função.</p>
+          </section>
+        </div>
+
+        <div class="legal-part" id="internacional">
+          <p class="legal-part-label">8 · Transferências internacionais</p>
+          <h2>Dados podem circular entre países.</h2>
+          <section>
+            <p>A Eyby está estabelecida no Brasil e utiliza fornecedores globais. Assim, dados de pessoas localizadas na União Europeia ou no Espaço Econômico Europeu podem ser transferidos para o Brasil, Estados Unidos e outros países onde nossos prestadores operem.</p>
+            <p>Quando o GDPR for aplicável e o país de destino não estiver coberto por decisão de adequação aplicável, adotaremos um mecanismo válido de transferência, como as <strong>Cláusulas Contratuais Padrão da Comissão Europeia (SCCs)</strong>, acompanhado, quando necessário, de avaliação de impacto da transferência e medidas técnicas, contratuais ou organizacionais complementares.</p>
+            <p>Para transferências sujeitas à LGPD, observaremos os mecanismos autorizados pela legislação brasileira e pela Autoridade Nacional de Proteção de Dados.</p>
+            <p>Você poderá solicitar informações adicionais sobre o mecanismo utilizado para transferências internacionais relacionadas aos seus dados.</p>
+          </section>
+        </div>
+
+        <div class="legal-part" id="retencao">
+          <p class="legal-part-label">9 · Retenção</p>
+          <h2>Guardamos dados apenas pelo tempo necessário.</h2>
+          <section>
+            <p>Os períodos de conservação variam conforme a finalidade, natureza do dado, relação contratual, risco de fraude, prazos legais e necessidade de defesa de direitos. Aplicamos o princípio de limitação da conservação e excluímos, anonimizamos ou isolamos dados quando deixam de ser necessários, salvo obrigação de preservação.</p>
+            <p>De modo geral:</p>
+            <ul>
+              <li>dados de conta e perfil são mantidos enquanto a conta estiver ativa e pelo período adicional necessário para encerramento, segurança, prevenção de abuso e obrigações legais;</li>
+              <li>registros de compra, pagamento, reembolso, repasse, notas e documentos relacionados podem ser mantidos pelos prazos fiscais, consumeristas, contábeis e prescricionais aplicáveis;</li>
+              <li>logs de segurança e antifraude são mantidos pelo período proporcional ao risco e às obrigações legais;</li>
+              <li>conteúdo de suporte, denúncias e evidências pode ser preservado enquanto necessário para resolver a solicitação, investigar abuso, cumprir obrigação legal ou defender direitos;</li>
+              <li>dados tratados exclusivamente com base em consentimento deixam de ser usados para aquela finalidade após sua revogação, sem prejuízo de conservação que possua outra base legal válida.</li>
+            </ul>
+            <p>Backups podem reter cópias por ciclos técnicos limitados antes da sobrescrita segura.</p>
+          </section>
+        </div>
+
+        <div class="legal-part" id="direitos">
+          <p class="legal-part-label">10 · Direitos dos titulares</p>
+          <h2>Você pode controlar seus dados.</h2>
+          <section>
+            <h3>10.1. Direitos no Brasil — LGPD</h3>
+            <p>Nos termos da LGPD, você pode solicitar, conforme aplicável: confirmação do tratamento; acesso; correção; anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade; portabilidade; informação sobre compartilhamentos; informação sobre a possibilidade de não consentir; revogação do consentimento; eliminação de dados tratados com consentimento, ressalvadas hipóteses legais de conservação; oposição; e revisão de decisões exclusivamente automatizadas quando aplicável.</p>
+          </section>
+          <section>
+            <h3>10.2. Direitos na União Europeia e no EEE — GDPR</h3>
+            <p>Quando o GDPR se aplicar, você poderá exercer os direitos de <strong>acesso, retificação, apagamento, limitação do tratamento, portabilidade, oposição</strong> e retirada de consentimento. Também poderá se opor a marketing direto a qualquer momento.</p>
+            <p>Quando houver tratamento baseado em interesse legítimo, você pode se opor por motivos relacionados à sua situação particular. Continuaremos o tratamento apenas quando existirem motivos legítimos imperiosos que prevaleçam ou quando necessário para declaração, exercício ou defesa de direitos.</p>
+            <p>Você tem direito de não ficar sujeito a decisão baseada exclusivamente em tratamento automatizado que produza efeitos jurídicos ou efeitos similarmente significativos, salvo as exceções previstas em lei e respectivas salvaguardas.</p>
+          </section>
+          <section>
+            <h3>10.3. Como exercer</h3>
+            <p>Solicitações podem ser feitas pelo canal indicado ao final desta Política. Podemos solicitar informações razoáveis para confirmar sua identidade e evitar que dados sejam entregues ou alterados por terceiros não autorizados.</p>
+            <p>Responderemos nos prazos estabelecidos pela legislação aplicável. Pedidos manifestamente infundados ou excessivos poderão ser tratados conforme as exceções legais.</p>
+            <p>Na União Europeia, você também pode apresentar reclamação à autoridade supervisora de seu país. Na Espanha, a autoridade competente é a <strong>Agencia Española de Protección de Datos — AEPD</strong>.</p>
+          </section>
+        </div>
+
+        <div class="legal-part" id="seguranca">
+          <p class="legal-part-label">11 · Segurança</p>
+          <h2>Proteção desde o desenho.</h2>
+          <section>
+            <p>Adotamos medidas técnicas e organizacionais proporcionais ao risco, incluindo controles de acesso, segregação de permissões, autenticação, proteção de segredos, criptografia em trânsito quando aplicável, registros de segurança, limitação de dados, revisão de fornecedores e mecanismos antifraude.</p>
+            <p>Nenhum sistema é absolutamente invulnerável. Quando ocorrer incidente de segurança com dados pessoais, avaliaremos natureza, extensão e risco e adotaremos medidas de contenção, investigação e correção.</p>
+            <p>Quando a legislação exigir, notificaremos a autoridade competente e os titulares afetados dentro dos prazos aplicáveis. Para incidentes sujeitos ao GDPR, a notificação à autoridade supervisora será realizada, quando exigida, sem demora indevida e, sempre que viável, em até 72 horas após ciência do incidente.</p>
+          </section>
+        </div>
+
+        <div class="legal-part" id="europa">
+          <p class="legal-part-label">12 · União Europeia e Espanha</p>
+          <h2>Regras adicionais para a operação europeia.</h2>
+          <section>
+            <h3>12.1. Aplicação territorial</h3>
+            <p>Quando o Rolê oferecer bens ou serviços a pessoas localizadas na União Europeia/EEE ou monitorar seu comportamento na forma prevista pelo art. 3(2) do GDPR, esta Política será interpretada em conjunto com o GDPR e a legislação nacional aplicável, inclusive a <strong>Ley Orgánica 3/2018 (LOPDGDD)</strong> e a <strong>Ley 34/2002 (LSSI)</strong> na Espanha.</p>
+          </section>
+          <section>
+            <h3>12.2. Representante na União Europeia</h3>
+            <p>Como a Eyby está estabelecida no Brasil, antes do início de oferta regular do Rolê dirigida ao mercado europeu será designado, quando exigido pelo art. 27 do GDPR, <strong>representante estabelecido na União Europeia</strong>. Os dados de identificação e contato do representante serão publicados nesta seção assim que a designação estiver formalizada.</p>
+            <p>Até essa publicação, solicitações de privacidade podem ser enviadas diretamente à Eyby pelo canal indicado abaixo. Esta disposição não substitui a obrigação de designação quando legalmente aplicável.</p>
+          </section>
+          <section>
+            <h3>12.3. Avaliações de impacto e privacidade desde o desenho</h3>
+            <p>Funcionalidades que envolvam perfilamento, interação social, dados potencialmente sensíveis, monitoramento sistemático ou novas tecnologias serão submetidas a avaliação de risco e, quando os critérios legais forem atingidos, a <strong>Avaliação de Impacto à Proteção de Dados (DPIA/EIPD)</strong> antes do tratamento de alto risco.</p>
+          </section>
+          <section>
+            <h3>12.4. Crianças e adolescentes</h3>
+            <p>O Rolê é destinado a pessoas com <strong>18 anos ou mais</strong>. Não pretendemos oferecer a experiência social do aplicativo a crianças. Se identificarmos conta criada em violação dessa regra, poderemos suspender o acesso e eliminar ou restringir os dados conforme a legislação aplicável.</p>
+          </section>
+        </div>
+
+        <div class="legal-part" id="alteracoes">
+          <p class="legal-part-label">13 · Atualizações</p>
+          <h2>Alterações desta Política.</h2>
+          <section>
+            <p>Podemos atualizar esta Política para refletir mudanças legais, regulatórias, técnicas ou de produto. Alterações materiais serão comunicadas de forma apropriada antes de entrarem em vigor quando isso for exigido.</p>
+            <p>Quando uma nova finalidade exigir consentimento que ainda não tenha sido obtido, não presumiremos consentimento apenas porque esta Política foi atualizada.</p>
+          </section>
+        </div>
+
+        <div class="legal-part legal-end" id="contato">
+          <p class="legal-part-label">14 · Contato</p>
+          <h2>Fale com o Rolê sobre privacidade.</h2>
+          <section>
+            <p>Para exercer direitos, tirar dúvidas, comunicar incidente ou tratar de assuntos de privacidade e proteção de dados, utilize o canal de suporte da Eyby indicado nos dados da controladora acima. Esse canal também funciona como ponto inicial de contato de privacidade até eventual designação de contato adicional ou representante europeu.</p>
+            <p>Para assuntos gerais da plataforma, você também pode utilizar os canais oficiais disponíveis em <a href="/#contato">role.events</a>.</p>
+          </section>
+        </div>
+      </article>
+    </div>
   </main>
+
   <aside class="consent-panel" data-consent-panel hidden role="region" aria-labelledby="consent-title" aria-live="polite">
     <div class="consent-copy">
       <p class="eyebrow">Privacidade</p>
       <h2 id="consent-title">Você escolhe como medir sua visita.</h2>
-      <p>Permita cookies opcionais para medição de audiência e campanhas. Sua escolha pode ser alterada a qualquer momento no rodapé.</p>
+      <p>Permita cookies opcionais para medição de audiência e campanhas. Sua escolha pode ser alterada a qualquer momento.</p>
       <p class="consent-note" data-consent-gtm-note hidden>Quando configurado, o Google Tag Manager só carrega se as duas categorias forem permitidas.</p>
       <a href="/privacy">Leia a Política de Privacidade</a>
     </div>
     <div class="consent-controls">
       <fieldset>
         <legend>Preferências opcionais</legend>
-        <label data-consent-analytics-option><input type="checkbox" data-consent-analytics> Medição de audiência (Google Analytics / Tag Manager)</label>
-        <label data-consent-marketing-option><input type="checkbox" data-consent-marketing> Marketing e anúncios (Meta Ads)</label>
+        <label data-consent-analytics-option><input type="checkbox" data-consent-analytics /> Medição de audiência (Google Analytics / Tag Manager)</label>
+        <label data-consent-marketing-option><input type="checkbox" data-consent-marketing /> Marketing e anúncios (Meta Ads)</label>
       </fieldset>
       <div class="consent-actions">
         <button class="btn btn-ghost btn-small" type="button" data-consent-reject>Recusar opcionais</button>
@@ -39,6 +309,29 @@
       </div>
     </div>
   </aside>
+
   <script type="module" src="/tracking-entry.js"></script>
+  <script>
+    (async function loadLegalIdentity(){
+      const box=document.querySelector('[data-legal-identity]');
+      if(!box)return;
+      const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+      try{
+        const tokenResponse=await fetch('/api/legal-token',{headers:{Accept:'application/json'},cache:'no-store'});
+        if(!tokenResponse.ok)throw new Error('token');
+        const tokenData=await tokenResponse.json();
+        await sleep(1900);
+        const detailsResponse=await fetch('/api/legal-details',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},cache:'no-store',body:JSON.stringify({token:tokenData.token,website:''})});
+        if(!detailsResponse.ok)throw new Error('details');
+        const d=await detailsResponse.json();
+        box.replaceChildren();
+        [d.companyName,d.cnpj,d.address,d.supportEmail].forEach((value,index)=>{
+          const row=document.createElement('span');
+          if(index===0){const strong=document.createElement('strong');strong.textContent=value;row.append(strong);}else{row.textContent=value;}
+          box.append(row);
+        });
+      }catch(error){box.innerHTML='<span>Identificação completa temporariamente indisponível. Utilize os canais oficiais do Rolê para contato.</span>';}
+    })();
+  </script>
 </body>
 </html>
