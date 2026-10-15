@@ -37,6 +37,24 @@ VITE_GOOGLE_PLAY_URL=https://play.google.com/store/apps/...
 
 Enquanto as URLs estiverem vazias, os botões aparecem visualmente, mas não redirecionam para uma loja incorreta.
 
+## Analytics e anúncios
+
+Configure os IDs públicos no `.env.local` ou nos ambientes Preview/Production da Vercel:
+
+```env
+VITE_GA4_MEASUREMENT_ID=G-XXXXXXXXXX
+VITE_GTM_ID=
+VITE_META_PIXEL_ID=123456789012345
+```
+
+- Use `VITE_GA4_MEASUREMENT_ID` para instalar o Google Analytics 4 diretamente **ou** `VITE_GTM_ID` para um container do Google Tag Manager. Não preencha os dois; o GTM tem precedência no código.
+- O Meta Pixel é carregado diretamente com `VITE_META_PIXEL_ID`. Se o pixel estiver dentro do GTM, deixe essa variável vazia para evitar eventos duplicados.
+- O GA4 aguarda consentimento para analytics; o Meta Pixel aguarda consentimento de marketing. O GTM só carrega quando ambos são permitidos, pois o conteúdo do container pode incluir tags das duas categorias.
+- Sem IDs configurados, nenhuma tag ou aviso de cookies opcionais é carregado.
+- Os IDs `VITE_*` são incorporados ao JavaScript público e não são segredos. Atualize a Política de Privacidade aprovada antes de ativar esses IDs em produção.
+
+O visitante pode aceitar, recusar ou salvar separadamente as preferências de audiência e marketing. A escolha fica no navegador e pode ser reaberta pelo rodapé.
+
 ## Próximos eventos
 
 Configure no ambiente server-side de produção:

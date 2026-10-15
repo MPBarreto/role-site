@@ -271,12 +271,33 @@
       </div>
       <div class="footer-column"><h2>Rolê</h2><a href="#eventos">Eventos</a><a href="#como-funciona">Como funciona</a><a href="#seguranca">Segurança</a><a href="#produtores">Para produtores</a></div>
       <div class="footer-column"><h2>App</h2><a class="footer-store-link" data-app-store href="#app"><img src="/assets/app%20store/app-store.png" alt="" aria-hidden="true" width="512" height="512" />App Store</a><a class="footer-store-link" data-play-store href="#app"><img src="/assets/app%20store/google-play.png" alt="" aria-hidden="true" width="128" height="128" />Google Play</a></div>
-      <div class="footer-column"><h2>Legal</h2><a href="/termos.html">Termos de Uso</a><a href="/privacidade.html">Privacidade</a><a href="/reembolsos.html">Reembolsos</a></div>
+      <div class="footer-column"><h2>Legal</h2><a href="/termos.html">Termos de Uso</a><a href="/privacidade.html">Privacidade</a><a href="/reembolsos.html">Reembolsos</a><button class="consent-settings-trigger" type="button" data-consent-settings hidden>Preferências de cookies</button></div>
       <div class="footer-contact"><h2>Quer colocar seu evento no Rolê?</h2><button class="btn btn-primary" type="button" data-contact-trigger>Conversar com o Rolê</button></div>
     </div>
     <div class="container footer-bottom"><span>© 2026 Rolê. Todos os direitos reservados.</span><span>Feito para noites que conectam pessoas.</span></div>
   </footer>
 
+  <aside class="consent-panel" data-consent-panel hidden role="region" aria-labelledby="consent-title" aria-live="polite">
+    <div class="consent-copy">
+      <p class="eyebrow">Privacidade</p>
+      <h2 id="consent-title">Você escolhe como medir sua visita.</h2>
+      <p>Permita cookies opcionais para medição de audiência e campanhas. Sua escolha pode ser alterada a qualquer momento no rodapé.</p>
+      <p class="consent-note" data-consent-gtm-note hidden>Quando configurado, o Google Tag Manager só carrega se as duas categorias forem permitidas.</p>
+      <a href="/privacidade.html">Leia a Política de Privacidade</a>
+    </div>
+    <div class="consent-controls">
+      <fieldset>
+        <legend>Preferências opcionais</legend>
+        <label data-consent-analytics-option><input type="checkbox" data-consent-analytics /> Medição de audiência (Google Analytics / Tag Manager)</label>
+        <label data-consent-marketing-option><input type="checkbox" data-consent-marketing /> Marketing e anúncios (Meta Ads)</label>
+      </fieldset>
+      <div class="consent-actions">
+        <button class="btn btn-ghost btn-small" type="button" data-consent-reject>Recusar opcionais</button>
+        <button class="btn btn-ghost btn-small" type="button" data-consent-save>Salvar escolhas</button>
+        <button class="btn btn-primary btn-small" type="button" data-consent-accept>Aceitar todos</button>
+      </div>
+    </div>
+  </aside>
   <form class="bot-trap" aria-hidden="true" tabindex="-1"><label>Empresa<input type="text" name="company" data-honeypot autocomplete="off" tabindex="-1" /></label></form>
   <div class="toast" role="status" aria-live="polite" data-toast></div>
 

@@ -13,6 +13,14 @@
 .events-empty-state{grid-column:1/-1;padding:34px;border:1px solid var(--line);border-radius:22px;background:var(--panel);text-align:center}.events-empty-state h3{margin:0 0 8px;font-size:1.25rem}.events-empty-state p{margin:0;color:var(--muted)}
 .events-unavailable-state{border-color:rgba(255,95,116,.35)}.events-retry{margin-top:20px}.events-retry:disabled{cursor:wait;opacity:.7}
 
+.consent-panel[hidden],.consent-panel [hidden],.consent-settings-trigger[hidden]{display:none!important}
+.consent-panel{position:fixed;z-index:2200;left:50%;bottom:16px;transform:translateX(-50%);width:min(1120px,calc(100% - 32px));display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px;padding:24px;border:1px solid rgba(255,255,255,.18);border-radius:22px;background:rgba(15,10,18,.97);box-shadow:0 24px 80px rgba(0,0,0,.65);backdrop-filter:blur(18px)}
+.consent-copy h2{margin:0 0 8px;font-size:1.4rem;letter-spacing:-.03em}.consent-copy>p:not(.eyebrow){margin:0 0 10px;color:var(--muted);font-size:.9rem}.consent-copy>a{color:#ff82b2;font-size:.86rem;text-decoration:underline;text-underline-offset:3px}
+.consent-copy .consent-note{margin:0 0 10px;color:#e9b4cf;font-size:.8rem}
+.consent-controls{display:flex;flex-direction:column;justify-content:space-between;gap:16px}.consent-controls fieldset{display:grid;gap:10px;margin:0;padding:0;border:0}.consent-controls legend{margin-bottom:8px;color:#e9e3eb;font-size:.82rem;font-weight:800}.consent-controls label{display:flex;align-items:center;gap:9px;color:#d7d1da;font-size:.85rem}.consent-controls input{width:18px;height:18px;accent-color:var(--pink)}
+.consent-actions{display:flex;flex-wrap:wrap;gap:8px}.consent-actions .btn{min-height:44px;padding-inline:14px;font-size:.78rem}.consent-settings-trigger{align-self:flex-start;padding:0;border:0;background:none;color:#a8a1ab;font:inherit;font-size:.9rem;text-align:left;cursor:pointer}.consent-settings-trigger:hover{color:#fff;text-decoration:underline}
+@media(max-width:760px){.consent-panel{grid-template-columns:1fr;gap:16px;padding:20px}.consent-actions{display:grid;grid-template-columns:1fr 1fr}.consent-actions [data-consent-accept]{grid-column:1/-1}}
+
 /* Local Role imagery and real app screens */
 .phone-main{display:block;width:min(365px,100%);padding:10px;margin:0;transform:rotate(1deg)}
 .app-screen-preview{display:block;width:100%;height:auto;border-radius:31px}

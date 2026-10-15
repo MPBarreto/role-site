@@ -1,4 +1,5 @@
 import config from './config.js';
+import { initializeTracking } from './tracking.js';
 
 const startedAt = Date.now();
 let contactToken = null;
@@ -228,4 +229,5 @@ $$('[data-producer-link]').forEach(element => element.addEventListener('click', 
 
 configureStoreLinks();
 configureProducerLinks();
+initializeTracking();
 loadEvents();

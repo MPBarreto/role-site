@@ -12,7 +12,7 @@
   <style>
     .legal-shell{width:min(1180px,calc(100% - 48px));margin:0 auto;padding:42px 0 110px}
     .legal-top{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 0 52px}
-    .legal-top img{width:118px;height:auto}.legal-back{color:#b8b2bb;text-decoration:none;font-weight:700}.legal-back:hover{color:#fff}
+    .legal-top img{width:118px;height:auto}.legal-top-actions{display:flex;align-items:center;gap:20px}.legal-back{color:#b8b2bb;text-decoration:none;font-weight:700}.legal-back:hover{color:#fff}
     .legal-hero{max-width:880px;padding:28px 0 62px}.legal-kicker{margin:0 0 16px;color:#ff2b8a;font-size:.82rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
     .legal-hero h1{margin:0;font-size:clamp(3rem,7vw,6.2rem);line-height:.92;letter-spacing:-.065em}.legal-hero h1 span{color:#ff2b8a}
     .legal-intro{max-width:780px;margin:28px 0 0;color:#c7c2ca;font-size:1.12rem;line-height:1.7}.legal-updated{margin-top:18px;color:#7f7884;font-size:.92rem}
@@ -34,7 +34,7 @@
   <main class="legal-shell">
     <header class="legal-top">
       <a href="/" aria-label="Voltar ao site do Rolê"><img src="/assets/logo/logo-role-branco.webp" alt="Rolê" /></a>
-      <a class="legal-back" href="/">Voltar ao site</a>
+      <div class="legal-top-actions"><button class="consent-settings-trigger" type="button" data-consent-settings hidden>Preferências de cookies</button><a class="legal-back" href="/">Voltar ao site</a></div>
     </header>
 
     <div class="legal-hero">
@@ -351,5 +351,27 @@
       </article>
     </div>
   </main>
+  <aside class="consent-panel" data-consent-panel hidden role="region" aria-labelledby="consent-title" aria-live="polite">
+    <div class="consent-copy">
+      <p class="eyebrow">Privacidade</p>
+      <h2 id="consent-title">Você escolhe como medir sua visita.</h2>
+      <p>Permita cookies opcionais para medição de audiência e campanhas. Sua escolha pode ser alterada a qualquer momento no rodapé.</p>
+      <p class="consent-note" data-consent-gtm-note hidden>Quando configurado, o Google Tag Manager só carrega se as duas categorias forem permitidas.</p>
+      <a href="/privacidade.html">Leia a Política de Privacidade</a>
+    </div>
+    <div class="consent-controls">
+      <fieldset>
+        <legend>Preferências opcionais</legend>
+        <label data-consent-analytics-option><input type="checkbox" data-consent-analytics /> Medição de audiência (Google Analytics / Tag Manager)</label>
+        <label data-consent-marketing-option><input type="checkbox" data-consent-marketing /> Marketing e anúncios (Meta Ads)</label>
+      </fieldset>
+      <div class="consent-actions">
+        <button class="btn btn-ghost btn-small" type="button" data-consent-reject>Recusar opcionais</button>
+        <button class="btn btn-ghost btn-small" type="button" data-consent-save>Salvar escolhas</button>
+        <button class="btn btn-primary btn-small" type="button" data-consent-accept>Aceitar todos</button>
+      </div>
+    </div>
+  </aside>
+  <script type="module" src="/tracking-entry.js"></script>
 </body>
 </html>
