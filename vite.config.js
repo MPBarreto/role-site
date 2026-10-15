@@ -11,6 +11,7 @@ export default defineConfig({
         home: resolve(projectRoot, 'index.html'),
         terms: resolve(projectRoot, 'terms.html'),
         privacy: resolve(projectRoot, 'privacy.html'),
+        childSafety: resolve(projectRoot, 'child-safety.html'),
         refunds: resolve(projectRoot, 'reembolsos.html'),
         producers: resolve(projectRoot, 'produtores.html')
       }

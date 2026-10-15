@@ -16,6 +16,11 @@
       "permanent": true
     },
     {
+      "source": "/child-safety.html",
+      "destination": "/seguranca-infantil",
+      "permanent": true
+    },
+    {
       "source": "/termos",
       "destination": "/terms",
       "permanent": true
@@ -40,6 +45,10 @@
     {
       "source": "/privacy",
       "destination": "/privacy.html"
+    },
+    {
+      "source": "/seguranca-infantil",
+      "destination": "/child-safety.html"
     },
     {
       "source": "/terms",
