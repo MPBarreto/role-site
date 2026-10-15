@@ -1,4 +1,22 @@
 {
+  "redirects": [
+    {
+      "source": "/termos",
+      "destination": "/terms",
+      "permanent": true
+    },
+    {
+      "source": "/termos.html",
+      "destination": "/terms",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/terms",
+      "destination": "/terms.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
