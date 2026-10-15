@@ -1,6 +1,21 @@
 {
   "redirects": [
     {
+      "source": "/privacidade",
+      "destination": "/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/privacidade.html",
+      "destination": "/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/privacy.html",
+      "destination": "/privacy",
+      "permanent": true
+    },
+    {
       "source": "/termos",
       "destination": "/terms",
       "permanent": true
@@ -22,6 +37,10 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/privacy",
+      "destination": "/privacy.html"
+    },
     {
       "source": "/terms",
       "destination": "/terms.html"

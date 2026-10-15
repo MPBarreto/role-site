@@ -10,7 +10,7 @@ export default defineConfig({
       input: {
         home: resolve(projectRoot, 'index.html'),
         terms: resolve(projectRoot, 'terms.html'),
-        privacy: resolve(projectRoot, 'privacidade.html'),
+        privacy: resolve(projectRoot, 'privacy.html'),
         refunds: resolve(projectRoot, 'reembolsos.html'),
         producers: resolve(projectRoot, 'produtores.html')
       }
