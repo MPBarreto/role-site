@@ -9,12 +9,30 @@
       "source": "/termos.html",
       "destination": "/terms",
       "permanent": true
+    },
+    {
+      "source": "/reembolsos.html",
+      "destination": "/reembolsos",
+      "permanent": true
+    },
+    {
+      "source": "/produtores.html",
+      "destination": "/produtores",
+      "permanent": true
     }
   ],
   "rewrites": [
     {
       "source": "/terms",
       "destination": "/terms.html"
+    },
+    {
+      "source": "/reembolsos",
+      "destination": "/reembolsos.html"
+    },
+    {
+      "source": "/produtores",
+      "destination": "/produtores.html"
     }
   ],
   "headers": [

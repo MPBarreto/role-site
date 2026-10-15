@@ -258,3 +258,165 @@
   .producer-features .producer-feature-wide{grid-column:auto}
   .producer-devices{height:425px;width:calc(100% + 8px);margin-left:-4px}
 }
+
+/* Producer story and practical answers. */
+.producer-guide{padding-block:104px;background:#0b080e;border-top:1px solid rgba(255,255,255,.08)}
+.producer-guide-heading{max-width:1180px;margin-bottom:54px}
+.producer-guide-heading h2,.policy-hero h1{margin:0 0 20px;font-size:clamp(2.8rem,5.6vw,5.1rem);line-height:.96;letter-spacing:-.06em}
+.producer-guide-heading h2 span,.policy-hero h1 span,.policy-article h2 span,.policy-faq h2 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.producer-guide-heading>p:not(.eyebrow){max-width:700px;color:var(--muted);font-size:1.08rem}
+.producer-guide-grid{display:grid;grid-template-columns:minmax(0,.93fr) minmax(0,1.07fr);gap:clamp(38px,7vw,96px);align-items:start}
+.producer-outcomes{margin:0 0 30px;padding:0;list-style:none;border-top:1px solid var(--line)}
+.producer-outcomes li{display:grid;grid-template-columns:38px minmax(0,1fr);gap:15px;padding:19px 0;border-bottom:1px solid var(--line)}
+.producer-outcomes li>span{color:#ff74aa;font-size:.8rem;font-weight:900;letter-spacing:.08em;padding-top:3px}
+.producer-outcomes h3{margin:0;font-size:1.05rem}
+.producer-outcomes p{margin:4px 0 0;color:#aaa2ad;font-size:.9rem;line-height:1.5}
+.producer-fee-card{padding:24px;border:1px solid rgba(255,43,138,.55);border-radius:24px;background:rgba(255,43,138,.055);box-shadow:0 22px 55px rgba(0,0,0,.2)}
+.producer-fee-card .eyebrow{margin-bottom:12px;font-size:.68rem}
+.producer-fee-amount{display:flex;align-items:center;gap:15px}
+.producer-fee-amount strong{font-size:clamp(3rem,5vw,4.2rem);line-height:.95;letter-spacing:-.07em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.producer-fee-amount span{font-weight:800;line-height:1.25}
+.producer-fee-card>p:last-child{margin:16px 0 0;color:#c6bec9;font-size:.9rem;line-height:1.55}
+.producer-guide-faq>.eyebrow{margin-bottom:12px}
+.producer-guide-faq>h3{margin:0 0 23px;font-size:clamp(1.55rem,2.4vw,2.15rem);line-height:1.05;letter-spacing:-.04em}
+.producer-guide-faq .accordion details p a,.faq .accordion details p a{color:#ff81af;text-decoration:underline;text-underline-offset:3px}
+.faq-heading>p a{color:#ff81af;text-decoration:underline;text-underline-offset:3px}
+.producer-guide-cta{margin-top:24px}
+
+/* Dedicated producer landing page. */
+.producer-page-hero{position:relative;isolation:isolate;min-height:760px;overflow:hidden;padding:145px 0 72px;background:#09070d}
+.producer-page-hero::before{content:"";position:absolute;z-index:-2;inset:0;background-image:linear-gradient(90deg,rgba(7,6,10,.98) 0%,rgba(7,6,10,.88) 39%,rgba(7,6,10,.52) 68%,rgba(7,6,10,.46) 100%),linear-gradient(0deg,#09070d 0%,transparent 38%,rgba(9,7,13,.35) 100%),url('/assets/generated/role-live-show-hero.webp');background-size:cover;background-position:center 46%}
+.producer-page-hero::after{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(ellipse at 74% 53%,rgba(255,43,138,.12),transparent 39%);pointer-events:none}
+.producer-page-hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);gap:35px;align-items:center;min-height:525px}
+.producer-page-copy{max-width:660px}
+.producer-page-copy h1{margin:0 0 24px;font-size:clamp(3.4rem,6.3vw,6.2rem);line-height:.93;letter-spacing:-.07em}
+.producer-page-copy h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.producer-page-copy>p:not(.eyebrow){max-width:590px;margin:0;color:#d0c9d3;font-size:1.16rem;line-height:1.55}
+.producer-page-copy .hero-actions{margin-top:30px}
+.producer-page-copy .hero-actions .btn{min-height:50px}
+.producer-page-points{display:flex;gap:0;flex-wrap:wrap;margin:38px 0 0;padding:0;list-style:none}
+.producer-page-points li{padding:0 15px;border-left:1px solid rgba(255,255,255,.25);color:#d9d2dc;font-size:.81rem;font-weight:750}
+.producer-page-points li:first-child{padding-left:0;border-left:0}
+.producer-page-visual{position:relative;height:555px;min-width:0;perspective:1100px}
+.producer-page-screen{position:absolute;top:50%;width:min(42%,238px);margin:0;line-height:0;filter:drop-shadow(0 35px 42px rgba(0,0,0,.55))}
+.producer-page-screen img{width:100%;height:auto;border:1px solid rgba(255,255,255,.2);border-radius:30px;box-shadow:0 0 48px rgba(255,43,138,.12)}
+.producer-page-screen-events{left:9%;transform:translateY(-48%) rotate(-8deg);z-index:1}
+.producer-page-screen-social{right:8%;transform:translateY(-53%) rotate(7deg);z-index:2}
+.producer-page-points li:last-child{color:#ff86b3}
+.producer-page-contact{padding:58px 0;background:#100b14;border-top:1px solid var(--line)}
+.producer-page-contact-inner{display:flex;align-items:center;justify-content:space-between;gap:28px}
+.producer-page-contact-inner>div{max-width:670px}
+.producer-page-contact-inner .eyebrow{margin-bottom:10px}
+.producer-page-contact-inner h2{margin:0;font-size:clamp(2rem,3.5vw,3rem);line-height:.98;letter-spacing:-.055em}
+.producer-page-contact-inner p:not(.eyebrow){margin:10px 0 0;color:#b9b2bf}
+.producer-page-footer{padding:30px 0;background:#070609;border-top:1px solid var(--line)}
+.producer-page-footer-inner{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:25px}
+.producer-page-footer .brand{margin:0}
+.producer-page-footer .brand img{width:112px}
+.producer-page-footer nav{display:flex;gap:clamp(12px,2.5vw,30px);justify-content:center;flex-wrap:wrap}
+.producer-page-footer nav a{color:#aaa2ad;font-size:.82rem}
+.producer-page-footer nav a:hover{color:#fff}
+.producer-page-footer>div>span{color:#77717b;font-size:.72rem;text-align:right}
+.producer-page #produtores-contato{scroll-margin-top:94px}
+@media(max-width:1040px){
+  .producer-page-hero-grid{grid-template-columns:minmax(0,1.03fr) minmax(0,.8fr);gap:20px}
+  .producer-page-visual{height:480px}
+  .producer-page-screen{width:min(47%,210px)}
+  .producer-page-footer-inner{grid-template-columns:auto 1fr}
+  .producer-page-footer-inner>span{grid-column:1/-1;text-align:left}
+}
+@media(max-width:760px){
+  .producer-page-hero{min-height:0;padding:118px 0 55px}
+  .producer-page-hero::before{background-image:linear-gradient(180deg,rgba(7,6,10,.48) 0%,rgba(7,6,10,.82) 28%,#09070d 73%),url('/assets/generated/role-live-show-hero.webp');background-position:58% top}
+  .producer-page-hero-grid{grid-template-columns:1fr;gap:16px;min-height:0}
+  .producer-page-copy h1{font-size:clamp(3.1rem,13vw,5rem)}
+  .producer-page-copy>p:not(.eyebrow){font-size:1.03rem}
+  .producer-page-copy .hero-actions .btn{width:100%}
+  .producer-page-points{margin-top:28px;gap:8px 0}
+  .producer-page-points li{padding-inline:10px;font-size:.72rem}
+  .producer-page-visual{height:410px;max-width:490px;width:100%;margin:0 auto}
+  .producer-page-screen{width:min(43%,190px)}
+  .producer-page-screen-events{left:10%}
+  .producer-page-screen-social{right:9%}
+  .producer-page-contact{padding:43px 0}
+  .producer-page-contact-inner{align-items:flex-start;flex-direction:column}
+  .producer-page-footer-inner{grid-template-columns:1fr;gap:20px}
+  .producer-page-footer nav{justify-content:flex-start}
+  .producer-page-footer-inner>span{grid-column:auto}
+}
+@media(max-width:430px){
+  .producer-page-hero{padding-top:106px}
+  .producer-page-copy h1{font-size:clamp(2.8rem,13vw,4rem)}
+  .producer-page-points li{padding-inline:8px;font-size:.66rem}
+  .producer-page-visual{height:355px}
+  .producer-page-screen{width:min(45%,164px)}
+}
+
+/* Standalone refund and ticket transfer guide. */
+.policy-body{min-height:100vh;background:#09070d}
+.policy-header{position:relative;z-index:2;border-bottom:1px solid var(--line);background:rgba(9,7,13,.94)}
+.policy-header-inner{height:82px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.policy-header .brand img{width:126px;height:auto}
+.policy-back{color:#d7d0da;font-size:.9rem;font-weight:750}
+.policy-back span{margin-left:5px;color:#ff72aa}
+.policy-hero{padding:116px 0 72px;background:radial-gradient(ellipse at 82% 6%,rgba(255,43,138,.17),transparent 40%),linear-gradient(180deg,#100b14,#09070d)}
+.policy-hero .container{max-width:1180px}
+.policy-hero h1{max-width:960px}
+.policy-hero>div>p:not(.eyebrow){max-width:670px;color:#c4bdc8;font-size:1.13rem}
+.policy-shortcuts{display:flex;gap:10px;flex-wrap:wrap;margin-top:31px}
+.policy-shortcuts a{display:inline-flex;gap:12px;align-items:center;padding:10px 15px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(16,11,20,.72);color:#eee9f0;font-size:.83rem;font-weight:800}
+.policy-shortcuts a span{color:#ff71a9}
+.policy-deadline-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:-1px}
+.policy-deadline-card{padding:27px 30px 25px;border:1px solid var(--line);border-radius:23px;background:#110c15}
+.policy-kicker{display:block;margin-bottom:13px;color:#ff79ad;text-transform:uppercase;letter-spacing:.13em;font-size:.69rem;font-weight:900}
+.policy-deadline-card>strong{display:block;font-size:clamp(2.15rem,4vw,3.25rem);line-height:1;letter-spacing:-.06em}
+.policy-deadline-card p{max-width:500px;margin:12px 0 0;color:#b9b2bf;font-size:.96rem;line-height:1.55}
+.policy-content{padding-top:70px;padding-bottom:85px}
+.policy-content-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}
+.policy-article{padding:32px;border:1px solid var(--line);border-radius:28px;background:#100c14}
+.policy-article>.eyebrow{margin-bottom:12px}
+.policy-article h2,.policy-faq h2{margin:0 0 17px;font-size:clamp(2rem,3.2vw,3.1rem);line-height:.98;letter-spacing:-.055em}
+.policy-intro,.policy-article>p:not(.eyebrow){color:#b9b2bf;font-size:.95rem;line-height:1.65}
+.policy-steps{display:grid;gap:0;margin:27px 0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.policy-steps li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:13px;padding:17px 0;border-bottom:1px solid var(--line)}
+.policy-steps li>span{color:#ff77aa;font-weight:900;font-size:.76rem;letter-spacing:.07em;padding-top:2px}
+.policy-steps strong{font-size:.91rem}
+.policy-steps p{margin:4px 0 0;color:#aaa2ad;font-size:.86rem;line-height:1.5}
+.policy-callout{padding:16px 17px;border-left:2px solid #ff4b9a;border-radius:0 14px 14px 0;background:rgba(255,43,138,.07);color:#cfc7d2;font-size:.88rem;line-height:1.55}
+.policy-callout strong{color:#fff}
+.policy-faq{padding-block:70px;background:#0d0910;border-top:1px solid rgba(255,255,255,.07)}
+.policy-faq-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:start}
+.policy-footer-cta{padding:45px 0;border-top:1px solid var(--line);background:#100b14}
+.policy-footer-inner{display:flex;align-items:center;justify-content:space-between;gap:25px}
+.policy-footer-inner .eyebrow{margin-bottom:9px}
+.policy-footer-inner h2{margin:0;font-size:2rem;letter-spacing:-.05em}
+.policy-footer-inner p:not(.eyebrow){margin:5px 0 0;color:#b9b2bf}
+.policy-site-footer{padding:23px 0;background:#070609;color:#aaa2ad;font-size:.8rem}
+.policy-site-footer .container{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.policy-site-footer a{color:#f2edf4;font-weight:750}
+@media(max-width:850px){
+  .producer-guide-grid{grid-template-columns:1fr;gap:46px}
+  .policy-faq-layout{grid-template-columns:1fr;gap:25px}
+}
+@media(max-width:760px){
+  .producer-guide{padding-block:76px}
+  .producer-guide-heading{margin-bottom:37px}
+  .policy-header-inner{height:72px}
+  .policy-hero{padding:84px 0 50px}
+  .policy-hero h1{font-size:clamp(2.55rem,10vw,4rem)}
+  .policy-deadline-grid{grid-template-columns:1fr;gap:10px}
+  .policy-content{padding-top:36px;padding-bottom:50px}
+  .policy-content-grid{grid-template-columns:1fr;gap:14px}
+  .policy-article{padding:24px;border-radius:22px}
+  .policy-faq{padding-block:50px}
+  .policy-footer-inner{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:430px){
+  .producer-fee-card{padding:20px}
+  .policy-header .brand img{width:108px}
+  .policy-back{font-size:.8rem}
+  .policy-hero>div>p:not(.eyebrow){font-size:1rem}
+  .policy-shortcuts a{padding:9px 12px;font-size:.77rem}
+  .policy-deadline-card{padding:23px}
+  .policy-article{padding:20px}
+}

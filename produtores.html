@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Venda ingressos, organize o check-in e conecte seu público antes do evento com o Rolê." />
+  <meta name="theme-color" content="#09070D" />
+  <meta property="og:title" content="Rolê para Produtores — Ingressos e conexões" />
+  <meta property="og:description" content="Uma bilheteria para organizar seu evento e conectar pessoas antes da noite." />
+  <meta property="og:type" content="website" />
+  <title>Para Produtores — Rolê</title>
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body class="producer-page">
+  <a class="skip-link" href="#main">Ir para o conteúdo</a>
+  <header class="site-header" data-header>
+    <div class="container nav-wrap">
+      <a class="brand" href="/#top" aria-label="Rolê — início"><img src="/assets/logo/logo-role-branco.webp" alt="Rolê" width="142" height="48" /></a>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="/#eventos">Eventos</a>
+        <a href="/#como-funciona">Como funciona</a>
+        <a href="/#seguranca">Segurança</a>
+        <a href="/produtores" aria-current="page">Para produtores</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-ghost btn-small" href="#produtores-contato">Cadastrar evento</a>
+        <a class="btn btn-primary btn-small" href="/#app">Baixe o app</a>
+      </div>
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" data-menu-toggle>Menu</button>
+    </div>
+    <div class="mobile-menu" data-mobile-menu>
+      <a href="/#eventos">Eventos</a>
+      <a href="/#como-funciona">Como funciona</a>
+      <a href="/#seguranca">Segurança</a>
+      <a href="/produtores" aria-current="page">Para produtores</a>
+      <a href="/#app">Baixe o app</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="producer-page-hero" id="top" aria-labelledby="producer-page-title">
+      <div class="container producer-page-hero-grid">
+        <div class="producer-page-copy reveal">
+          <p class="eyebrow">Para casas de show e produtores</p>
+          <h1 id="producer-page-title">Mais que vender ingressos.<br /><span>Faça a noite acontecer.</span></h1>
+          <p>Organize sua bilheteria, acompanhe a entrada e ajude seu público a se conectar antes de chegar ao evento.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#produtores-contato" data-producer-link>Quero falar sobre meu evento</a>
+            <a class="btn btn-ghost" href="#vantagens">Conheça as vantagens</a>
+          </div>
+          <ul class="producer-page-points" aria-label="O que o Rolê reúne">
+            <li>Venda de ingressos</li>
+            <li>Operação de entrada</li>
+            <li>Conexões no evento</li>
+          </ul>
+        </div>
+        <div class="producer-page-visual reveal reveal-delay-1" role="group" aria-label="Telas do Rolê para descobrir eventos e deslizar entre pessoas que também vão">
+          <figure class="producer-page-screen producer-page-screen-events"><img src="/assets/telas/eventos.webp" alt="Eventos disponíveis no app Rolê" width="863" height="1822" /></figure>
+          <figure class="producer-page-screen producer-page-screen-social"><img src="/assets/telas/deslizar.webp" alt="Pessoas que vão ao mesmo evento no app Rolê" width="863" height="1822" /></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="producer-guide section" id="vantagens" aria-labelledby="producer-guide-title">
+      <div class="container">
+        <div class="producer-guide-heading reveal">
+          <p class="eyebrow">Uma bilheteria que entende a noite</p>
+          <h2 id="producer-guide-title">Da descoberta ao check&#8209;in,<br /><span>tudo no mesmo fluxo.</span></h2>
+          <p>O Rolê conecta a operação da sua casa à experiência de quem vai — e às conexões que começam antes da música.</p>
+        </div>
+
+        <div class="producer-guide-grid">
+          <div class="producer-guide-benefits reveal">
+            <ul class="producer-outcomes">
+              <li><span>01</span><div><h3>Venda no mesmo app</h3><p>Cadastre evento, tipos de ingresso, lotes e cupons em um único fluxo.</p></div></li>
+              <li><span>02</span><div><h3>Organize a entrada</h3><p>Use QR Code para validar ingressos e acompanhe a presença do público.</p></div></li>
+              <li><span>03</span><div><h3>Amplie a experiência</h3><p>Ajude as pessoas a descobrir quem também vai, dar match e conversar antes da noite.</p></div></li>
+            </ul>
+
+            <aside class="producer-fee-card" aria-label="Taxa para produtores">
+              <p class="eyebrow">Modelo de cobrança · modo repasse</p>
+              <div class="producer-fee-amount"><strong>10%</strong><span>de taxa Rolê<br />por ingresso pago</span></div>
+              <p>A taxa é repassada ao público e aparece discriminada no checkout, além do valor do ingresso definido pelo produtor.</p>
+            </aside>
+          </div>
+
+          <div class="producer-guide-faq reveal reveal-delay-1">
+            <p class="eyebrow">Dúvidas de quem produz</p>
+            <h3>Antes de colocar seu evento no Rolê</h3>
+            <div class="accordion" data-accordion>
+              <details open><summary>Que tipo de evento posso divulgar?<i></i></summary><p>O Rolê é feito para shows, festas e experiências presenciais em que as pessoas querem curtir e conhecer quem também vai.</p></details>
+              <details><summary>Como funciona a taxa de 10%?<i></i></summary><p>No modo repasse, a taxa de serviço Rolê é adicionada ao valor do ingresso e cobrada do público. A composição aparece no checkout antes da confirmação da compra.</p></details>
+              <details><summary>O que consigo administrar pelo app?<i></i></summary><p>Você pode cadastrar eventos e lotes, criar cupons, acompanhar vendas e participantes e validar entradas pelo check-in com QR Code.</p></details>
+              <details><summary>Como funcionam reembolsos e transferências?<i></i></summary><p>O app mostra os prazos e permite acompanhar os pedidos. Veja <a href="/reembolsos">as regras de reembolso e transferência</a> para o público.</p></details>
+            </div>
+            <a class="btn btn-primary producer-guide-cta" href="#produtores-contato" data-producer-link>Conversar sobre meu evento</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="producer-page-contact" id="produtores-contato" aria-labelledby="producer-contact-title">
+      <div class="container producer-page-contact-inner reveal">
+        <div>
+          <p class="eyebrow">Próximo passo</p>
+          <h2 id="producer-contact-title">Vamos colocar seu evento no Rolê?</h2>
+          <p>Converse com nosso time para conhecer a plataforma e organizar a operação da sua casa.</p>
+        </div>
+        <a class="btn btn-primary" href="#produtores-contato" data-producer-link>Falar com o Rolê</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="producer-page-footer">
+    <div class="container producer-page-footer-inner">
+      <a class="brand" href="/#top" aria-label="Rolê — início"><img src="/assets/logo/logo-role-branco.webp" alt="Rolê" width="142" height="48" /></a>
+      <nav aria-label="Links do rodapé"><a href="/#eventos">Eventos</a><a href="/reembolsos">Reembolso e transferência</a><a href="/privacidade.html">Privacidade</a><a href="/terms">Termos de uso</a></nav>
+      <span>© 2026 Rolê. Todos os direitos reservados.</span>
+    </div>
+  </footer>
+
+  <aside class="consent-panel" data-consent-panel hidden role="region" aria-labelledby="consent-title" aria-live="polite">
+    <div class="consent-copy">
+      <p class="eyebrow">Privacidade</p>
+      <h2 id="consent-title">Você escolhe como medir sua visita.</h2>
+      <p>Permita cookies opcionais para medição de audiência e campanhas. Sua escolha pode ser alterada a qualquer momento no rodapé.</p>
+      <p class="consent-note" data-consent-gtm-note hidden>Quando configurado, o Google Tag Manager só carrega se as duas categorias forem permitidas.</p>
+      <a href="/privacidade.html">Leia a Política de Privacidade</a>
+    </div>
+    <div class="consent-controls">
+      <fieldset>
+        <legend>Preferências opcionais</legend>
+        <label data-consent-analytics-option><input type="checkbox" data-consent-analytics /> Medição de audiência (Google Analytics / Tag Manager)</label>
+        <label data-consent-marketing-option><input type="checkbox" data-consent-marketing /> Marketing e anúncios (Meta Ads)</label>
+      </fieldset>
+      <div class="consent-actions">
+        <button class="btn btn-ghost btn-small" type="button" data-consent-reject>Recusar opcionais</button>
+        <button class="btn btn-ghost btn-small" type="button" data-consent-save>Salvar escolhas</button>
+        <button class="btn btn-primary btn-small" type="button" data-consent-accept>Aceitar todos</button>
+      </div>
+    </div>
+  </aside>
+  <form class="bot-trap" aria-hidden="true" tabindex="-1"><label>Empresa<input type="text" name="company" data-honeypot autocomplete="off" tabindex="-1" /></label></form>
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

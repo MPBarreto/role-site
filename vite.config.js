@@ -9,9 +9,10 @@ export default defineConfig({
     rolldownOptions: {
       input: {
         home: resolve(projectRoot, 'index.html'),
-        terms: resolve(projectRoot, 'termos.html'),
+        terms: resolve(projectRoot, 'terms.html'),
         privacy: resolve(projectRoot, 'privacidade.html'),
-        refunds: resolve(projectRoot, 'reembolsos.html')
+        refunds: resolve(projectRoot, 'reembolsos.html'),
+        producers: resolve(projectRoot, 'produtores.html')
       }
     }
   }
