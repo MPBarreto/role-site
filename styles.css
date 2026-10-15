@@ -166,7 +166,9 @@
 .download-layout h2 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .download-layout>div>p:not(.eyebrow){color:var(--muted);font-size:1.08rem}
 .download-art{height:570px;position:relative;overflow:visible}
-.download-screen{height:540px;border:1px solid rgba(255,255,255,.18);border-radius:33px;transform:rotate(4deg);box-shadow:0 38px 85px rgba(0,0,0,.55),0 0 55px rgba(255,43,138,.14)}
+.download-screen{position:absolute;top:50%;left:50%;width:clamp(150px,25vw,245px);height:auto;max-width:48%;border:1px solid rgba(255,255,255,.18);border-radius:33px;object-fit:contain;box-shadow:0 38px 85px rgba(0,0,0,.55),0 0 55px rgba(255,43,138,.14)}
+.download-screen-list{z-index:1;transform:translate(calc(-100% + 10px),-50%) rotate(-7deg)}
+.download-screen-conversation{z-index:2;transform:translate(-10px,-50%) rotate(7deg)}
 
 .producers{position:relative;isolation:isolate;overflow:hidden;padding-block:92px;background:none}
 .producers::before{content:"";position:absolute;z-index:-2;inset:0;background-image:linear-gradient(90deg,rgba(7,6,10,.97) 0%,rgba(7,6,10,.84) 43%,rgba(7,6,10,.52) 100%),linear-gradient(0deg,#09070d 0%,transparent 25%,#0d0810 100%),url('/assets/derived/preview-event-show.webp');background-size:cover;background-position:center 47%}
@@ -202,7 +204,6 @@
 @media(max-width:850px){
   .download-layout{min-height:0;gap:24px}
   .download-art{height:500px}
-  .download-screen{height:480px}
   .producer-layout{grid-template-columns:1fr;gap:28px}
   .producer-copy{max-width:680px}
   .producer-devices{width:min(100%,560px);height:550px}
@@ -225,8 +226,7 @@
   .download{padding-block:74px}
   .download-layout{grid-template-columns:1fr;gap:8px;padding:0}
   .download-layout>div:first-child{max-width:620px}
-  .download-art{height:440px;justify-content:flex-start;padding-left:min(14vw,54px)}
-  .download-screen{height:420px;max-height:none}
+  .download-art{height:440px;justify-content:center;padding-left:0}
   .producers{padding-block:76px}
   .producer-layout{gap:24px;padding:0}
   .producer-devices{height:490px}
@@ -241,8 +241,7 @@
   .experience-copy p{font-size:.74rem}
   .experience-visual img{border-radius:14px}
   .safety-visual{min-height:350px}
-  .download-art{height:390px;padding-left:10vw}
-  .download-screen{height:375px}
+  .download-art{height:390px;padding-left:0}
   .producer-features{grid-template-columns:1fr}
   .producer-features .producer-feature-wide{grid-column:auto}
   .producer-devices{height:425px;width:calc(100% + 8px);margin-left:-4px}
