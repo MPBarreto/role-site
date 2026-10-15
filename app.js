@@ -149,16 +149,36 @@ function renderEmptyEvents(grid) {
   grid.append(empty);
 }
 
-async function loadEvents() {
+function renderEventsUnavailable(grid) {
+  grid.replaceChildren();
+  const unavailable = document.createElement('div');
+  unavailable.className = 'events-empty-state events-unavailable-state';
+  unavailable.setAttribute('role', 'status');
+  addTextElement(unavailable, 'h3', '', 'Não foi possível carregar os eventos agora.');
+  addTextElement(unavailable, 'p', '', 'Tente novamente em instantes.');
+  const retry = document.createElement('button');
+  retry.type = 'button';
+  retry.className = 'btn btn-ghost btn-small events-retry';
+  retry.textContent = 'Tentar novamente';
+  retry.addEventListener('click', () => loadEvents(retry));
+  unavailable.append(retry);
+  grid.append(unavailable);
+}
+
+async function loadEvents(retryButton = null) {
   const grid = $('[data-events-grid]');
   if (!grid) return;
+  if (retryButton) {
+    retryButton.disabled = true;
+    retryButton.textContent = 'Tentando…';
+  }
   try {
     const endpoint = config.EVENTS_API_URL;
     const response = await fetch(`${endpoint}${endpoint.includes('?') ? '&' : '?'}limit=6`, {
       headers: { Accept: 'application/json' }
     });
-    if (!response.ok) throw new Error(`events_${response.status}`);
     const payload = await response.json();
+    if (!response.ok || payload?.source === 'unavailable') throw new Error('events_unavailable');
     const events = Array.isArray(payload) ? payload : (payload.events || payload.data || []);
     if (!events.length) {
       renderEmptyEvents(grid);
@@ -166,7 +186,7 @@ async function loadEvents() {
     }
     grid.replaceChildren(...events.map(renderEvent));
   } catch {
-    renderEmptyEvents(grid);
+    renderEventsUnavailable(grid);
   }
 }
 

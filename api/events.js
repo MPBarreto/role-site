@@ -41,8 +41,9 @@ export default async function handler(req, res) {
   const publishableKey = process.env.SUPABASE_PUBLISHABLE_KEY || '';
 
   if (!baseUrl || !publishableKey) {
-    res.setHeader('Cache-Control', 'public, max-age=20, s-maxage=60');
-    return res.status(200).json({ events: [], source: 'unavailable' });
+    res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('Retry-After', '30');
+    return res.status(503).json({ events: [], source: 'unavailable' });
   }
 
   try {
@@ -86,8 +87,10 @@ export default async function handler(req, res) {
 
     res.setHeader('Cache-Control', CACHE_CONTROL);
     return res.status(200).json({ events: normalized, source: 'supabase' });
-  } catch {
-    res.setHeader('Cache-Control', 'public, max-age=20, s-maxage=60');
-    return res.status(200).json({ events: [], source: 'unavailable' });
+  } catch (error) {
+    console.error('[api/events] Supabase request failed:', error instanceof Error ? error.message : 'unknown error');
+    res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('Retry-After', '30');
+    return res.status(502).json({ events: [], source: 'unavailable' });
   }
 }
