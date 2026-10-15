@@ -1,6 +1,6 @@
 # Rolê — Site
 
-Site institucional/comercial do Rolê, desenvolvido a partir dos mockups aprovados da marca e orientado ao ICP de casas de show, bares, festas e produtores de eventos.
+Site do Rolê em Vite, com descoberta de eventos, experiência social e informações para produtores.
 
 ## Estrutura
 
@@ -8,7 +8,7 @@ Site institucional/comercial do Rolê, desenvolvido a partir dos mockups aprovad
 - Dor orientada à solução
 - Solução e jornada: evento → ingresso → pessoas → match → conversa → check-in
 - Benefícios para casa e público
-- Eventos reais via API; sem feed disponível, cards explicam os recursos do app
+- Eventos públicos via RPC Supabase; sem feed disponível, o site mostra um estado vazio sem inventar eventos
 - CTA para App Store / Google Play
 - FAQ
 - Footer e WhatsApp protegido por endpoint server-side
@@ -39,14 +39,12 @@ Enquanto as URLs estiverem vazias, os botões aparecem visualmente, mas não red
 
 ## Próximos eventos
 
-Configure em produção:
+Configure no ambiente server-side de produção:
 
-- `EVENTS_API_URL`: endpoint público/privado que retorna os próximos eventos.
-- `EVENTS_API_TOKEN`: opcional, enviado como Bearer token pelo proxy server-side.
+- `SUPABASE_URL`: URL do projeto Supabase.
+- `SUPABASE_PUBLISHABLE_KEY`: chave publishable do projeto.
 
-Sem eventos configurados ou quando a origem estiver indisponível, o site apresenta os recursos de descoberta, conexões sociais e check-in no lugar de exibir uma agenda fictícia.
-
-O adaptador aceita uma lista direta ou `{ events: [...] }` / `{ data: [...] }` e normaliza campos comuns como `title`, `cover_url`, `location`, `attendee_count` e `genres`.
+A rota `/api/events` consulta as RPCs públicas `search_public_event_directory` e `get_public_event_cover_media`. Ela não consulta tabelas diretamente nem expõe contagens sociais. Sem configuração ou quando a origem estiver indisponível, o site mostra um estado vazio sem eventos fictícios.
 
 ## WhatsApp protegido
 
@@ -70,7 +68,7 @@ SITE_HOST=seu-dominio.com
 
 - Trocar `example.com` em `robots.txt` e `sitemap.xml` pelo domínio final.
 - Inserir URLs oficiais da App Store e Google Play em `.env.local`.
-- Configurar variáveis do WhatsApp e API de eventos.
+- Configurar as variáveis do WhatsApp e do Supabase no ambiente server-side.
 - Substituir as páginas legais provisórias pelo texto jurídico aprovado.
 
 ## Design tokens principais
