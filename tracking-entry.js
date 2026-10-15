@@ -1,4 +1,5 @@
 import { initializeTracking } from './tracking.js';
+import './protected-email.js';
 
 initializeTracking();
 
@@ -46,8 +47,7 @@ async function loadProtectedLegalIdentity() {
     const lines = [
       ['Operadora:', data.companyName],
       ['CNPJ:', data.cnpj],
-      ['Endereço:', data.address],
-      ['E-mail de suporte:', data.supportEmail]
+      ['Endereço:', data.address]
     ];
 
     for (const [label, value] of lines) {

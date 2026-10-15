@@ -82,6 +82,10 @@ WHATSAPP_MESSAGE=Olá! Quero saber como levar o Rolê para minha casa de eventos
 SITE_HOST=seu-dominio.com
 ```
 
+## E-mail de suporte protegido
+
+Configure `EMAIL_SUPORTE` e `CONTACT_SECRET` como variáveis **server-only** em Production. Configure os dois também em Preview se quiser testar o fluxo em prévias. Não use o prefixo `VITE_`: o endereço é entregue pela função `/api/support-email` apenas após a interação do visitante, token assinado, verificação de origem e limites básicos de tentativas. As páginas legais não incluem o endereço no HTML inicial nem o carregam automaticamente.
+
 ## Antes de publicar
 
 - Trocar `example.com` em `robots.txt` e `sitemap.xml` pelo domínio final.

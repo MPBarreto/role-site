@@ -1,6 +1,6 @@
 import crypto from 'node:crypto';
 
-const SECRET = process.env.CONTACT_SECRET || 'dev-only-change-me-before-production';
+const SECRET = process.env.CONTACT_SECRET || (process.env.NODE_ENV === 'production' ? '' : 'dev-only-change-me-before-production');
 const MIN_TOKEN_AGE_MS = 1800;
 const MAX_TOKEN_AGE_MS = 20 * 60 * 1000;
 const WINDOW_MS = 60 * 60 * 1000;
@@ -66,6 +66,7 @@ export default async function handler(req, res) {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'Method not allowed' });
   }
+  if (!SECRET) return res.status(503).json({ error: 'Verificação temporariamente indisponível.' });
 
   res.setHeader('Cache-Control', 'no-store, max-age=0');
   res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive');
@@ -81,7 +82,6 @@ export default async function handler(req, res) {
   return res.status(200).json({
     companyName: 'Eyby Desenvolvimento e Licenciamento de Software Ltda',
     cnpj: '55.430.619/0001-45',
-    address: 'R. Ubaldino do Amaral, 917, Curitiba-PR',
-    supportEmail: 'suporte@eyby.com.br'
+    address: 'R. Ubaldino do Amaral, 917, Curitiba-PR'
   });
 }

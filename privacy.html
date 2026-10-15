@@ -57,7 +57,7 @@
           <h2>Quem controla seus dados.</h2>
           <section>
             <p>O Rolê é operado pela <strong>Eyby Desenvolvimento e Licenciamento de Software Ltda.</strong> (“Eyby”, “Rolê”, “nós”), que atua como controladora dos dados pessoais tratados para operação da plataforma, gestão de contas, experiência social, venda e emissão de ingressos, segurança, suporte, marketing próprio e demais finalidades descritas nesta Política.</p>
-            <p>Para reduzir coleta automatizada dos dados cadastrais da empresa, os dados completos de identificação são carregados por mecanismo protegido após o acesso humano à página:</p>
+            <p>Os dados de identificação empresarial são carregados separadamente do HTML. O endereço de e-mail de contato só é consultado após o clique no link protegido da seção de contato abaixo:</p>
             <div class="legal-identity" data-legal-identity aria-live="polite">
               <span class="pending">Carregando identificação da controladora…</span>
             </div>
@@ -280,7 +280,7 @@
           <p class="legal-part-label">14 · Contato</p>
           <h2>Fale com o Rolê sobre privacidade.</h2>
           <section>
-            <p>Para exercer direitos, tirar dúvidas, comunicar incidente ou tratar de assuntos de privacidade e proteção de dados, utilize o canal de suporte da Eyby indicado nos dados da controladora acima. Esse canal também funciona como ponto inicial de contato de privacidade até eventual designação de contato adicional ou representante europeu.</p>
+            <p>Para exercer direitos, tirar dúvidas, comunicar incidente ou tratar de assuntos de privacidade e proteção de dados, <a href="#contato" data-protected-email data-email-subject="Privacidade e protecao de dados" data-email-purpose="privacidade e proteção de dados" aria-label="Carregar o e-mail de privacidade">carregue o e-mail de contato protegido</a>. Esse canal também funciona como ponto inicial de contato de privacidade até eventual designação de contato adicional ou representante europeu.</p>
             <p>Para assuntos gerais da plataforma, você também pode utilizar os canais oficiais disponíveis em <a href="/#contato">role.events</a>.</p>
           </section>
         </div>
@@ -325,7 +325,7 @@
         if(!detailsResponse.ok)throw new Error('details');
         const d=await detailsResponse.json();
         box.replaceChildren();
-        [d.companyName,d.cnpj,d.address,d.supportEmail].forEach((value,index)=>{
+        [d.companyName,d.cnpj,d.address].forEach((value,index)=>{
           const row=document.createElement('span');
           if(index===0){const strong=document.createElement('strong');strong.textContent=value;row.append(strong);}else{row.textContent=value;}
           box.append(row);
