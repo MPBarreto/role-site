@@ -106,13 +106,28 @@ function addTextElement(parent, tag, className, value) {
   return element;
 }
 
+function eventSlug(value) {
+  return String(value || 'role').normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 96).replace(/-+$/g, '') || 'role';
+}
+
 function renderEvent(event) {
   const article = document.createElement('article');
   article.className = 'event-card reveal visible';
 
   const cover = document.createElement('div');
   cover.className = 'event-cover';
-  if (event.coverUrl) cover.style.backgroundImage = `url("${event.coverUrl.replace(/["\\\n\r]/g, '')}")`;
+  if (event.coverUrl) {
+    const image = document.createElement('img');
+    image.className = 'event-cover-image';
+    image.src = event.coverUrl;
+    image.alt = `Capa do evento ${event.title || 'no Rolê'}`;
+    image.loading = 'lazy';
+    image.decoding = 'async';
+    image.width = 1280;
+    image.height = 720;
+    cover.append(image);
+  }
   addTextElement(cover, 'span', 'event-date', formatEventDate(event.startsAt));
   article.append(cover);
 
@@ -134,8 +149,10 @@ function renderEvent(event) {
   body.append(tags);
   const link = document.createElement('a');
   link.className = 'event-cta';
-  link.href = '#app';
-  addTextElement(link, 'span', '', 'Ver no app');
+  link.href = event.publicShareCode
+    ? `/events/${encodeURIComponent(event.publicShareCode)}/${encodeURIComponent(eventSlug(event.title))}`
+    : '/#app';
+  addTextElement(link, 'span', '', 'Ver evento');
   body.append(link);
   article.append(body);
   return article;

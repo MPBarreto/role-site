@@ -1,4 +1,8 @@
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+
 User-agent: *
 Allow: /
 Disallow: /api/
-Sitemap: https://example.com/sitemap.xml
+Sitemap: https://role.events/sitemap.xml

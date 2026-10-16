@@ -11,12 +11,6 @@ function jsonHeaders(key) {
   };
 }
 
-function publicCoverUrl(baseUrl, path) {
-  if (typeof path !== 'string' || !path.trim()) return null;
-  const encodedPath = path.split('/').map(segment => encodeURIComponent(segment)).join('/');
-  return `${baseUrl}/storage/v1/object/public/role-event-covers/${encodedPath}`;
-}
-
 async function callRpc(baseUrl, key, functionName, body) {
   const response = await fetch(`${baseUrl}/rest/v1/rpc/${functionName}`, {
     method: 'POST',
@@ -25,6 +19,12 @@ async function callRpc(baseUrl, key, functionName, body) {
   });
   if (!response.ok) throw new Error(`rpc_${functionName}_${response.status}`);
   return response.json();
+}
+
+function publicCoverUrl(baseUrl, path) {
+  if (typeof path !== 'string' || !path.trim() || path.split('/').some(segment => segment === '..')) return null;
+  const encodedPath = path.split('/').map(segment => encodeURIComponent(segment)).join('/');
+  return `${baseUrl}/storage/v1/object/public/role-event-covers/${encodedPath}`;
 }
 
 export default async function handler(req, res) {
@@ -37,8 +37,8 @@ export default async function handler(req, res) {
   const limit = Number.isFinite(limitValue)
     ? Math.max(1, Math.min(Math.floor(limitValue), MAX_LIMIT))
     : DEFAULT_LIMIT;
-  const baseUrl = (process.env.SUPABASE_URL || '').replace(/\/$/, '');
-  const publishableKey = process.env.SUPABASE_PUBLISHABLE_KEY || '';
+  const baseUrl = (process.env.SUPABASE_URL || process.env.EXPO_PUBLIC_SUPABASE_URL || '').replace(/\/$/, '');
+  const publishableKey = process.env.SUPABASE_PUBLISHABLE_KEY || process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY || '';
 
   if (!baseUrl || !publishableKey) {
     res.setHeader('Cache-Control', 'no-store');
@@ -47,29 +47,29 @@ export default async function handler(req, res) {
   }
 
   try {
-    const rows = await callRpc(baseUrl, publishableKey, 'search_public_event_directory', {
-      p_search: null,
-      p_city: null,
-      p_category: null,
-      p_starts_at_from: null,
-      p_starts_at_before: null,
-      p_limit: limit,
-      p_offset: 0
-    });
+    const [rows, shareRows] = await Promise.all([
+      callRpc(baseUrl, publishableKey, 'search_public_event_directory', {
+        p_search: null,
+        p_city: null,
+        p_category: null,
+        p_starts_at_from: null,
+        p_starts_at_before: null,
+        p_limit: limit,
+        p_offset: 0
+      }),
+      callRpc(baseUrl, publishableKey, 'search_public_event_share_directory', {
+        p_search: null,
+        p_limit: 48,
+        p_offset: 0
+      })
+    ]);
     const events = Array.isArray(rows) ? rows : [];
-    const coverRows = events.length
-      ? await callRpc(baseUrl, publishableKey, 'get_public_event_cover_media', {
-        p_event_ids: events.map(event => event.id)
-      }).catch(() => [])
-      : [];
-    const covers = new Map(
-      (Array.isArray(coverRows) ? coverRows : [])
-        .map(cover => [cover.event_id, publicCoverUrl(baseUrl, cover.cover_image_path)])
-        .filter(([, url]) => url)
-    );
+    const shareById = new Map((Array.isArray(shareRows) ? shareRows : [])
+      .map(event => [event.event_id, event]));
 
     const normalized = events.map(event => ({
       id: event.id,
+      publicShareCode: shareById.get(event.id)?.public_share_code || null,
       title: event.title,
       category: event.category,
       description: event.description,
@@ -81,7 +81,7 @@ export default async function handler(req, res) {
       lowestPriceMinor: event.lowest_price_minor === null || event.lowest_price_minor === undefined
         ? null
         : Number(event.lowest_price_minor),
-      coverUrl: covers.get(event.id) || null,
+      coverUrl: publicCoverUrl(baseUrl, shareById.get(event.id)?.cover_image_path) || null,
       tags: event.category ? [event.category] : []
     }));
 

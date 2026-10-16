@@ -8,7 +8,7 @@ Site do Rolê em Vite, com descoberta de eventos, experiência social e informa�
 - Dor orientada à solução
 - Solução e jornada: evento → ingresso → pessoas → match → conversa → check-in
 - Benefícios para casa e público
-- Eventos públicos via RPC Supabase; sem feed disponível, o site mostra um estado vazio sem inventar eventos
+- Eventos públicos, páginas indexáveis por evento e sitemap dinâmico via RPC Supabase; sem feed disponível, a home mostra um estado vazio sem inventar eventos
 - CTA para App Store / Google Play
 - FAQ
 - Footer e WhatsApp protegido por endpoint server-side
@@ -62,7 +62,15 @@ Configure no ambiente server-side de produção:
 - `SUPABASE_URL`: URL do projeto Supabase.
 - `SUPABASE_PUBLISHABLE_KEY`: chave publishable do projeto.
 
-A rota `/api/events` consulta as RPCs públicas `search_public_event_directory` e `get_public_event_cover_media`. Ela não consulta tabelas diretamente nem expõe contagens sociais. Sem configuração ou quando a origem estiver indisponível, o site mostra um estado vazio sem eventos fictícios.
+A rota `/api/events` consulta as RPCs públicas `search_public_event_directory` e `search_public_event_share_directory` para combinar preço, capa e URL de compartilhamento. Ela não consulta tabelas diretamente nem expõe contagens sociais. Sem configuração ou quando a origem estiver indisponível, o site mostra um estado vazio sem eventos fictícios.
+
+### Páginas públicas de eventos e indexação
+
+- `/eventos` lista os eventos publicados e futuros com HTML renderizado no servidor.
+- `/events/{public_share_code}/{slug}` serve a página pública de cada evento, com canonical, Open Graph e dados estruturados `Event`. O preço e a oferta estruturada aparecem quando há ingresso disponível.
+- `/sitemap.xml` gera um índice com as páginas fixas e lotes de URLs de eventos publicados e futuros. O `robots.txt` aponta para esse sitemap e permite o acesso do OAI-SearchBot às páginas públicas.
+- As funções usam apenas `SUPABASE_URL` e `SUPABASE_PUBLISHABLE_KEY` (ou os equivalentes `EXPO_PUBLIC_*`) e as RPCs públicas. Não configure a chave `service_role` no site.
+- As RPCs `get_public_event_share_page` e `search_public_event_share_directory` precisam estar implantadas no projeto Supabase selecionado. O site usa temporariamente Role-Staging; antes de trocar para Role-Producao, aplique as migrações públicas de compartilhamento e diretório de eventos nesse projeto.
 
 ## WhatsApp protegido
 
@@ -88,7 +96,6 @@ Configure `EMAIL_SUPORTE` e `CONTACT_SECRET` como variáveis **server-only** em 
 
 ## Antes de publicar
 
-- Trocar `example.com` em `robots.txt` e `sitemap.xml` pelo domínio final.
 - Inserir URLs oficiais da App Store e Google Play em `.env.local`.
 - Configurar as variáveis do WhatsApp e do Supabase no ambiente server-side.
 - Substituir as páginas legais provisórias pelo texto jurídico aprovado.

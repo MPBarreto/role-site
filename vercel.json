@@ -39,9 +39,26 @@
       "source": "/produtores.html",
       "destination": "/produtores",
       "permanent": true
+    },
+    {
+      "source": "/events",
+      "destination": "/eventos",
+      "permanent": true
     }
   ],
   "rewrites": [
+    {
+      "source": "/events/:shareCode/:slug",
+      "destination": "/api/event-share?shareCode=:shareCode&slug=:slug"
+    },
+    {
+      "source": "/eventos",
+      "destination": "/api/event-share?directory=1"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    },
     {
       "source": "/privacy",
       "destination": "/privacy.html"

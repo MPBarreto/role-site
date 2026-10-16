@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "check": "node --check vite.config.js && node --check config.js && node --check app.js && node --check api/events.js && node --check api/contact.js && node --check api/contact-token.js"
+    "check": "node --check vite.config.js && node --check config.js && node --check app.js && node --check api/events.js && node --check api/event-share.js && node --check api/sitemap.js && node --check api/contact.js && node --check api/contact-token.js"
   },
   "engines": {
     "node": ">=20.19.0"
