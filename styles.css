@@ -41,6 +41,9 @@
 .store-badge{justify-content:flex-start;min-height:64px;text-align:left}
 .store-badge-icon{width:42px;height:42px;flex:0 0 42px;object-fit:contain;border-radius:9px}
 .store-badge span{flex:1}
+.web-app-badge{transition:border-color .2s,transform .2s}
+.web-app-badge:hover{border-color:rgba(255,43,138,.7);transform:translateY(-2px)}
+.web-app-icon{width:42px;height:42px;flex:0 0 42px;fill:none;stroke:var(--pink);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .footer-store-link{display:inline-flex;align-items:center;gap:8px}
 .footer-store-link img{width:18px;height:18px;flex:0 0 18px;object-fit:contain;border-radius:4px}
 @media(max-width:760px){.phone-main{width:min(350px,90vw)}.experience-card{min-height:810px}.experience-visual{width:min(100%,250px)}.download-art{height:auto}.download-screen{height:min(470px,125vw)}.producer-visual img{min-height:280px}}

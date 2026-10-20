@@ -137,8 +137,10 @@ function eventPage(event, { origin, supabaseUrl, shareCode, priceMinor }) {
   const title = String(event.title || 'Evento no Rolê');
   const canonical = shareUrl(origin, shareCode, title);
   const image = coverUrl(supabaseUrl, event.cover_image_path) || fallbackCover(origin);
-  const description = truncate(String(event.description || `Descubra ${title} no Rolê.`), 220);
+  const fullDescription = String(event.description || `Descubra ${title} no Rolê.`).trim();
+  const description = truncate(fullDescription, 220);
   const location = [event.venue_name, event.venue_address, event.city].filter(Boolean).join(' · ');
+  const mapUrl = location ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}` : '';
   const startsAt = formatEventDate(event.starts_at, event.event_timezone);
   const endsAt = event.ends_at ? formatEventDate(event.ends_at, event.event_timezone) : '';
   const price = priceMinor === null || priceMinor === undefined ? '' : formatMoney(priceMinor, event.currency);
@@ -153,14 +155,15 @@ function eventPage(event, { origin, supabaseUrl, shareCode, priceMinor }) {
   const body = `<header class="masthead masthead-overlay"><a class="brand" href="/" aria-label="Rolê"><img src="/assets/logo/logo-role-branco.webp" alt="Rolê" width="142" height="48"></a><a class="top-link" href="/eventos">Todos os eventos <span aria-hidden="true">→</span></a></header>
     <main class="event-main"><article class="event-hero"><img class="hero-image" src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(title)}"><div class="hero-shade"></div>
       <div class="hero-content"><p class="eyebrow">${escapeHtml(event.category || 'EVENTO')} · ${escapeHtml(event.city || '')}</p><h1>${escapeHtml(title)}</h1><p class="hero-description">${escapeHtml(description)}</p></div>
-    </article><section class="event-details"><div class="details-copy">${state}<div class="detail-line"><span class="detail-icon" aria-hidden="true">◷</span><div><strong>${escapeHtml(startsAt)}</strong>${endsAt ? `<span>Até ${escapeHtml(endsAt)}</span>` : ''}</div></div>
-      <div class="detail-line"><span class="detail-icon" aria-hidden="true">⌖</span><div><strong>${escapeHtml(event.venue_name || '')}</strong><span>${escapeHtml([event.venue_address, event.city].filter(Boolean).join(' · '))}</span></div></div>
+    </article><section class="event-details"><div class="details-copy">${state}
+      <div class="detail-line"><span class="detail-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 11h18"></path></svg></span><div><strong>${escapeHtml(startsAt)}</strong>${endsAt ? `<span>Até ${escapeHtml(endsAt)}</span>` : ''}</div></div>
+      <div class="detail-line"><span class="detail-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span><div><strong>${escapeHtml(event.venue_name || '')}</strong><span>${escapeHtml([event.venue_address, event.city].filter(Boolean).join(' · '))}</span>${mapUrl ? `<a class="map-link" href="${escapeHtml(mapUrl)}" target="_blank" rel="noopener noreferrer">Ver no mapa ↗</a>` : ''}</div></div>
       ${price ? `<div class="detail-line"><span class="detail-icon" aria-hidden="true">R$</span><div><strong>Ingressos a partir de ${escapeHtml(price)}</strong><span>Consulte a disponibilidade no app Rolê.</span></div></div>` : ''}
-      <h2>Sobre o evento</h2><p>${escapeHtml(description)}</p>
-      <div class="cta-row"><a class="button" href="${escapeHtml(isAvailable ? appUrl : '/eventos')}">${isAvailable ? 'Ver ingressos no app' : 'Explorar próximos eventos'} <span aria-hidden="true">→</span></a><a class="button button-secondary" href="https://wa.me/?text=${whatsappText}" target="_blank" rel="noreferrer">Compartilhar no WhatsApp</a></div>
-      <p class="fine-print">As informações e a disponibilidade dos ingressos são confirmadas pela casa de show.</p></div><aside class="side-card"><p class="eyebrow">Rolê · eventos e conexões</p><h2>Viva esse rolê com a gente</h2><p>Encontre eventos incríveis, veja quem já vai e dê match antes do rolê começar.</p><a href="/eventos">Explorar eventos <span aria-hidden="true">→</span></a></aside></section></main>
+      <div class="cta-row"><a class="button" href="${escapeHtml(isAvailable ? appUrl : '/eventos')}">${isAvailable ? 'Ver ingressos no app' : 'Explorar próximos eventos'} <span aria-hidden="true">→</span></a><a class="button button-secondary" href="https://wa.me/?text=${whatsappText}" target="_blank" rel="noopener noreferrer">Compartilhar no WhatsApp</a></div>
+      <h2>Sobre o evento</h2><p class="event-description">${escapeHtml(fullDescription)}</p><p class="fine-print">As informações e a disponibilidade dos ingressos são confirmadas pela casa de show.</p>
+    </div><aside class="side-card"><p class="eyebrow">Rolê · eventos e conexões</p><h2>Viva esse rolê com a gente</h2><p>Encontre eventos incríveis, veja quem já vai e dê match antes do rolê começar.</p><a href="/eventos">Explorar eventos <span aria-hidden="true">→</span></a></aside></section></main>
     <footer class="footer">Rolê · Boas festas, novas pessoas, conexões reais.</footer>`;
-  const structuredData = eventStructuredData(event, { title, description, image, canonical, priceMinor });
+  const structuredData = eventStructuredData(event, { title, description: fullDescription, image, canonical, priceMinor });
   return pageShell({
     title: `${title} | Rolê`,
     description,
@@ -322,4 +325,6 @@ const styles = `
   @media(max-width:760px){.masthead{height:72px;padding:0 18px}.brand img{width:112px}.directory-main{width:min(100% - 36px,1180px);padding:48px 0 64px}.intro{margin-bottom:32px}.intro h1{font-size:clamp(42px,10vw,58px)}.lead{font-size:16px}.event-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.event-copy{padding:15px}.event-copy h2{font-size:18px}.event-copy p{font-size:12px}.event-hero{min-height:470px;border-radius:0 0 22px 22px}.hero-content{left:22px;right:22px;bottom:34px}.hero-content h1{font-size:48px}.hero-description{font-size:16px}.event-details{grid-template-columns:1fr;gap:22px;padding:26px 18px}.side-card{margin:0}.cta-row{flex-direction:column}.cta-row .button{text-align:center}}
   @media(max-width:440px){.directory-main{width:calc(100% - 32px);padding-top:40px}.event-grid{grid-template-columns:1fr}.event-card img{aspect-ratio:1.7}.search{flex-direction:column}.search button{width:100%}.intro h1{font-size:40px}.event-hero{min-height:430px}.hero-content h1{font-size:42px}.event-details{padding:22px 16px}.cta-row .button{width:100%}}
   @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+  .detail-line span.detail-icon{display:grid}.detail-icon svg{display:block;width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.map-link{display:inline-flex;align-items:center;margin-top:10px;color:#ff78ad;font-size:13px;font-weight:850;text-decoration:none}.map-link:hover{text-decoration:underline}.event-description{white-space:pre-line;overflow-wrap:anywhere}
+
 `;
