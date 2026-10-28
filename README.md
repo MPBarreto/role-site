@@ -28,14 +28,14 @@ As rotas `/api/*` continuam como Vercel Functions. O servidor do Vite não execu
 
 ## Configuração das lojas
 
-Copie `.env.example` para `.env.local` e configure os valores públicos do Vite:
+Configure as URLs oficiais no arquivo local `.env` (ignorado pelo Git) e também nos ambientes Preview/Production da Vercel. Os badges da App Store e do Google Play aparecem por padrão:
 
 ```env
 VITE_APP_STORE_URL=https://apps.apple.com/...
 VITE_GOOGLE_PLAY_URL=https://play.google.com/store/apps/...
 ```
 
-Enquanto as URLs estiverem vazias, os botões aparecem visualmente, mas não redirecionam para uma loja incorreta.
+Os controles continuam independentes: defina `VITE_SHOW_APP_STORE_BADGE=false` ou `VITE_SHOW_GOOGLE_PLAY_BADGE=false` para ocultar uma loja. Nunca versione o arquivo `.env`; use as variáveis de ambiente da Vercel para os deploys.
 
 ## Analytics e anúncios
 

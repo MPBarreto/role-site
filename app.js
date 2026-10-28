@@ -46,32 +46,44 @@ const observer = 'IntersectionObserver' in window ? new IntersectionObserver(ent
 $$('.reveal').forEach(element => observer ? observer.observe(element) : element.classList.add('visible'));
 
 function configureStoreLinks() {
-  const appStore = config.APP_STORE_URL;
-  const playStore = config.GOOGLE_PLAY_URL;
-  $$('[data-app-store]').forEach(element => {
-    if (appStore) {
-      element.href = appStore;
-      element.target = '_blank';
-      element.rel = 'noopener';
-    } else {
-      element.addEventListener('click', event => {
-        event.preventDefault();
-        showToast('O link da App Store será liberado assim que o app estiver publicado.');
-      });
+  const stores = [
+    {
+      selector: '[data-app-store]',
+      url: config.APP_STORE_URL,
+      visible: config.SHOW_APP_STORE_BADGE,
+      unavailableMessage: 'O link da App Store será liberado assim que o app estiver publicado.'
+    },
+    {
+      selector: '[data-play-store]',
+      url: config.GOOGLE_PLAY_URL,
+      visible: config.SHOW_GOOGLE_PLAY_BADGE,
+      unavailableMessage: 'O link do Google Play será liberado assim que o app estiver publicado.'
     }
+  ];
+  let hasVisibleStore = false;
+
+  stores.forEach(({ selector, url, visible, unavailableMessage }) => {
+    $$(selector).forEach(element => {
+      const enabled = visible;
+      element.hidden = !enabled;
+      if (!enabled) return;
+
+      hasVisibleStore = true;
+      if (url) {
+        element.href = url;
+        element.target = '_blank';
+        element.rel = 'noopener';
+      } else {
+        element.addEventListener('click', event => {
+          event.preventDefault();
+          showToast(unavailableMessage);
+        });
+      }
+    });
   });
-  $$('[data-play-store]').forEach(element => {
-    if (playStore) {
-      element.href = playStore;
-      element.target = '_blank';
-      element.rel = 'noopener';
-    } else {
-      element.addEventListener('click', event => {
-        event.preventDefault();
-        showToast('O link do Google Play será liberado assim que o app estiver publicado.');
-      });
-    }
-  });
+
+  const storeColumn = $('[data-store-links]');
+  if (storeColumn) storeColumn.hidden = !hasVisibleStore;
 }
 
 function configureProducerLinks() {

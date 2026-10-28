@@ -1,6 +1,8 @@
 const config = {
   APP_STORE_URL: import.meta.env.VITE_APP_STORE_URL || '',
   GOOGLE_PLAY_URL: import.meta.env.VITE_GOOGLE_PLAY_URL || '',
+  SHOW_APP_STORE_BADGE: import.meta.env.VITE_SHOW_APP_STORE_BADGE !== 'false',
+  SHOW_GOOGLE_PLAY_BADGE: import.meta.env.VITE_SHOW_GOOGLE_PLAY_BADGE !== 'false',
   PRODUCER_SIGNUP_URL: import.meta.env.VITE_PRODUCER_SIGNUP_URL || '',
   EVENTS_API_URL: import.meta.env.VITE_EVENTS_API_URL || '/api/events',
   CONTACT_TOKEN_URL: import.meta.env.VITE_CONTACT_TOKEN_URL || '/api/contact-token',
