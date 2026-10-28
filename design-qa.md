@@ -24,3 +24,38 @@
 - [x] Usar Deslizar e Eventos como as duas telas da hero.
 - [x] Variar a composição das seções sem alterar os controles interativos do FAQ.
 - [x] Conferir o layout desktop e móvel no navegador.
+
+## Apresentação de investimento — `/pitch/investment`
+
+### Auditoria e correção contra as referências anexadas — 28/10/2026
+
+**Regressão corrigida**
+
+- Os slides 1–10 agora exibem cada composição de referência completa, sem recortar os mockups, redesenhar seus textos ou sobrepor elementos HTML.
+- Os slides 11 e 12 usam os dois painéis completos da referência financeira mais recente. O arquivo composto foi separado somente no divisor central.
+- Os controles continuam fora da área dos slides; navegação e numeração permanecem disponíveis.
+
+| Slide | Composição revisada |
+| --- | --- |
+| 1 | Capa e proposta do Rolê |
+| 2 | Problema de descoberta e relacionamento |
+| 3 | Solução e jornada social |
+| 4 | Tamanho de mercado |
+| 5 | Produto e telas do app |
+| 6 | Tração e marcos |
+| 7 | Modelo de negócio |
+| 8 | Comparativo competitivo |
+| 9 | Estratégia go-to-market |
+| 10 | Fundadores e equipe |
+| 11 | Projeções financeiras |
+| 12 | Pedido de investimento e alocação |
+
+**Verificação visual e funcional**
+
+- Comparação lado a lado de referência e captura final para os 12 slides em `/tmp/role-pitch-qa/compare-1.png` até `compare-4.png`.
+- Chromium local em desktop de 1672 × 941 px: slides 1–10 preservam a proporção de 1672 × 941; slides 11–12 preservam 1018 × 768. Cada imagem preenche o canvas sem recorte.
+- Chromium local em celular de 390 × 844 px: 12 slides navegáveis, sem rolagem horizontal; as imagens mantêm suas proporções e os controles ficam acessíveis.
+- Navegação anterior/próximo, botões numerados, teclas Home/ArrowRight/End e gesto horizontal foram verificados. As 12 imagens carregaram e não houve erros de console.
+- `npm run build`: aprovado.
+
+**final result: passed** — as 12 composições correspondem às referências integrais e a navegação segue funcionando em desktop e celular.

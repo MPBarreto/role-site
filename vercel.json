@@ -41,6 +41,11 @@
       "permanent": true
     },
     {
+      "source": "/pitch/investment/",
+      "destination": "/pitch/investment",
+      "permanent": true
+    },
+    {
       "source": "/events",
       "destination": "/eventos",
       "permanent": true
@@ -78,9 +83,19 @@
     {
       "source": "/produtores",
       "destination": "/produtores.html"
+    },
+    {
+      "source": "/pitch/investment",
+      "destination": "/pitch/investment/index.html"
     }
   ],
   "headers": [
+    {
+      "source": "/pitch/investment",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [

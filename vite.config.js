@@ -13,7 +13,8 @@ export default defineConfig({
         privacy: resolve(projectRoot, 'privacy.html'),
         childSafety: resolve(projectRoot, 'child-safety.html'),
         refunds: resolve(projectRoot, 'reembolsos.html'),
-        producers: resolve(projectRoot, 'produtores.html')
+        producers: resolve(projectRoot, 'produtores.html'),
+        investmentPitch: resolve(projectRoot, 'pitch/investment/index.html')
       }
     }
   }
