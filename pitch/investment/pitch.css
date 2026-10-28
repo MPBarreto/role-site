@@ -48,6 +48,35 @@ button { font: inherit; }
   background: #050407;
 }
 .reference-art { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
+.slide-canvas-portrait-art {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(90deg, #030708 0%, #080a0b 67%, #140a0e 100%);
+}
+#slide-11 .reference-art, #slide-12 .reference-art {
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+}
+#slide-11 .slide-11-art {
+  position: relative;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  aspect-ratio: 1018 / 768;
+}
+#slide-11 .slide-11-art .reference-art { width: 100%; }
+.finance-chart-host {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.finance-chart-host svg { display: block; width: 100%; height: 100%; }
+#slide-12 .slide-canvas-portrait-art {
+  background:
+    radial-gradient(ellipse at 76% 8%, rgb(83 12 36 / 30%), transparent 48%),
+    linear-gradient(90deg, #030809 0%, #080a0b 64%, #18090d 100%);
+}
 
 .deck-controls {
   position: fixed;

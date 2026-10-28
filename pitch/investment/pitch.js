@@ -1,3 +1,5 @@
+import { renderFinanceChart } from './finance-chart.js';
+
 const slides = [...document.querySelectorAll('[data-slide]')];
 const pageButtons = [...document.querySelectorAll('[data-go]')];
 const previousButton = document.querySelector('[data-previous]');
@@ -7,6 +9,8 @@ const progress = document.querySelector('.deck-progress');
 const progressFill = document.querySelector('[data-progress-fill]');
 let current = 0;
 let pointerStart = null;
+
+renderFinanceChart(document.querySelector('[data-finance-chart]'));
 
 function showSlide(index, { updateHash = true } = {}) {
   current = Math.max(0, Math.min(slides.length - 1, index));
