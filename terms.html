@@ -54,7 +54,7 @@
       <p class="legal-kicker">Legal · Rolê</p>
       <h1>Termos de <span>Uso.</span></h1>
       <p class="legal-intro">Estes Termos regulam o uso do Rolê por pessoas que descobrem eventos, compram e utilizam ingressos e participam da experiência social do app, bem como por produtores, casas de eventos e seus representantes que anunciam, vendem e operam eventos na plataforma.</p>
-      <p class="legal-updated">Última atualização: 15 de outubro de 2026.</p>
+      <p class="legal-updated">Última atualização: 28 de outubro de 2026.</p>
     </div>
 
     <div class="legal-layout">
@@ -137,7 +137,8 @@
             <h3>2.4. Preço, Taxa de Serviço e processamento</h3>
             <p>O valor total da compra será apresentado de forma clara antes da confirmação. A Taxa de Serviço Rolê não integra o preço de face do ingresso e será discriminada separadamente sempre que cobrada.</p>
             <p class="legal-formula">Total pago pelo Usuário = valor de face do(s) ingresso(s) + Taxa de Serviço Rolê + outros valores legalmente aplicáveis e previamente informados.</p>
-            <p>Os pagamentos podem ser processados pela Stripe ou por outros prestadores indicados no checkout. O uso de um meio de pagamento também está sujeito às regras do emissor, bandeira, instituição financeira e provedor de pagamento, sem redução dos direitos assegurados ao consumidor nestes Termos e na legislação aplicável.</p>
+            <p>Os pagamentos podem ser processados pela Stripe ou por outros prestadores indicados no checkout. Os custos de processamento cobrados do Produtor pelo provedor não se confundem com a Taxa de Serviço Rolê e não são uma cobrança adicional ao Usuário. Qualquer tarifa de processamento cobrada diretamente do Usuário deverá aparecer discriminada no checkout antes da confirmação da compra.</p>
+            <p>O uso de um meio de pagamento também está sujeito às regras do emissor, bandeira, instituição financeira e provedor de pagamento, sem redução dos direitos assegurados ao consumidor nestes Termos e na legislação aplicável.</p>
           </section>
 
           <section>
@@ -178,7 +179,7 @@
             <p>Nas compras realizadas por meio eletrônico, o consumidor poderá exercer o direito de arrependimento nos termos do art. 49 do Código de Defesa do Consumidor e da regulamentação específica de comercialização de ingressos vigente.</p>
             <p>Quando exercido dentro do prazo legal e nas condições aplicáveis, o reembolso será <strong>integral dos valores pagos pelo consumidor</strong>, inclusive Taxa de Serviço Rolê e demais taxas acessórias reembolsáveis por lei. Custos de processamento que eventualmente não sejam devolvidos pelo provedor de pagamento não serão descontados do consumidor quando houver direito a restituição integral.</p>
             <p>O fluxo de autoatendimento poderá considerar a data de início do Evento e o status do ingresso para impedir cancelamentos incompatíveis com ingresso já utilizado. Pedidos formulados após check-in, após efetiva fruição do serviço ou em situações limítrofes serão tratados conforme a legislação aplicável, sem afastar direitos inderrogáveis do consumidor.</p>
-            <p>Após o prazo legal de arrependimento, a desistência por conveniência pessoal não gera reembolso automático, salvo política mais favorável do Evento ou outra hipótese obrigatória prevista em lei. A transferência gratuita do ingresso permanece disponível quando tecnicamente elegível.</p>
+            <p>Após o prazo legal de arrependimento, a desistência espontânea por decisão do Usuário não gera reembolso automático, salvo política mais favorável do Evento ou outra hipótese obrigatória prevista em lei. Se a política do Evento ou uma concessão comercial permitir reembolso nessa situação, uma tarifa de processamento poderá não ser restituída somente quando tiver sido cobrada diretamente do Usuário, discriminada no checkout antes da compra, não devolvida pelo provedor e quando a retenção for permitida pela legislação. Custos de processamento debitados da conta Stripe Connect do Produtor, sem cobrança discriminada ao Usuário, não serão tratados como valor pago pelo Usuário nem deduzidos do reembolso que lhe for devido. A transferência gratuita do ingresso permanece disponível quando tecnicamente elegível.</p>
           </section>
 
           <section>
@@ -240,38 +241,39 @@
 
           <section id="repasses">
             <h3>3.6. Processamento de pagamentos e estrutura de recebíveis</h3>
-            <p>O Rolê utiliza infraestrutura de pagamento que pode incluir Stripe Connect e o modelo de cobrança centralizada com transferências posteriores ao Produtor. O valor pago pelo Usuário pode ser processado inicialmente na conta da Plataforma e somente depois ser transferido à conta conectada do Produtor quando os critérios de elegibilidade forem atendidos.</p>
-            <p class="legal-formula">Recebível econômico do Produtor = valor de face dos ingressos vendidos − custos efetivos de processamento de pagamento atribuíveis às vendas − reembolsos, chargebacks, reversões, ajustes e demais valores legitimamente devidos.</p>
-            <p>A Taxa de Serviço Rolê, quando cobrada do consumidor, remunera os serviços da Plataforma e não integra o valor de face devido ao Produtor, salvo condição comercial expressa em sentido diverso.</p>
+            <p>Nas vendas habilitadas para cobrança direta, o Rolê utiliza Stripe Connect no modelo <em>Direct Charge</em>: o pagamento é criado na conta Stripe conectada do Produtor. A Stripe debita dessa conta as tarifas de processamento aplicáveis, conforme o plano contratado para a conta. A Taxa de Serviço Rolê apresentada ao Usuário é separada e, quando aplicável, destinada ao Rolê como tarifa de aplicação da plataforma.</p>
+            <p class="legal-formula">Saldo da venda destinado ao Produtor = valor capturado na Conta Conectada − Taxa de Serviço Rolê informada no checkout − tarifas de processamento Stripe − reembolsos, contestações, ajustes e outros valores aplicáveis.</p>
+            <p>Nas cobranças diretas, o saldo da venda permanece na Conta Conectada e os pagamentos para a conta bancária cadastrada são feitos pela Stripe conforme as regras e o calendário de repasses dessa conta; não há uma transferência posterior independente do Rolê. Operações realizadas por outro fluxo, inclusive vendas anteriores, seguem a configuração informada para a respectiva transação.</p>
           </section>
 
           <section>
             <h3>3.7. Saldo previsto, reservado, disponível e repasses</h3>
-            <p>O painel financeiro poderá distinguir valores <strong>previstos</strong>, <strong>reservados</strong> e <strong>disponíveis</strong>. Valor previsto ou reservado não representa obrigação de transferência imediata e não deve ser tratado pelo Produtor como saldo já liberado.</p>
-            <p>Como mecanismo de proteção contra cancelamentos, reembolsos, chargebacks, disputas, fraude e demais riscos da operação, o Rolê poderá:</p>
+            <p>A Stripe controla os estados de saldo da Conta Conectada — incluindo valores pendentes, disponíveis ou sujeitos a reserva — e realiza os repasses à conta bancária cadastrada conforme o calendário, os requisitos de disponibilidade, as verificações e as regras aplicáveis à conta. O Produtor deve manter seus dados bancários e cadastrais atualizados e acompanhar o Stripe Dashboard.</p>
+            <p>O prazo de disponibilidade e a data de repasse podem variar conforme o meio de pagamento, o calendário escolhido, dias bancários, análise de risco, verificações ou medidas da Stripe. O Rolê não garante uma data específica de crédito nem realiza um segundo repasse das vendas processadas como cobranças diretas. A Stripe poderá solicitar informações, limitar pagamentos ou estabelecer reservas nos termos aplicáveis à Conta Conectada.</p>
+            <p>Para a configuração atual das contas conectadas do Rolê, a Stripe é indicada como responsável pela gestão de saldos negativos da Conta Conectada; a Stripe também responde pelo saldo negativo da própria conta da Plataforma. Essa configuração não elimina obrigações contratuais do Produtor perante o Rolê por reembolsos, chargebacks ou prejuízos diretamente atribuíveis ao seu Evento, quando exigíveis nos termos destes Termos e da legislação.</p>
+            <p>Quando o fluxo de uma transação permitir ao Rolê controlar valores ainda não repassados, a Plataforma poderá, observados a lei e os direitos do consumidor:</p>
             <ul>
-              <li>reter total ou parcialmente os recebíveis antes da realização do Evento;</li>
-              <li>estabelecer janela de liberação após a conclusão do Evento;</li>
-              <li>manter reserva temporária pós-evento;</li>
-              <li>ampliar retenções quando houver aumento de risco, volume atípico de disputas, alteração material do Evento ou exigência do provedor de pagamento;</li>
-              <li>suspender transferências enquanto houver Evento cancelado, investigação de fraude, obrigação de reembolso ou saldo negativo.</li>
+              <li>suspender novas vendas ou a publicação do Evento diante de risco relevante, cancelamento ou obrigação de reembolso;</li>
+              <li>solicitar informações ou a recomposição de valores devidos pelo Produtor;</li>
+              <li>compensar valores com recebíveis que estejam efetivamente sob controle do Rolê, quando permitido.</li>
             </ul>
-            <p>Os percentuais, prazos e critérios comerciais aplicáveis poderão ser exibidos no painel, proposta comercial, contrato específico ou comunicação de risco vinculada à conta do Produtor.</p>
+            <p>Essas medidas não significam que o Rolê controle ou possa antecipar valores mantidos na Conta Conectada pela Stripe.</p>
           </section>
 
           <section id="cancelamentos-produtor">
             <h3>3.8. Reembolsos, cancelamento, adiamento e alteração relevante</h3>
             <p>O Produtor reconhece que cancelamento, adiamento ou alteração relevante do Evento pode gerar obrigação de restituição integral ao consumidor, incluindo taxas acessórias, conforme a legislação vigente.</p>
-            <p>Quando um Evento for cancelado, o Rolê poderá interromper imediatamente novas vendas, bloquear repasses e iniciar ou viabilizar os reembolsos aplicáveis. Em caso de adiamento ou alteração relevante, o Rolê poderá habilitar as opções legalmente exigidas ao consumidor, incluindo nova data, crédito ou reembolso integral.</p>
-            <p>O Produtor autoriza o Rolê a utilizar saldos pendentes, reservas e recebíveis futuros para financiar reembolsos e obrigações diretamente relacionadas ao Evento quando isso decorrer de responsabilidade do Produtor ou das condições comerciais assumidas. Se os valores forem insuficientes, o Produtor deverá recompor o saldo devido nos prazos comunicados.</p>
-            <p>Custos de processamento que a Stripe ou outro provedor não devolva ao Rolê em uma operação de reembolso não reduzem o valor legalmente devido ao consumidor. A alocação econômica desses custos entre Rolê e Produtor observará a causa do reembolso, as regras do provedor de pagamento e as condições comerciais aplicáveis.</p>
+            <p>Quando o Produtor cancelar o Evento ou solicitar um reembolso que seja devido ao consumidor, caberá ao Produtor assegurar a restituição de todos os valores pagos pelo Usuário que devam ser devolvidos, inclusive Taxa de Serviço Rolê e qualquer tarifa de processamento que tenha sido cobrada diretamente do Usuário e discriminada no checkout, conforme a lei e a política aplicável.</p>
+            <p>Nas cobranças diretas, a devolução ao Produtor da tarifa de aplicação destinada ao Rolê depende do motivo do reembolso. No fluxo atual, ela é devolvida à Conta Conectada quando o estorno decorre de falha de emissão atribuível ao Rolê; nos demais motivos, poderá permanecer com o Rolê. Essa regra comercial não reduz o valor devido ao Usuário.</p>
+            <p>Nas cobranças diretas, os reembolsos são processados na Conta Conectada. As tarifas de processamento cobradas pela Stripe do Produtor podem não ser devolvidas pela Stripe quando a transação é reembolsada. Esse custo permanece com o Produtor e não reduz o valor integral devido ao consumidor. Se o saldo disponível for insuficiente, a gestão do saldo negativo e sua recuperação seguem as regras da Stripe e as responsabilidades configuradas para a Conta Conectada.</p>
+            <p>O Rolê poderá interromper novas vendas, comunicar consumidores, iniciar ou viabilizar o processamento dos reembolsos e solicitar ao Produtor os valores necessários para cumprir obrigações atribuíveis ao Evento. Eventual compensação ou cobrança pelo Rolê fica limitada a valores efetivamente desembolsados ou devidos e diretamente relacionados ao Evento, observados estes Termos e a legislação. Em caso de adiamento ou alteração relevante, serão oferecidas ao consumidor as opções exigidas por lei.</p>
           </section>
 
           <section>
-            <h3>3.9. Chargebacks, disputas e saldo negativo</h3>
-            <p>O Produtor deve colaborar com a coleta de evidências para contestação de chargebacks e disputas relacionadas aos seus Eventos, respeitando os prazos das bandeiras e do provedor de pagamento.</p>
-            <p>O Rolê poderá reservar valores, reverter transferências ainda reversíveis, compensar débitos com vendas futuras ou solicitar recomposição financeira quando reembolsos, chargebacks, multas de rede ou ajustes gerarem saldo negativo atribuível ao Evento ou à conduta do Produtor.</p>
-            <p>A decisão operacional de contestar ou aceitar uma disputa poderá considerar evidências disponíveis, custo, prazo, regras de rede e probabilidade de êxito. Essa gestão interna não limita direitos do consumidor perante seu emissor ou autoridades competentes.</p>
+            <h3>3.9. Contestações, chargebacks e tarifas</h3>
+            <p>Uma contestação iniciada pelo titular do cartão pode reverter o pagamento e gerar o débito do valor contestado e das tarifas aplicáveis à Conta Conectada. O Produtor deverá fornecer ao Rolê, sem demora e dentro do prazo solicitado, comprovantes da oferta, do ingresso, das comunicações, do check-in, do cancelamento ou do reembolso, conforme o motivo da contestação. A decisão final cabe ao emissor do cartão, não ao Rolê.</p>
+            <p>Na tabela pública padrão da Stripe Brasil consultada em 28 de outubro de 2026, a tarifa informada é de <strong>R$ 55,00 por contestação recebida</strong> e mais <strong>R$ 55,00 por contestação respondida manualmente</strong>. A Stripe informa que a tarifa de resposta manual é devolvida quando a contestação é ganha e não é devolvida quando perdida. Em casos raros, podem incidir tarifas de bandeira. Preços personalizados, meios de pagamento e produtos adicionais contratados podem ter condições diferentes; prevalecem as tarifas vigentes na Conta Conectada e apresentadas pela Stripe. Consulte a <a href="https://stripe.com/br/pricing" target="_blank" rel="noopener noreferrer">tabela de preços da Stripe Brasil</a> e o Stripe Dashboard.</p>
+            <p>Na configuração atual de pagamentos diretos do Rolê, a Stripe é responsável pela gestão do saldo negativo da Conta Conectada, conforme o contrato e as regras da Stripe. Isso não impede a apuração de obrigações próprias do Produtor perante o Rolê por valores de reembolso ou prejuízos diretamente causados pelo Evento, quando permitidos por estes Termos e pela legislação. A decisão de contestar ou aceitar uma disputa poderá considerar evidências, prazo, tarifas e probabilidade de êxito, sem limitar direitos do consumidor perante seu emissor ou autoridades competentes.</p>
           </section>
 
           <section>
@@ -296,12 +298,12 @@
           <section>
             <h3>3.13. Obrigações fiscais e regulatórias</h3>
             <p>Cada parte é responsável pelos tributos, documentos fiscais, registros contábeis e obrigações regulatórias incidentes sobre suas próprias receitas, atividades e responsabilidades legais. O Produtor deve manter a regularidade necessária para realização do Evento e comercialização dos ingressos.</p>
-            <p>O Rolê poderá solicitar documentos adicionais, reter repasses quando exigido por lei, ordem de autoridade, provedor de pagamento ou obrigação de compliance, e fornecer registros às autoridades competentes quando houver base legal.</p>
+            <p>O Rolê poderá solicitar documentos adicionais, reter valores de repasses que estejam efetivamente sob seu controle ou solicitar à Stripe medidas disponíveis sobre pagamentos da Conta Conectada quando exigido por lei, ordem de autoridade, provedor de pagamento ou obrigação de compliance. Registros poderão ser fornecidos às autoridades competentes quando houver base legal.</p>
           </section>
 
           <section>
             <h3>3.14. Suspensão e encerramento da conta do Produtor</h3>
-            <p>O Rolê poderá limitar publicação, suspender vendas, bloquear repasses ou encerrar acesso quando identificar fraude, risco relevante ao consumidor, documentação irregular, evento sem autorização, alto índice de disputas, descumprimento destes Termos ou obrigação legal.</p>
+            <p>O Rolê poderá limitar a publicação, suspender vendas, bloquear valores sob seu controle, solicitar à Stripe medidas de repasse disponíveis ou encerrar o acesso quando identificar fraude, risco relevante ao consumidor, documentação irregular, Evento sem autorização, alto índice de disputas, descumprimento destes Termos ou obrigação legal.</p>
             <p>O encerramento da conta não elimina obrigações pendentes relacionadas a ingressos já vendidos, reembolsos, chargebacks, dados, prestação de contas, reservas ou valores negativos.</p>
           </section>
         </div>
