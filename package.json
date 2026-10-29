@@ -1,9 +1,9 @@
 {
-  "name": "role-site",
+  "name": "matchie-site",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Site institucional e comercial do app Rolê",
+  "description": "Site institucional e comercial do app Matchie",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

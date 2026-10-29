@@ -36,7 +36,7 @@ document.querySelectorAll('[data-protected-email]').forEach((link) => {
 
     try {
       const email = await getSupportEmail();
-      const subject = encodeURIComponent(link.dataset.emailSubject || 'Contato com o Rolê');
+      const subject = encodeURIComponent(link.dataset.emailSubject || 'Contato com o Matchie');
       link.href = `mailto:${email}?subject=${subject}`;
       link.textContent = email;
       link.dataset.emailReady = 'true';

@@ -1,6 +1,6 @@
-# Rolê — Site
+# Matchie — Site
 
-Site do Rolê em Vite, com descoberta de eventos, experiência social e informações para produtores.
+Site do Matchie em Vite: conecte-se com pessoas que vão ao mesmo evento e comece a conversa antes dele.
 
 ## Estrutura
 
@@ -86,7 +86,7 @@ Variáveis necessárias:
 ```env
 CONTACT_SECRET=uma-chave-longa-e-aleatoria
 WHATSAPP_NUMBER=5511999999999
-WHATSAPP_MESSAGE=Olá! Quero saber como levar o Rolê para minha casa de eventos.
+WHATSAPP_MESSAGE=Olá! Quero saber como levar o Matchie para minha casa de eventos.
 SITE_HOST=seu-dominio.com
 ```
 
@@ -103,7 +103,7 @@ Configure `EMAIL_SUPORTE` e `CONTACT_SECRET` como variáveis **server-only** em 
 ## Design tokens principais
 
 - Midnight: `#09070D`
-- Rolê Pink: `#FF2B8A`
+- Matchie Pink: `#FF2B8A`
 - Afterglow Coral: `#FF5F74`
 - Electric Violet: `#8A4DFF`
 - Off White: `#F7F5F8`

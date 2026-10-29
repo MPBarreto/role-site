@@ -121,23 +121,23 @@ function directoryPage(rows, { origin, search, offset, supabaseUrl }) {
   const content = cards || `<div class="empty"><h2>Nenhum rolê encontrado</h2><p>Tente outra busca ou volte em breve para descobrir novos eventos.</p></div>`;
   const canonical = `${origin}/eventos`;
   return pageShell({
-    title: 'Eventos | Rolê',
-    description: 'Encontre eventos incríveis, veja quem já vai e dê match antes do rolê começar.',
+    title: 'Eventos | Matchie',
+    description: 'Veja quem vai ao mesmo evento, dê match e comece a conversa antes de chegar.',
     image: fallbackCover(origin),
     canonical,
-    body: `<header class="masthead"><a class="brand" href="/" aria-label="Rolê, página inicial"><img src="/assets/logo/logo-role-branco.webp" alt="Rolê" width="142" height="48"></a><a class="top-link" href="/#app">Baixar o app <span aria-hidden="true">↗</span></a></header>
-      <main class="directory-main"><section class="intro"><p class="eyebrow">DESCUBRA SEU PRÓXIMO ROLÊ</p><h1>Eventos para <em>viver juntos.</em></h1><p class="lead">Encontre eventos incríveis, veja quem já vai e dê match antes do rolê começar.</p>
+    body: `<header class="masthead"><a class="brand" href="/" aria-label="Matchie, página inicial"><img src="/assets/logo/matchie-branca-chama-gradiente.png" alt="Matchie" width="142" height="71"></a><a class="top-link" href="/#app">Baixar o app <span aria-hidden="true">↗</span></a></header>
+      <main class="directory-main"><section class="intro"><p class="eyebrow">DESCUBRA SEU PRÓXIMO EVENTO</p><h1>Conheça quem vai <em>antes de chegar.</em></h1><p class="lead">Veja quem vai ao mesmo evento, dê match e comece a conversa antes da festa.</p>
       <form class="search" action="/eventos" method="get"><label class="sr-only" for="event-search">Buscar evento, cidade ou casa de show</label><input id="event-search" name="q" value="${escapeHtml(search)}" placeholder="Evento, cidade ou casa de show"><button type="submit">Buscar</button></form></section>
       <section class="event-grid" aria-label="Eventos públicos">${content}</section><div class="more">${nextLink}</div></main>
-      <footer class="footer">Rolê · Boas festas, novas pessoas, conexões reais.</footer>`,
+      <footer class="footer">Matchie · Boas festas, novas pessoas, conexões reais.</footer>`,
   });
 }
 
 function eventPage(event, { origin, supabaseUrl, shareCode, priceMinor }) {
-  const title = String(event.title || 'Evento no Rolê');
+  const title = String(event.title || 'Evento no Matchie');
   const canonical = shareUrl(origin, shareCode, title);
   const image = coverUrl(supabaseUrl, event.cover_image_path) || fallbackCover(origin);
-  const fullDescription = String(event.description || `Descubra ${title} no Rolê.`).trim();
+  const fullDescription = String(event.description || `Descubra ${title} no Matchie.`).trim();
   const description = truncate(fullDescription, 220);
   const location = [event.venue_name, event.venue_address, event.city].filter(Boolean).join(' · ');
   const mapUrl = location ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}` : '';
@@ -152,20 +152,20 @@ function eventPage(event, { origin, supabaseUrl, shareCode, priceMinor }) {
     : event.status === 'completed'
       ? '<p class="status">Este rolê já aconteceu. Confira outros eventos.</p>'
       : '';
-  const body = `<header class="masthead masthead-overlay"><a class="brand" href="/" aria-label="Rolê"><img src="/assets/logo/logo-role-branco.webp" alt="Rolê" width="142" height="48"></a><a class="top-link" href="/eventos">Todos os eventos <span aria-hidden="true">→</span></a></header>
+  const body = `<header class="masthead masthead-overlay"><a class="brand" href="/" aria-label="Matchie"><img src="/assets/logo/matchie-branca-chama-gradiente.png" alt="Matchie" width="142" height="71"></a><a class="top-link" href="/eventos">Todos os eventos <span aria-hidden="true">→</span></a></header>
     <main class="event-main"><article class="event-hero"><img class="hero-image" src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(title)}"><div class="hero-shade"></div>
       <div class="hero-content"><p class="eyebrow">${escapeHtml(event.category || 'EVENTO')} · ${escapeHtml(event.city || '')}</p><h1>${escapeHtml(title)}</h1><p class="hero-description">${escapeHtml(description)}</p></div>
     </article><section class="event-details"><div class="details-copy">${state}
       <div class="detail-line"><span class="detail-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 11h18"></path></svg></span><div><strong>${escapeHtml(startsAt)}</strong>${endsAt ? `<span>Até ${escapeHtml(endsAt)}</span>` : ''}</div></div>
       <div class="detail-line"><span class="detail-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span><div><strong>${escapeHtml(event.venue_name || '')}</strong><span>${escapeHtml([event.venue_address, event.city].filter(Boolean).join(' · '))}</span>${mapUrl ? `<a class="map-link" href="${escapeHtml(mapUrl)}" target="_blank" rel="noopener noreferrer">Ver no mapa ↗</a>` : ''}</div></div>
-      ${price ? `<div class="detail-line"><span class="detail-icon" aria-hidden="true">R$</span><div><strong>Ingressos a partir de ${escapeHtml(price)}</strong><span>Consulte a disponibilidade no app Rolê.</span></div></div>` : ''}
+      ${price ? `<div class="detail-line"><span class="detail-icon" aria-hidden="true">R$</span><div><strong>Ingressos a partir de ${escapeHtml(price)}</strong><span>Consulte a disponibilidade no app Matchie.</span></div></div>` : ''}
       <div class="cta-row"><a class="button" href="${escapeHtml(isAvailable ? appUrl : '/eventos')}">${isAvailable ? 'Ver ingressos no app' : 'Explorar próximos eventos'} <span aria-hidden="true">→</span></a><a class="button button-secondary" href="https://wa.me/?text=${whatsappText}" target="_blank" rel="noopener noreferrer">Compartilhar no WhatsApp</a></div>
       <h2>Sobre o evento</h2><p class="event-description">${escapeHtml(fullDescription)}</p><p class="fine-print">As informações e a disponibilidade dos ingressos são confirmadas pela casa de show.</p>
-    </div><aside class="side-card"><p class="eyebrow">Rolê · eventos e conexões</p><h2>Viva esse rolê com a gente</h2><p>Encontre eventos incríveis, veja quem já vai e dê match antes do rolê começar.</p><a href="/eventos">Explorar eventos <span aria-hidden="true">→</span></a></aside></section></main>
-    <footer class="footer">Rolê · Boas festas, novas pessoas, conexões reais.</footer>`;
+    </div><aside class="side-card"><p class="eyebrow">Matchie · eventos e conexões</p><h2>Conheça quem também vai</h2><p>Dê match com pessoas que vão ao mesmo evento e comece a conversar antes de chegar.</p><a href="/eventos">Explorar eventos <span aria-hidden="true">→</span></a></aside></section></main>
+    <footer class="footer">Matchie · Boas festas, novas pessoas, conexões reais.</footer>`;
   const structuredData = eventStructuredData(event, { title, description: fullDescription, image, canonical, priceMinor });
   return pageShell({
-    title: `${title} | Rolê`,
+    title: `${title} | Matchie`,
     description,
     image,
     canonical,
@@ -252,7 +252,7 @@ function pageShell({ title, description, image, canonical, body, structuredData 
     : '';
   return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
     <title>${escapeHtml(title)}</title><meta name="description" content="${escapeHtml(description)}"><meta name="robots" content="${escapeHtml(robots)}"><link rel="canonical" href="${escapeHtml(canonical)}">
-    <meta property="og:type" content="website"><meta property="og:site_name" content="Rolê"><meta property="og:locale" content="pt_BR"><meta property="og:title" content="${escapeHtml(title)}"><meta property="og:description" content="${escapeHtml(description)}"><meta property="og:url" content="${escapeHtml(canonical)}"><meta property="og:image" content="${escapeHtml(image)}"><meta property="og:image:alt" content="${escapeHtml(title)}">
+    <meta property="og:type" content="website"><meta property="og:site_name" content="Matchie"><meta property="og:locale" content="pt_BR"><meta property="og:title" content="${escapeHtml(title)}"><meta property="og:description" content="${escapeHtml(description)}"><meta property="og:url" content="${escapeHtml(canonical)}"><meta property="og:image" content="${escapeHtml(image)}"><meta property="og:image:alt" content="${escapeHtml(title)}">
     <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${escapeHtml(title)}"><meta name="twitter:description" content="${escapeHtml(description)}"><meta name="twitter:image" content="${escapeHtml(image)}">
     <meta name="theme-color" content="#09070d">${jsonLd}<style>${styles}</style></head><body><div class="site">${body}</div></body></html>`;
 }
@@ -311,11 +311,11 @@ function sendPage(res, statusCode, html, cacheControl) {
 function errorPage(title, description) {
   const origin = 'https://role.events';
   return pageShell({
-    title: `${title} | Rolê`,
+    title: `${title} | Matchie`,
     description,
     image: fallbackCover(origin),
     canonical: `${origin}/eventos`,
-    body: `<main class="error-page"><a class="brand" href="/eventos" aria-label="Rolê"><img src="/assets/logo/logo-role-branco.webp" alt="Rolê" width="142" height="48"></a><h1>${escapeHtml(title)}</h1><p>${escapeHtml(description)}</p><a class="button" href="/eventos">Explorar eventos</a></main>`,
+    body: `<main class="error-page"><a class="brand" href="/eventos" aria-label="Matchie"><img src="/assets/logo/matchie-branca-chama-gradiente.png" alt="Matchie" width="142" height="71"></a><h1>${escapeHtml(title)}</h1><p>${escapeHtml(description)}</p><a class="button" href="/eventos">Explorar eventos</a></main>`,
   });
 }
 

@@ -133,7 +133,7 @@ function renderEvent(event) {
     const image = document.createElement('img');
     image.className = 'event-cover-image';
     image.src = event.coverUrl;
-    image.alt = `Capa do evento ${event.title || 'no Rolê'}`;
+    image.alt = `Capa do evento ${event.title || 'no Matchie'}`;
     image.loading = 'lazy';
     image.decoding = 'async';
     image.width = 1280;
@@ -145,7 +145,7 @@ function renderEvent(event) {
 
   const body = document.createElement('div');
   body.className = 'event-body';
-  addTextElement(body, 'h3', '', event.title || 'Evento no Rolê');
+  addTextElement(body, 'h3', '', event.title || 'Evento no Matchie');
   const location = [event.venueName, event.city].filter(Boolean).join(' · ') || 'Local a confirmar';
   addTextElement(body, 'p', 'event-location', location);
   const meta = document.createElement('div');
@@ -174,7 +174,7 @@ function renderEmptyEvents(grid) {
   grid.replaceChildren();
   const empty = document.createElement('div');
   empty.className = 'events-empty-state';
-  addTextElement(empty, 'h3', '', 'Seu próximo Rolê está chegando.');
+  addTextElement(empty, 'h3', '', 'Seu próximo evento está chegando.');
   addTextElement(empty, 'p', '', 'Ainda não há eventos publicados por aqui. Volte em breve para descobrir novidades.');
   grid.append(empty);
 }

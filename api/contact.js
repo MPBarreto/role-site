@@ -81,7 +81,7 @@ export default async function handler(req, res) {
   const number = rawNumber.replace(/\D/g, '');
   if (!number) return res.status(503).json({ error: 'Canal de WhatsApp ainda não configurado.' });
 
-  const message = process.env.WHATSAPP_MESSAGE || 'Olá! Quero saber como levar o Rolê para minha casa de eventos.';
+  const message = process.env.WHATSAPP_MESSAGE || 'Olá! Quero saber como levar o Matchie para minha casa de eventos.';
   const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
   return res.status(200).json({ url });
 }

@@ -58,7 +58,7 @@ async function loadProtectedLegalIdentity() {
       details.append(p);
     }
   } catch {
-    details.textContent = 'Não foi possível carregar os dados cadastrais agora. Recarregue a página ou utilize os canais oficiais de suporte do Rolê.';
+    details.textContent = 'Não foi possível carregar os dados cadastrais agora. Recarregue a página ou utilize os canais oficiais de suporte do Matchie.';
   }
 }
 
@@ -71,14 +71,14 @@ function applyRefundWindowCopy() {
   const paragraphs = section.querySelectorAll('p');
   if (!paragraphs.length) return;
 
-  paragraphs[0].innerHTML = 'Nas compras realizadas por meio eletrônico, o Rolê adota como regra operacional de arrependimento a possibilidade de solicitação de cancelamento em até <strong>7 (sete) dias corridos contados da compra</strong>, desde que o pedido seja realizado com antecedência mínima de <strong>48 (quarenta e oito) horas do horário de início do Evento</strong>. Se o Evento ocorrer antes do término do prazo de 7 dias, prevalece, para o fluxo ordinário de autoatendimento, o limite de 48 horas antes do início do Evento.';
+  paragraphs[0].innerHTML = 'Nas compras realizadas por meio eletrônico, o Matchie adota como regra operacional de arrependimento a possibilidade de solicitação de cancelamento em até <strong>7 (sete) dias corridos contados da compra</strong>, desde que o pedido seja realizado com antecedência mínima de <strong>48 (quarenta e oito) horas do horário de início do Evento</strong>. Se o Evento ocorrer antes do término do prazo de 7 dias, prevalece, para o fluxo ordinário de autoatendimento, o limite de 48 horas antes do início do Evento.';
 
   if (paragraphs[1]) {
-    paragraphs[1].innerHTML = 'Quando a solicitação estiver dentro dessa janela e o ingresso não tiver sido utilizado, o reembolso será <strong>integral dos valores pagos pelo consumidor</strong>, inclusive Taxa de Serviço Rolê e demais taxas acessórias reembolsáveis por lei. Custos de processamento eventualmente não devolvidos pelo provedor de pagamento não serão descontados do consumidor quando houver direito à restituição integral.';
+    paragraphs[1].innerHTML = 'Quando a solicitação estiver dentro dessa janela e o ingresso não tiver sido utilizado, o reembolso será <strong>integral dos valores pagos pelo consumidor</strong>, inclusive Taxa de Serviço Matchie e demais taxas acessórias reembolsáveis por lei. Custos de processamento eventualmente não devolvidos pelo provedor de pagamento não serão descontados do consumidor quando houver direito à restituição integral.';
   }
 
   if (paragraphs[2]) {
-    paragraphs[2].innerHTML = 'A regra de “7 dias da compra + 48 horas antes do Evento” disciplina o fluxo operacional padrão do Rolê e <strong>não limita direitos obrigatórios mais favoráveis assegurados pela legislação aplicável</strong>, inclusive em hipóteses de cancelamento, adiamento, alteração relevante do Evento ou outras situações em que a restituição seja legalmente devida.';
+    paragraphs[2].innerHTML = 'A regra de “7 dias da compra + 48 horas antes do Evento” disciplina o fluxo operacional padrão do Matchie e <strong>não limita direitos obrigatórios mais favoráveis assegurados pela legislação aplicável</strong>, inclusive em hipóteses de cancelamento, adiamento, alteração relevante do Evento ou outras situações em que a restituição seja legalmente devida.';
   }
 }
 
