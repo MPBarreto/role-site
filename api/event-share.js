@@ -1,5 +1,7 @@
 const EVENT_COVER_BUCKET = 'role-event-covers';
 const PUBLIC_CODE_PATTERN = /^[0-9a-f]{16}$/;
+const EVENT_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const DEFAULT_APP_ORIGIN = 'https://app.role.events';
 
 export default async function eventShareHandler(req, res) {
   if (req.method !== 'GET' && req.method !== 'HEAD') {
@@ -144,8 +146,8 @@ function eventPage(event, { origin, supabaseUrl, shareCode, priceMinor }) {
   const startsAt = formatEventDate(event.starts_at, event.event_timezone);
   const endsAt = event.ends_at ? formatEventDate(event.ends_at, event.event_timezone) : '';
   const price = priceMinor === null || priceMinor === undefined ? '' : formatMoney(priceMinor, event.currency);
-  const appUrl = `${origin}/#app`;
-  const isAvailable = event.status === 'published';
+  const appUrl = buildEventAppUrl(event.event_id, process.env.EVENT_APP_ORIGIN || DEFAULT_APP_ORIGIN);
+  const isAvailable = event.status === 'published' && Boolean(appUrl);
   const whatsappText = encodeURIComponent(`${title}\n${location}\n${startsAt}\n${canonical}`);
   const state = event.status === 'cancelled'
     ? '<p class="status status-cancelled">Este evento foi cancelado.</p>'
@@ -173,6 +175,24 @@ function eventPage(event, { origin, supabaseUrl, shareCode, priceMinor }) {
     structuredData,
     robots: event.status === 'completed' ? 'noindex,follow' : 'index,follow',
   });
+}
+
+export function buildEventAppUrl(eventId, configuredOrigin = DEFAULT_APP_ORIGIN) {
+  if (typeof eventId !== 'string' || !EVENT_ID_PATTERN.test(eventId)) return null;
+
+  let appOrigin = DEFAULT_APP_ORIGIN;
+  try {
+    const parsed = new URL(configuredOrigin);
+    const localDevelopment = parsed.hostname === 'localhost' || parsed.hostname === '127.0.0.1';
+    if ((parsed.protocol === 'https:' || localDevelopment && parsed.protocol === 'http:')
+        && !parsed.username && !parsed.password && parsed.pathname === '/' && !parsed.search && !parsed.hash) {
+      appOrigin = parsed.origin;
+    }
+  } catch {
+    // A bad deployment setting should still send buyers to the canonical app domain.
+  }
+
+  return `${appOrigin}/events/${encodeURIComponent(eventId)}?ingressos`;
 }
 
 function eventStructuredData(event, { title, description, image, canonical, priceMinor }) {
@@ -218,7 +238,7 @@ function eventStructuredData(event, { title, description, image, canonical, pric
 }
 
 async function findLowestPrice(supabaseUrl, publishableKey, event) {
-  if (!event.id || !event.starts_at) return null;
+  if (!event.event_id || !event.starts_at) return null;
   const startsAt = new Date(event.starts_at);
   if (Number.isNaN(startsAt.getTime())) return null;
   const rows = await invokeRpc(supabaseUrl, publishableKey, 'search_public_event_directory', {
@@ -230,7 +250,7 @@ async function findLowestPrice(supabaseUrl, publishableKey, event) {
     p_limit: 50,
     p_offset: 0,
   });
-  const match = Array.isArray(rows) ? rows.find((row) => row.id === event.id) : null;
+  const match = Array.isArray(rows) ? rows.find((row) => row.id === event.event_id) : null;
   const priceMinor = match && match.lowest_price_minor !== null && match.lowest_price_minor !== undefined
     ? Number(match.lowest_price_minor)
     : null;
