@@ -199,8 +199,9 @@ function directoryPage(rows, { origin, search, city, date, category, offset, sup
     const image = coverUrl(supabaseUrl, event.cover_image_path) || fallbackCover(origin);
     const date = formatEventDate(event.starts_at, event.event_timezone);
     return `<a class="event-card" href="${escapeHtml(url)}">
+      <span class="event-category-badge">${escapeHtml(EVENT_CATEGORY_NAMES[event.category] || 'Evento')}</span>
       <img src="${escapeHtml(image)}" alt="Capa do evento ${escapeHtml(event.title)}" loading="lazy">
-      <div class="event-copy"><span class="eyebrow">${escapeHtml(EVENT_CATEGORY_NAMES[event.category] || 'Evento')} · ${escapeHtml(event.city)}</span>
+      <div class="event-copy"><span class="eyebrow">${escapeHtml(event.city)}</span>
         <h2>${escapeHtml(event.title)}</h2><p>${escapeHtml(date)} · ${escapeHtml(event.venue_name)}</p>
         <span class="card-link">Ver evento <span aria-hidden="true">→</span></span></div>
     </a>`;
@@ -211,7 +212,11 @@ function directoryPage(rows, { origin, search, city, date, category, offset, sup
     : '';
   const content = cards || `<div class="empty"><h2>Nenhum rolê encontrado</h2><p>Tente outra busca ou volte em breve para descobrir novos eventos.</p></div>`;
   const canonical = `${origin}/events`;
-  const filtersOpen = Boolean(city || date || category);
+  const activeFilterCount = [city, date, category].filter(Boolean).length;
+  const filtersOpen = activeFilterCount > 0;
+  const filterToggleLabel = activeFilterCount
+    ? `${activeFilterCount} filtro${activeFilterCount === 1 ? '' : 's'} ativo${activeFilterCount === 1 ? '' : 's'}. Ocultar filtros`
+    : 'Expandir filtros';
   const categoryOptions = EVENT_CATEGORIES.map(([value, label]) => `<option value="${value}"${category === value ? ' selected' : ''}>${label}</option>`).join('');
   return pageShell({
     title: 'Eventos | Matchie',
@@ -220,9 +225,9 @@ function directoryPage(rows, { origin, search, city, date, category, offset, sup
     canonical,
     body: `<header class="masthead"><a class="brand" href="/" aria-label="Matchie, página inicial"><img src="/assets/logo/matchie-branca-chama-gradiente.png" alt="Matchie" width="142" height="71"></a><a class="top-link" href="/#app">Baixar o app <span aria-hidden="true">↗</span></a></header>
       <main class="directory-main"><section class="intro"><p class="eyebrow">DESCUBRA SEU PRÓXIMO EVENTO</p><h1>Conheça quem vai <em>antes de chegar.</em></h1><p class="lead">Veja quem vai ao mesmo evento, dê match e comece a conversa antes da festa.</p>
-      <form class="search" action="/events" method="get"><div class="search-row"><label class="sr-only" for="event-search">Buscar evento, cidade ou casa de show</label><input id="event-search" name="q" value="${escapeHtml(search)}" placeholder="Evento, cidade ou casa de show"><button class="filter-toggle" id="event-filters-toggle" type="button" aria-label="${filtersOpen ? 'Ocultar filtros' : 'Expandir filtros'}" aria-expanded="${filtersOpen}" aria-controls="event-filters" title="Filtrar eventos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9m4 0h3M4 17h3m4 0h9"></path><circle cx="15" cy="7" r="2"></circle><circle cx="9" cy="17" r="2"></circle></svg></button><button class="search-submit" type="submit">Buscar</button></div>
+      <form class="search" action="/events" method="get"><div class="search-row"><label class="sr-only" for="event-search">Buscar evento, cidade ou casa de show</label><input id="event-search" name="q" value="${escapeHtml(search)}" placeholder="Evento, cidade ou casa de show"><button class="filter-toggle" id="event-filters-toggle" type="button" data-active-count="${activeFilterCount}" aria-label="${filterToggleLabel}" aria-expanded="${filtersOpen}" aria-controls="event-filters" title="Filtrar eventos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9m4 0h3M4 17h3m4 0h9"></path><circle cx="15" cy="7" r="2"></circle><circle cx="9" cy="17" r="2"></circle></svg>${activeFilterCount ? `<span class="filter-active-count" aria-hidden="true">${activeFilterCount}</span>` : ''}</button><button class="search-submit" type="submit">Buscar</button></div>
         <div class="filter-panel" id="event-filters"${filtersOpen ? '' : ' hidden'}><label for="event-city">Cidade<input id="event-city" name="city" value="${escapeHtml(city)}" placeholder="Ex.: Curitiba" autocomplete="address-level2"></label><label for="event-date">Data do evento<input id="event-date" name="date" type="date" value="${escapeHtml(date)}"></label><label for="event-category">Categoria<select id="event-category" name="category"><option value="">Todas as categorias</option>${categoryOptions}</select></label><a class="filter-clear" href="/events">Limpar filtros</a></div>
-      </form><script>(function(){var button=document.getElementById('event-filters-toggle');var panel=document.getElementById('event-filters');if(!button||!panel)return;button.addEventListener('click',function(){var expanded=button.getAttribute('aria-expanded')==='true';button.setAttribute('aria-expanded',String(!expanded));button.setAttribute('aria-label',expanded?'Expandir filtros':'Ocultar filtros');panel.hidden=expanded;});})();</script></section>
+      </form><script>(function(){var button=document.getElementById('event-filters-toggle');var panel=document.getElementById('event-filters');if(!button||!panel)return;var activeCount=Number(button.getAttribute('data-active-count')||0);button.addEventListener('click',function(){var expanded=button.getAttribute('aria-expanded')==='true';button.setAttribute('aria-expanded',String(!expanded));var activeLabel=activeCount===1?'1 filtro ativo. ':activeCount>1?activeCount+' filtros ativos. ':'';button.setAttribute('aria-label',activeLabel+(expanded?'Expandir filtros':'Ocultar filtros'));panel.hidden=expanded;});})();</script></section>
       <section class="event-grid" aria-label="Eventos públicos">${content}</section><div class="more">${nextLink}</div></main>
       ${siteFooter()}`,
   });
@@ -499,9 +504,11 @@ const styles = `
   .search-row{display:grid;grid-template-columns:minmax(0,1fr) 54px auto;gap:10px}
   .search-row input{width:100%;flex:none}
   .search .filter-toggle{width:54px;padding:0;border:1px solid var(--line);background:rgba(18,14,21,.88);box-shadow:none;color:var(--muted)}
+  .search .filter-toggle{position:relative}
   .search .filter-toggle:hover{transform:translateY(-2px);border-color:rgba(255,43,138,.55);box-shadow:none;color:#fff}
   .search .filter-toggle[aria-expanded="true"]{border-color:rgba(255,43,138,.65);color:#ff78ad}
   .filter-toggle svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .filter-active-count{position:absolute;top:-7px;right:-7px;min-width:20px;height:20px;padding:0 5px;display:grid;place-items:center;border:2px solid #09070d;border-radius:999px;background:var(--grad);box-shadow:0 4px 14px rgba(255,43,138,.35);color:#fff;font-size:10px;font-weight:900;line-height:1}
   .filter-panel{display:grid;grid-template-columns:minmax(130px,1fr) minmax(140px,.9fr) minmax(170px,1.1fr) auto;align-items:end;gap:12px;margin-top:12px;padding:16px;border:1px solid var(--line);border-radius:18px;background:rgba(18,14,21,.82)}
   .filter-panel[hidden]{display:none}
   .filter-panel label{display:grid;gap:7px;color:var(--muted);font-size:12px;font-weight:800}
@@ -511,5 +518,7 @@ const styles = `
   .filter-clear:hover{text-decoration:underline}
   @media(max-width:760px){.filter-panel{grid-template-columns:repeat(2,minmax(0,1fr))}.filter-clear{align-self:end;padding-bottom:12px}}
   @media(max-width:440px){.search .search-submit{width:auto;padding:0 17px}.filter-panel{grid-template-columns:1fr}.filter-clear{padding:0}}
+  .event-card{position:relative}
+  .event-category-badge{position:absolute;top:14px;left:14px;z-index:1;max-width:calc(100% - 28px);padding:7px 11px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(9,7,13,.82);backdrop-filter:blur(12px);color:#fff;font-size:11px;font-weight:850;line-height:1.2;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
 
 `;
