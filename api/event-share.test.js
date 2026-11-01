@@ -69,7 +69,7 @@ test('renders the event page CTA with the database event id and ticket intent', 
 
     assert.equal(response.statusCode, 200);
     assert.ok(response.body.includes('href="https://app.role.events/events/' + eventId + '?ingressos"'));
-    assert.match(response.body, /Compre pelo app/);
+    assert.match(response.body, /Ver ingressos no app/);
   } finally {
     globalThis.fetch = originalFetch;
     if (originalEnvironment.supabaseUrl === undefined) delete process.env.SUPABASE_URL;
