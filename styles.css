@@ -406,3 +406,24 @@
   .policy-deadline-card{padding:23px}
   .policy-article{padding:20px}
 }
+
+@media(max-width:760px){
+  .events .event-grid{
+    grid-template-columns:none;
+    grid-auto-flow:column;
+    grid-auto-columns:minmax(0,82%);
+    gap:14px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    padding:8px 2px 22px;
+    margin:0 -2px;
+    scroll-snap-type:x mandatory;
+    scroll-padding-inline:2px;
+    overscroll-behavior-x:contain;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  .events .event-grid::-webkit-scrollbar{display:none}
+  .events .event-grid>.event-card,.events .event-grid>.event-skeleton{min-width:0;scroll-snap-align:start;scroll-snap-stop:always}
+  .events .event-grid>.events-empty-state{width:100%;grid-column:auto}
+}
