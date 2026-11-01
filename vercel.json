@@ -46,8 +46,8 @@
       "permanent": true
     },
     {
-      "source": "/events",
-      "destination": "/eventos",
+      "source": "/eventos",
+      "destination": "/events",
       "permanent": true
     }
   ],
@@ -57,7 +57,7 @@
       "destination": "/api/event-share?shareCode=:shareCode&slug=:slug"
     },
     {
-      "source": "/eventos",
+      "source": "/events",
       "destination": "/api/event-share?directory=1"
     },
     {

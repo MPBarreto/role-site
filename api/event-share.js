@@ -118,10 +118,10 @@ function directoryPage(rows, { origin, search, offset, supabaseUrl }) {
   }).join('');
   const nextOffset = offset + events.length;
   const nextLink = nextOffset < total
-    ? `<a class="button button-secondary" href="/eventos?offset=${nextOffset}${search ? `&q=${encodeURIComponent(search)}` : ''}">Ver mais eventos</a>`
+    ? `<a class="button button-secondary" href="/events?offset=${nextOffset}${search ? `&q=${encodeURIComponent(search)}` : ''}">Ver mais eventos</a>`
     : '';
   const content = cards || `<div class="empty"><h2>Nenhum rolê encontrado</h2><p>Tente outra busca ou volte em breve para descobrir novos eventos.</p></div>`;
-  const canonical = `${origin}/eventos`;
+  const canonical = `${origin}/events`;
   return pageShell({
     title: 'Eventos | Matchie',
     description: 'Veja quem vai ao mesmo evento, dê match e comece a conversa antes de chegar.',
@@ -129,9 +129,9 @@ function directoryPage(rows, { origin, search, offset, supabaseUrl }) {
     canonical,
     body: `<header class="masthead"><a class="brand" href="/" aria-label="Matchie, página inicial"><img src="/assets/logo/matchie-branca-chama-gradiente.png" alt="Matchie" width="142" height="71"></a><a class="top-link" href="/#app">Baixar o app <span aria-hidden="true">↗</span></a></header>
       <main class="directory-main"><section class="intro"><p class="eyebrow">DESCUBRA SEU PRÓXIMO EVENTO</p><h1>Conheça quem vai <em>antes de chegar.</em></h1><p class="lead">Veja quem vai ao mesmo evento, dê match e comece a conversa antes da festa.</p>
-      <form class="search" action="/eventos" method="get"><label class="sr-only" for="event-search">Buscar evento, cidade ou casa de show</label><input id="event-search" name="q" value="${escapeHtml(search)}" placeholder="Evento, cidade ou casa de show"><button type="submit">Buscar</button></form></section>
+      <form class="search" action="/events" method="get"><label class="sr-only" for="event-search">Buscar evento, cidade ou casa de show</label><input id="event-search" name="q" value="${escapeHtml(search)}" placeholder="Evento, cidade ou casa de show"><button type="submit">Buscar</button></form></section>
       <section class="event-grid" aria-label="Eventos públicos">${content}</section><div class="more">${nextLink}</div></main>
-      <footer class="footer">Matchie · Boas festas, novas pessoas, conexões reais.</footer>`,
+      ${siteFooter()}`,
   });
 }
 
@@ -154,17 +154,17 @@ function eventPage(event, { origin, supabaseUrl, shareCode, priceMinor }) {
     : event.status === 'completed'
       ? '<p class="status">Este rolê já aconteceu. Confira outros eventos.</p>'
       : '';
-  const body = `<header class="masthead masthead-overlay"><a class="brand" href="/" aria-label="Matchie"><img src="/assets/logo/matchie-branca-chama-gradiente.png" alt="Matchie" width="142" height="71"></a><a class="top-link" href="/eventos">Todos os eventos <span aria-hidden="true">→</span></a></header>
+  const body = `<header class="masthead masthead-overlay"><a class="brand" href="/" aria-label="Matchie"><img src="/assets/logo/matchie-branca-chama-gradiente.png" alt="Matchie" width="142" height="71"></a><a class="top-link" href="/events">Todos os eventos <span aria-hidden="true">→</span></a></header>
     <main class="event-main"><article class="event-hero"><img class="hero-image" src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(title)}"><div class="hero-shade"></div>
       <div class="hero-content"><p class="eyebrow">${escapeHtml(event.category || 'EVENTO')} · ${escapeHtml(event.city || '')}</p><h1>${escapeHtml(title)}</h1><p class="hero-description">${escapeHtml(description)}</p></div>
     </article><section class="event-details"><div class="details-copy">${state}
       <div class="detail-line"><span class="detail-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 11h18"></path></svg></span><div><strong>${escapeHtml(startsAt)}</strong>${endsAt ? `<span>Até ${escapeHtml(endsAt)}</span>` : ''}</div></div>
       <div class="detail-line"><span class="detail-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span><div><strong>${escapeHtml(event.venue_name || '')}</strong><span>${escapeHtml([event.venue_address, event.city].filter(Boolean).join(' · '))}</span>${mapUrl ? `<a class="map-link" href="${escapeHtml(mapUrl)}" target="_blank" rel="noopener noreferrer">Ver no mapa ↗</a>` : ''}</div></div>
       ${price ? `<div class="detail-line"><span class="detail-icon" aria-hidden="true">R$</span><div><strong>Ingressos a partir de ${escapeHtml(price)}</strong><span>Consulte a disponibilidade no app Matchie.</span></div></div>` : ''}
-      <div class="cta-row"><a class="button" href="${escapeHtml(isAvailable ? appUrl : '/eventos')}">${isAvailable ? 'Compre pelo app' : 'Explorar próximos eventos'} <span aria-hidden="true">→</span></a><a class="button button-secondary" href="https://wa.me/?text=${whatsappText}" target="_blank" rel="noopener noreferrer">Compartilhar no WhatsApp</a></div>
+      <div class="cta-row"><a class="button" href="${escapeHtml(isAvailable ? appUrl : '/events')}">${isAvailable ? 'Compre pelo app' : 'Explorar próximos eventos'} <span aria-hidden="true">→</span></a><a class="button button-secondary" href="https://wa.me/?text=${whatsappText}" target="_blank" rel="noopener noreferrer">Compartilhar no WhatsApp</a></div>
       <h2>Sobre o evento</h2><p class="event-description">${escapeHtml(fullDescription)}</p><p class="fine-print">As informações e a disponibilidade dos ingressos são confirmadas pela casa de show.</p>
-    </div><aside class="side-card"><p class="eyebrow">Matchie · eventos e conexões</p><h2>Conheça quem também vai</h2><p>Dê match com pessoas que vão ao mesmo evento e comece a conversar antes de chegar.</p><a href="/eventos">Explorar eventos <span aria-hidden="true">→</span></a></aside></section></main>
-    <footer class="footer">Matchie · Boas festas, novas pessoas, conexões reais.</footer>`;
+    </div><aside class="side-card"><p class="eyebrow">Matchie · eventos e conexões</p><h2>Conheça quem também vai</h2><p>Dê match com pessoas que vão ao mesmo evento e comece a conversar antes de chegar.</p><a href="/events">Explorar eventos <span aria-hidden="true">→</span></a></aside></section></main>
+    ${siteFooter()}`;
   const structuredData = eventStructuredData(event, { title, description: fullDescription, image, canonical, priceMinor });
   return pageShell({
     title: `${title} | Matchie`,
@@ -193,6 +193,29 @@ export function buildEventAppUrl(eventId, configuredOrigin = DEFAULT_APP_ORIGIN)
   }
 
   return `${appOrigin}/events/${encodeURIComponent(eventId)}?ingressos`;
+}
+
+function siteFooter() {
+  const appStoreVisible = process.env.VITE_SHOW_APP_STORE_BADGE !== 'false';
+  const googlePlayVisible = process.env.VITE_SHOW_GOOGLE_PLAY_BADGE !== 'false';
+  const storesVisible = appStoreVisible || googlePlayVisible;
+  const appStoreLink = appStoreVisible
+    ? '<a class="footer-store-link" href="/#app"><img src="/assets/app%20store/app-store.webp" alt="" aria-hidden="true" width="128" height="128">App Store</a>'
+    : '';
+  const googlePlayLink = googlePlayVisible
+    ? '<a class="footer-store-link" href="/#app"><img src="/assets/app%20store/google-play.png" alt="" aria-hidden="true" width="128" height="128">Google Play</a>'
+    : '';
+
+  return `<footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand"><a href="/" aria-label="Matchie — início"><img src="/assets/logo/matchie-branca-chama-gradiente.png" alt="Matchie"></a><p>Vai pelo evento.<br><span>Fica pelas conexões.</span></p></div>
+      <div class="footer-column"><h2>Matchie</h2><a href="/events">Eventos</a><a href="/#como-funciona">Como funciona</a><a href="/#seguranca">Segurança</a><a href="/produtores">Para produtores</a></div>
+      <div class="footer-column"${storesVisible ? '' : ' hidden'}><h2>App</h2>${appStoreLink}${googlePlayLink}</div>
+      <div class="footer-column"><h2>Legal</h2><a href="/terms">Termos de Uso</a><a href="/privacy">Privacidade</a><a href="/seguranca-infantil">Segurança infantil</a><a href="/reembolsos">Reembolsos</a></div>
+      <div class="footer-contact"><h2>Quer colocar seu evento no Matchie?</h2><a class="button" href="/produtores#produtores-contato">Falar com nosso time</a></div>
+    </div>
+    <div class="container footer-bottom"><span>© 2026 Matchie. Todos os direitos reservados.</span><span>Feito para noites que conectam pessoas.</span></div>
+  </footer>`;
 }
 
 function eventStructuredData(event, { title, description, image, canonical, priceMinor }) {
@@ -334,12 +357,35 @@ function errorPage(title, description) {
     title: `${title} | Matchie`,
     description,
     image: fallbackCover(origin),
-    canonical: `${origin}/eventos`,
-    body: `<main class="error-page"><a class="brand" href="/eventos" aria-label="Matchie"><img src="/assets/logo/matchie-branca-chama-gradiente.png" alt="Matchie" width="142" height="71"></a><h1>${escapeHtml(title)}</h1><p>${escapeHtml(description)}</p><a class="button" href="/eventos">Explorar eventos</a></main>`,
+    canonical: `${origin}/events`,
+    body: `<main class="error-page"><a class="brand" href="/events" aria-label="Matchie"><img src="/assets/logo/matchie-branca-chama-gradiente.png" alt="Matchie" width="142" height="71"></a><h1>${escapeHtml(title)}</h1><p>${escapeHtml(description)}</p><a class="button" href="/events">Explorar eventos</a></main>${siteFooter()}`,
   });
 }
 
+const footerStyles = `
+  .site-footer{padding:78px 0 30px;background:#070609;border-top:1px solid var(--line);color:var(--text)}
+  .site-footer .container{width:min(1180px,calc(100% - 40px));margin-inline:auto}
+  .site-footer .footer-grid{display:grid;grid-template-columns:1.4fr .7fr .65fr .75fr 1.25fr;gap:35px}
+  .site-footer .footer-brand>a{display:inline-flex}
+  .site-footer .footer-brand img{display:block;width:140px;height:auto}
+  .site-footer .footer-brand p{font-size:1.45rem;font-weight:900;line-height:1.08}
+  .site-footer .footer-brand p span{color:#ff719f}
+  .site-footer .footer-column,.site-footer .footer-contact{display:flex;flex-direction:column;gap:9px}
+  .site-footer .footer-column h2,.site-footer .footer-contact h2{font-size:.9rem;color:#ff72aa;margin:0 0 7px}
+  .site-footer .footer-column a{font-size:.9rem;color:#a8a1ab;text-decoration:none}
+  .site-footer .footer-column a:hover{color:#fff}
+  .site-footer .footer-store-link{display:inline-flex;align-items:center;gap:8px}
+  .site-footer .footer-store-link img{width:18px;height:18px;flex:0 0 18px;object-fit:contain;border-radius:4px}
+  .site-footer .footer-contact .button{align-self:flex-start}
+  .site-footer .footer-bottom{border-top:1px solid var(--line);margin-top:48px;padding-top:23px;display:flex;justify-content:space-between;gap:20px;color:#99939d;font-size:.77rem}
+  .site-footer [hidden]{display:none!important}
+  @media(max-width:1040px){.site-footer .footer-grid{grid-template-columns:1.3fr repeat(3,.8fr)}.site-footer .footer-contact{grid-column:1/-1;border-top:1px solid var(--line);padding-top:24px}}
+  @media(max-width:760px){.site-footer .container{width:min(100% - 28px,1180px)}.site-footer .footer-grid{grid-template-columns:1fr 1fr}.site-footer .footer-brand,.site-footer .footer-contact{grid-column:1/-1}.site-footer .footer-bottom{flex-direction:column}}
+  @media(max-width:430px){.site-footer .footer-grid{gap:28px 18px}}
+`;
+
 const styles = `
+  ${footerStyles}
   :root{color-scheme:dark;--bg:#09070d;--bg2:#100b14;--panel:#120e15;--panel2:rgba(12,8,16,.92);--pink:#ff2b8a;--coral:#ff5f74;--violet:#8a4dff;--text:#f7f5f8;--muted:#b9b2bf;--line:rgba(255,255,255,.12);--grad:linear-gradient(105deg,var(--pink),var(--coral) 62%,#ff9652);--shadow:0 34px 90px rgba(0,0,0,.48)}
   *{box-sizing:border-box}html{min-height:100%;background:var(--bg);scroll-behavior:smooth}body{min-height:100vh;margin:0;background:radial-gradient(ellipse at 12% 4%,rgba(138,77,255,.1),transparent 32%),radial-gradient(ellipse at 88% 18%,rgba(255,43,138,.08),transparent 28%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}.site{min-height:100vh}.masthead{position:sticky;top:0;z-index:10;height:82px;padding:0 max(20px,calc((100vw - 1180px)/2));display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:rgba(9,7,13,.84);backdrop-filter:blur(20px);color:var(--text)}.masthead .brand{display:inline-flex;align-items:center;margin-right:auto}.brand img{display:block;width:126px;height:auto}.masthead-overlay{position:absolute;top:0;left:0;right:0;z-index:2;background:linear-gradient(180deg,rgba(9,7,13,.65),transparent);border-bottom:0;backdrop-filter:none}.top-link{min-height:44px;padding:0 16px;display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid rgba(255,255,255,.25);border-radius:14px;background:rgba(12,8,16,.5);color:#fff;text-decoration:none;font-size:14px;font-weight:800;transition:border-color .2s,transform .2s}.top-link:hover{transform:translateY(-2px);border-color:rgba(255,43,138,.7)}.directory-main{width:min(1180px,calc(100% - 40px));margin:0 auto;padding:68px 0 94px}.intro{max-width:780px;margin:0 0 42px}.eyebrow{margin:0 0 15px;color:#ff78ad;font-size:12px;font-weight:900;letter-spacing:.16em;text-transform:uppercase}.intro h1{margin:0 0 16px;font-size:clamp(42px,6vw,72px);line-height:.98;letter-spacing:-.06em}.intro h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}.lead{max-width:650px;margin:0;color:var(--muted);font-size:18px;line-height:1.6}.search{display:flex;gap:10px;max-width:690px;margin-top:27px}.search input{min-width:0;flex:1;min-height:54px;border:1px solid var(--line);border-radius:16px;padding:0 17px;background:rgba(18,14,21,.88);color:var(--text);font:inherit;font-size:15px}.search input::placeholder{color:#8f8793}.search input:focus{border-color:rgba(255,43,138,.75);outline:2px solid rgba(255,43,138,.18)}.search button,.button{min-height:52px;border:0;border-radius:16px;padding:0 22px;display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--grad);box-shadow:0 14px 36px rgba(255,43,138,.19);color:#fff;text-decoration:none;font:inherit;font-size:14px;font-weight:850;cursor:pointer;transition:transform .2s,box-shadow .2s}.search button:hover,.button:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(255,43,138,.27)}.event-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.event-card{overflow:hidden;border:1px solid var(--line);border-radius:27px;background:var(--panel);box-shadow:0 25px 60px rgba(0,0,0,.23);color:var(--text);text-decoration:none;transition:transform .25s,border-color .25s,box-shadow .25s}.event-card:hover{transform:translateY(-5px);border-color:rgba(255,43,138,.55);box-shadow:var(--shadow)}.event-card img{display:block;width:100%;aspect-ratio:1.55;object-fit:cover;background:#151018}.event-copy{padding:19px 20px 21px}.event-copy .eyebrow{margin:0 0 8px;color:#ff78ad;font-size:10px}.event-copy h2{margin:0 0 9px;font-size:22px;line-height:1.12;letter-spacing:-.035em}.event-copy p{margin:0 0 17px;color:var(--muted);font-size:13px;line-height:1.5}.card-link{color:#ff78ad;font-size:14px;font-weight:850}.empty{grid-column:1/-1;padding:58px 24px;border:1px solid var(--line);border-radius:27px;background:rgba(18,14,21,.78);text-align:center}.empty h2{margin:0 0 8px;font-size:26px;letter-spacing:-.03em}.empty p{margin:0;color:var(--muted)}.more{text-align:center;margin-top:34px}.button-secondary{background:rgba(12,8,16,.72);box-shadow:none;border:1px solid rgba(255,255,255,.2)}.button-secondary:hover{border-color:rgba(255,43,138,.7);box-shadow:none}.event-main{width:min(1180px,100%);margin:0 auto;padding-bottom:48px}.event-hero{position:relative;min-height:540px;overflow:hidden;border-radius:0 0 27px 27px;background:#100b14;color:#fff}.hero-image,.hero-shade{position:absolute;inset:0;width:100%;height:100%}.hero-image{object-fit:cover}.hero-shade{background:linear-gradient(90deg,rgba(9,7,13,.9),rgba(9,7,13,.58) 54%,rgba(9,7,13,.08)),linear-gradient(0deg,rgba(9,7,13,.84),transparent 68%)}.hero-content{position:absolute;left:max(24px,calc((100vw - 1060px)/2));right:24px;bottom:58px;max-width:740px}.hero-content .eyebrow{color:#ff78ad}.hero-content h1{margin:14px 0 12px;font-size:clamp(42px,8vw,76px);line-height:.98;letter-spacing:-.06em}.hero-description{max-width:700px;margin:0;color:#f0edf2;font-size:19px;line-height:1.5}.event-details{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(250px,.7fr);gap:42px;padding:38px 20px}.details-copy{max-width:700px}.detail-line{display:flex;align-items:center;gap:16px;margin:0 0 14px;padding:17px;border:1px solid var(--line);border-radius:18px;background:rgba(18,14,21,.82)}.detail-icon{width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;border:1px solid rgba(255,43,138,.26);border-radius:14px;background:rgba(255,43,138,.1);color:#ff78ad;font-size:19px;font-weight:800}.detail-line strong,.detail-line span{display:block}.detail-line strong{font-size:15px}.detail-line div span{margin-top:4px;color:var(--muted);font-size:13px}.details-copy h2{margin:34px 0 10px;font-size:27px;letter-spacing:-.04em}.details-copy>p{color:var(--muted);line-height:1.7}.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:25px}.fine-print{font-size:12px}.status{padding:12px 15px;border:1px solid rgba(255,43,138,.24);border-radius:14px;background:rgba(255,43,138,.1);color:#ffc1dc;font-weight:750}.status-cancelled{border-color:rgba(255,95,116,.3);background:rgba(255,95,116,.1);color:#ffabb5}.side-card{align-self:start;margin-top:0;padding:27px;border:1px solid rgba(255,43,138,.34);border-radius:24px;background:linear-gradient(145deg,rgba(24,13,29,.95),rgba(12,8,16,.96));box-shadow:var(--shadow);color:var(--text)}.side-card .eyebrow{margin:0 0 15px;color:#ff78ad}.side-card h2{margin:0 0 9px;font-size:24px;line-height:1.08;letter-spacing:-.04em}.side-card p:not(.eyebrow){color:var(--muted);line-height:1.55}.side-card a{color:#ff78ad;font-weight:850;text-decoration:none}.footer{padding:24px;border-top:1px solid var(--line);color:#8f8793;text-align:center;font-size:12px}.error-page{min-height:calc(100vh - 60px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;text-align:center}.error-page .brand{margin:0 0 48px}.error-page .brand img{width:126px}.error-page h1{margin:5px 0;font-size:clamp(30px,5vw,42px);letter-spacing:-.045em}.error-page p{margin:0 0 24px;color:var(--muted)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}a:focus-visible,button:focus-visible{outline:2px solid #ff78ad;outline-offset:4px}
   @media(max-width:760px){.masthead{height:72px;padding:0 18px}.brand img{width:112px}.directory-main{width:min(100% - 36px,1180px);padding:48px 0 64px}.intro{margin-bottom:32px}.intro h1{font-size:clamp(42px,10vw,58px)}.lead{font-size:16px}.event-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.event-copy{padding:15px}.event-copy h2{font-size:18px}.event-copy p{font-size:12px}.event-hero{min-height:470px;border-radius:0 0 22px 22px}.hero-content{left:22px;right:22px;bottom:34px}.hero-content h1{font-size:48px}.hero-description{font-size:16px}.event-details{grid-template-columns:1fr;gap:22px;padding:26px 18px}.side-card{margin:0}.cta-row{flex-direction:column}.cta-row .button{text-align:center}}

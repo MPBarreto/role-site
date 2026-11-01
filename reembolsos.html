@@ -112,8 +112,15 @@
     </section>
   </main>
 
-  <footer class="policy-site-footer">
-    <div class="container"><a href="/">← Voltar para o site do Matchie</a><span>Esta página não limita os direitos previstos na legislação aplicável.</span></div>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand"><a href="/" aria-label="Matchie — início"><img src="/assets/logo/matchie-branca-chama-gradiente.png" alt="Matchie" /></a><p>Vai pelo evento.<br /><span>Fica pelas conexões.</span></p></div>
+      <div class="footer-column"><h2>Matchie</h2><a href="/events">Eventos</a><a href="/#como-funciona">Como funciona</a><a href="/#seguranca">Segurança</a><a href="/produtores">Para produtores</a></div>
+      <div class="footer-column" data-store-links><h2>App</h2><a class="footer-store-link" data-app-store href="/#app"><img src="/assets/app%20store/app-store.webp" alt="" aria-hidden="true" width="128" height="128" />App Store</a><a class="footer-store-link" data-play-store href="/#app"><img src="/assets/app%20store/google-play.png" alt="" aria-hidden="true" width="128" height="128" />Google Play</a></div>
+      <div class="footer-column"><h2>Legal</h2><a href="/terms">Termos de Uso</a><a href="/privacy">Privacidade</a><a href="/seguranca-infantil">Segurança infantil</a><a href="/reembolsos">Reembolsos</a><button class="consent-settings-trigger" type="button" data-consent-settings hidden>Preferências de cookies</button></div>
+      <div class="footer-contact"><h2>Quer colocar seu evento no Matchie?</h2><button class="btn btn-primary" type="button" data-contact-trigger>Falar com nosso time</button></div>
+    </div>
+    <div class="container footer-bottom"><span>© 2026 Matchie. Todos os direitos reservados.</span><span>Feito para noites que conectam pessoas.</span><span>Esta página não limita os direitos previstos na legislação aplicável.</span></div>
   </footer>
 
   <aside class="consent-panel" data-consent-panel hidden role="region" aria-labelledby="consent-title" aria-live="polite">
@@ -137,6 +144,7 @@
       </div>
     </div>
   </aside>
-  <script type="module" src="/tracking-entry.js"></script>
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
+  <script type="module" src="/app.js"></script>
 </body>
 </html>

@@ -62,7 +62,7 @@ async function searchDirectory(supabaseUrl, publishableKey, offset, limit = PAGE
 
 function staticPages() {
   const origin = siteOrigin();
-  const paths = ['/', '/eventos', '/produtores', '/reembolsos', '/terms', '/privacy', '/seguranca-infantil'];
+  const paths = ['/', '/events', '/produtores', '/reembolsos', '/terms', '/privacy', '/seguranca-infantil'];
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${paths
     .map((path) => `<url><loc>${xmlEscape(`${origin}${path}`)}</loc></url>`).join('')}</urlset>`;
 }

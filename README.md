@@ -66,7 +66,7 @@ A rota `/api/events` consulta as RPCs públicas `search_public_event_directory` 
 
 ### Páginas públicas de eventos e indexação
 
-- `/eventos` lista os eventos publicados e futuros com HTML renderizado no servidor.
+- `/events` lista os eventos publicados e futuros com HTML renderizado no servidor; `/eventos` redireciona para a rota canônica.
 - `/events/{public_share_code}/{slug}` serve a página pública de cada evento, com canonical, Open Graph e dados estruturados `Event`. O preço e a oferta estruturada aparecem quando há ingresso disponível.
 - `/sitemap.xml` gera um índice com as páginas fixas e lotes de URLs de eventos publicados e futuros. O `robots.txt` aponta para esse sitemap e permite o acesso do OAI-SearchBot às páginas públicas.
 - As funções usam apenas `SUPABASE_URL` e `SUPABASE_PUBLISHABLE_KEY` (ou os equivalentes `EXPO_PUBLIC_*`) e as RPCs públicas. Não configure a chave `service_role` no site.

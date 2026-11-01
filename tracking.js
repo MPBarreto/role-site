@@ -13,7 +13,7 @@ const hasTrackingIds = hasGoogleId || Boolean(metaPixelId);
 const panel = document.querySelector('[data-consent-panel]');
 const analyticsInput = document.querySelector('[data-consent-analytics]');
 const marketingInput = document.querySelector('[data-consent-marketing]');
-const settingsButton = document.querySelector('[data-consent-settings]');
+const settingsButtons = [...document.querySelectorAll('[data-consent-settings]')];
 
 function readConsent() {
   try {
@@ -132,8 +132,11 @@ function updateConsent(nextConsent) {
 }
 
 function initializeTracking() {
-  if (!panel || !settingsButton) return;
-  settingsButton.hidden = !hasTrackingIds;
+  if (!panel || !settingsButtons.length) return;
+  settingsButtons.forEach((button) => {
+    button.hidden = !hasTrackingIds;
+    button.addEventListener('click', () => openPanel({ focus: true }));
+  });
   panel.querySelector('[data-consent-analytics-option]').hidden = !hasGoogleId;
   panel.querySelector('[data-consent-marketing-option]').hidden = !(metaPixelId || tagManagerId);
   panel.querySelector('[data-consent-gtm-note]').hidden = !tagManagerId;
@@ -150,7 +153,6 @@ function initializeTracking() {
     openPanel();
   }
 
-  settingsButton.addEventListener('click', () => openPanel({ focus: true }));
   panel.querySelector('[data-consent-reject]')?.addEventListener('click', () => {
     updateConsent({ analytics: false, marketing: false });
   });
