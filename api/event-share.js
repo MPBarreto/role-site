@@ -2,6 +2,19 @@ const EVENT_COVER_BUCKET = 'role-event-covers';
 const PUBLIC_CODE_PATTERN = /^[0-9a-f]{16}$/;
 const EVENT_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const DEFAULT_APP_ORIGIN = 'https://app.role.events';
+const EVENT_CATEGORIES = [
+  ['party', 'Festa'],
+  ['concert', 'Show'],
+  ['club', 'Balada'],
+  ['bar', 'Bar'],
+  ['rooftop', 'Rooftop'],
+  ['samba_pagode', 'Samba e pagode'],
+  ['sertanejo', 'Sertanejo'],
+  ['electronic', 'Eletrônica'],
+  ['comedy', 'Stand-up e comédia'],
+];
+const EVENT_CATEGORY_NAMES = Object.fromEntries(EVENT_CATEGORIES);
+const DIRECTORY_PAGE_SIZE = 24;
 
 export default async function eventShareHandler(req, res) {
   if (req.method !== 'GET' && req.method !== 'HEAD') {
@@ -19,14 +32,16 @@ export default async function eventShareHandler(req, res) {
   const directory = queryValue(req, 'directory') === '1';
   try {
     if (directory) {
-      const search = (queryValue(req, 'q') || '').trim().slice(0, 120);
+      const filters = parseDirectoryFilters(req);
       const offset = parseOffset(queryValue(req, 'offset'));
-      const rows = await invokeRpc(supabaseUrl, publishableKey, 'search_public_event_share_directory', {
-        p_search: search || null,
-        p_limit: 24,
-        p_offset: offset,
-      });
-      const html = directoryPage(rows, { origin, search, offset, supabaseUrl });
+      const rows = filters.city || filters.date || filters.category
+        ? await searchFilteredDirectory(supabaseUrl, publishableKey, filters, offset)
+        : await invokeRpc(supabaseUrl, publishableKey, 'search_public_event_share_directory', {
+          p_search: filters.search || null,
+          p_limit: DIRECTORY_PAGE_SIZE,
+          p_offset: offset,
+        });
+      const html = directoryPage(rows, { origin, ...filters, offset, supabaseUrl });
       return sendPage(res, 200, html, 'public, max-age=0, s-maxage=60, stale-while-revalidate=300');
     }
 
@@ -87,6 +102,80 @@ function parseOffset(value) {
   return Number.isFinite(offset) ? Math.max(0, Math.min(offset, 10000)) : 0;
 }
 
+function parseDirectoryFilters(req) {
+  const search = (queryValue(req, 'q') || '').trim().slice(0, 120);
+  const city = (queryValue(req, 'city') || '').trim().slice(0, 120);
+  const rawCategory = (queryValue(req, 'category') || '').trim();
+  const category = Object.hasOwn(EVENT_CATEGORY_NAMES, rawCategory) ? rawCategory : '';
+  const rawDate = (queryValue(req, 'date') || '').trim();
+  const date = isDateKey(rawDate) ? rawDate : '';
+  const dateRange = date ? getDateRange(date) : null;
+
+  return {
+    search,
+    city,
+    category,
+    date,
+    startsAtFrom: dateRange?.from ?? null,
+    startsAtBefore: dateRange?.before ?? null,
+  };
+}
+
+function isDateKey(value) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const [year, month, day] = value.split('-').map(Number);
+  const parsed = new Date(Date.UTC(year, month - 1, day));
+  return parsed.getUTCFullYear() === year
+    && parsed.getUTCMonth() === month - 1
+    && parsed.getUTCDate() === day;
+}
+
+function getDateRange(date) {
+  const [year, month, day] = date.split('-').map(Number);
+  const nextDay = new Date(Date.UTC(year, month - 1, day + 1));
+  const nextDate = [
+    nextDay.getUTCFullYear(),
+    String(nextDay.getUTCMonth() + 1).padStart(2, '0'),
+    String(nextDay.getUTCDate()).padStart(2, '0'),
+  ].join('-');
+
+  // Event dates on the public site follow Brazil's primary event timezone.
+  return {
+    from: new Date(`${date}T00:00:00-03:00`).toISOString(),
+    before: new Date(`${nextDate}T00:00:00-03:00`).toISOString(),
+  };
+}
+
+async function searchFilteredDirectory(supabaseUrl, publishableKey, filters, offset) {
+  const rows = await invokeRpc(supabaseUrl, publishableKey, 'search_public_event_directory', {
+    p_search: filters.search || null,
+    p_city: filters.city || null,
+    p_category: filters.category || null,
+    p_starts_at_from: filters.startsAtFrom,
+    p_starts_at_before: filters.startsAtBefore,
+    p_limit: DIRECTORY_PAGE_SIZE,
+    p_offset: offset,
+  });
+  if (!Array.isArray(rows) || rows.length === 0) return [];
+
+  const hydratedRows = await Promise.all(rows.map(async (event) => {
+    const detailRows = await invokeRpc(supabaseUrl, publishableKey, 'get_public_event_detail', {
+      p_event_id: event.id,
+    });
+    const detail = Array.isArray(detailRows) ? detailRows[0] : detailRows;
+    if (!detail) return null;
+
+    return {
+      ...event,
+      public_share_code: detail.public_share_code,
+      cover_image_path: detail.cover_image_path,
+      total_count: event.total_count,
+    };
+  }));
+
+  return hydratedRows.filter(Boolean);
+}
+
 async function invokeRpc(supabaseUrl, publishableKey, name, payload) {
   const response = await fetch(`${supabaseUrl}/rest/v1/rpc/${name}`, {
     method: 'POST',
@@ -102,7 +191,7 @@ async function invokeRpc(supabaseUrl, publishableKey, name, payload) {
   return response.json();
 }
 
-function directoryPage(rows, { origin, search, offset, supabaseUrl }) {
+function directoryPage(rows, { origin, search, city, date, category, offset, supabaseUrl }) {
   const events = Array.isArray(rows) ? rows : [];
   const total = Number(events[0] && events[0].total_count || 0);
   const cards = events.map((event) => {
@@ -111,17 +200,19 @@ function directoryPage(rows, { origin, search, offset, supabaseUrl }) {
     const date = formatEventDate(event.starts_at, event.event_timezone);
     return `<a class="event-card" href="${escapeHtml(url)}">
       <img src="${escapeHtml(image)}" alt="Capa do evento ${escapeHtml(event.title)}" loading="lazy">
-      <div class="event-copy"><span class="eyebrow">${escapeHtml(event.category)} · ${escapeHtml(event.city)}</span>
+      <div class="event-copy"><span class="eyebrow">${escapeHtml(EVENT_CATEGORY_NAMES[event.category] || 'Evento')} · ${escapeHtml(event.city)}</span>
         <h2>${escapeHtml(event.title)}</h2><p>${escapeHtml(date)} · ${escapeHtml(event.venue_name)}</p>
         <span class="card-link">Ver evento <span aria-hidden="true">→</span></span></div>
     </a>`;
   }).join('');
   const nextOffset = offset + events.length;
   const nextLink = nextOffset < total
-    ? `<a class="button button-secondary" href="/events?offset=${nextOffset}${search ? `&q=${encodeURIComponent(search)}` : ''}">Ver mais eventos</a>`
+    ? `<a class="button button-secondary" href="${escapeHtml(directoryHref({ search, city, date, category, offset: nextOffset }))}">Ver mais eventos</a>`
     : '';
   const content = cards || `<div class="empty"><h2>Nenhum rolê encontrado</h2><p>Tente outra busca ou volte em breve para descobrir novos eventos.</p></div>`;
   const canonical = `${origin}/events`;
+  const filtersOpen = Boolean(city || date || category);
+  const categoryOptions = EVENT_CATEGORIES.map(([value, label]) => `<option value="${value}"${category === value ? ' selected' : ''}>${label}</option>`).join('');
   return pageShell({
     title: 'Eventos | Matchie',
     description: 'Veja quem vai ao mesmo evento, dê match e comece a conversa antes de chegar.',
@@ -129,10 +220,21 @@ function directoryPage(rows, { origin, search, offset, supabaseUrl }) {
     canonical,
     body: `<header class="masthead"><a class="brand" href="/" aria-label="Matchie, página inicial"><img src="/assets/logo/matchie-branca-chama-gradiente.png" alt="Matchie" width="142" height="71"></a><a class="top-link" href="/#app">Baixar o app <span aria-hidden="true">↗</span></a></header>
       <main class="directory-main"><section class="intro"><p class="eyebrow">DESCUBRA SEU PRÓXIMO EVENTO</p><h1>Conheça quem vai <em>antes de chegar.</em></h1><p class="lead">Veja quem vai ao mesmo evento, dê match e comece a conversa antes da festa.</p>
-      <form class="search" action="/events" method="get"><label class="sr-only" for="event-search">Buscar evento, cidade ou casa de show</label><input id="event-search" name="q" value="${escapeHtml(search)}" placeholder="Evento, cidade ou casa de show"><button type="submit">Buscar</button></form></section>
+      <form class="search" action="/events" method="get"><div class="search-row"><label class="sr-only" for="event-search">Buscar evento, cidade ou casa de show</label><input id="event-search" name="q" value="${escapeHtml(search)}" placeholder="Evento, cidade ou casa de show"><button class="filter-toggle" id="event-filters-toggle" type="button" aria-label="${filtersOpen ? 'Ocultar filtros' : 'Expandir filtros'}" aria-expanded="${filtersOpen}" aria-controls="event-filters" title="Filtrar eventos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9m4 0h3M4 17h3m4 0h9"></path><circle cx="15" cy="7" r="2"></circle><circle cx="9" cy="17" r="2"></circle></svg></button><button class="search-submit" type="submit">Buscar</button></div>
+        <div class="filter-panel" id="event-filters"${filtersOpen ? '' : ' hidden'}><label for="event-city">Cidade<input id="event-city" name="city" value="${escapeHtml(city)}" placeholder="Ex.: Curitiba" autocomplete="address-level2"></label><label for="event-date">Data do evento<input id="event-date" name="date" type="date" value="${escapeHtml(date)}"></label><label for="event-category">Categoria<select id="event-category" name="category"><option value="">Todas as categorias</option>${categoryOptions}</select></label><a class="filter-clear" href="/events">Limpar filtros</a></div>
+      </form><script>(function(){var button=document.getElementById('event-filters-toggle');var panel=document.getElementById('event-filters');if(!button||!panel)return;button.addEventListener('click',function(){var expanded=button.getAttribute('aria-expanded')==='true';button.setAttribute('aria-expanded',String(!expanded));button.setAttribute('aria-label',expanded?'Expandir filtros':'Ocultar filtros');panel.hidden=expanded;});})();</script></section>
       <section class="event-grid" aria-label="Eventos públicos">${content}</section><div class="more">${nextLink}</div></main>
       ${siteFooter()}`,
   });
+}
+
+function directoryHref({ search, city, date, category, offset }) {
+  const params = new URLSearchParams({ offset: String(offset) });
+  if (search) params.set('q', search);
+  if (city) params.set('city', city);
+  if (date) params.set('date', date);
+  if (category) params.set('category', category);
+  return `/events?${params.toString()}`;
 }
 
 function eventPage(event, { origin, supabaseUrl, shareCode, priceMinor }) {
@@ -392,5 +494,22 @@ const styles = `
   @media(max-width:440px){.directory-main{width:calc(100% - 32px);padding-top:40px}.event-grid{grid-template-columns:1fr}.event-card img{aspect-ratio:1.7}.search{flex-direction:column}.search button{width:100%}.intro h1{font-size:40px}.event-hero{min-height:430px}.hero-content h1{font-size:42px}.event-details{padding:22px 16px}.cta-row .button{width:100%}}
   @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
   .detail-line span.detail-icon{display:grid}.detail-icon svg{display:block;width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.map-link{display:inline-flex;align-items:center;margin-top:10px;color:#ff78ad;font-size:13px;font-weight:850;text-decoration:none}.map-link:hover{text-decoration:underline}.event-description{white-space:pre-line;overflow-wrap:anywhere}
+
+  .search{display:block}
+  .search-row{display:grid;grid-template-columns:minmax(0,1fr) 54px auto;gap:10px}
+  .search-row input{width:100%;flex:none}
+  .search .filter-toggle{width:54px;padding:0;border:1px solid var(--line);background:rgba(18,14,21,.88);box-shadow:none;color:var(--muted)}
+  .search .filter-toggle:hover{transform:translateY(-2px);border-color:rgba(255,43,138,.55);box-shadow:none;color:#fff}
+  .search .filter-toggle[aria-expanded="true"]{border-color:rgba(255,43,138,.65);color:#ff78ad}
+  .filter-toggle svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .filter-panel{display:grid;grid-template-columns:minmax(130px,1fr) minmax(140px,.9fr) minmax(170px,1.1fr) auto;align-items:end;gap:12px;margin-top:12px;padding:16px;border:1px solid var(--line);border-radius:18px;background:rgba(18,14,21,.82)}
+  .filter-panel[hidden]{display:none}
+  .filter-panel label{display:grid;gap:7px;color:var(--muted);font-size:12px;font-weight:800}
+  .filter-panel input,.filter-panel select{width:100%;min-width:0;min-height:44px;border:1px solid var(--line);border-radius:12px;padding:0 12px;background:#0b080e;color:var(--text);font:inherit;font-size:14px}
+  .filter-panel input:focus,.filter-panel select:focus{border-color:rgba(255,43,138,.75);outline:2px solid rgba(255,43,138,.18)}
+  .filter-clear{align-self:center;color:#ff78ad;font-size:13px;font-weight:800;text-decoration:none;white-space:nowrap}
+  .filter-clear:hover{text-decoration:underline}
+  @media(max-width:760px){.filter-panel{grid-template-columns:repeat(2,minmax(0,1fr))}.filter-clear{align-self:end;padding-bottom:12px}}
+  @media(max-width:440px){.search .search-submit{width:auto;padding:0 17px}.filter-panel{grid-template-columns:1fr}.filter-clear{padding:0}}
 
 `;
