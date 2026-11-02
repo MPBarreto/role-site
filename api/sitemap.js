@@ -9,7 +9,7 @@ export default async function sitemapHandler(req, res) {
     return res.status(405).send('Method not allowed.');
   }
 
-  const params = new URL(req.url || '/', 'https://matchie.com.br').searchParams;
+  const params = new URL(req.url || '/', 'https://matchie.events').searchParams;
   const set = params.get('set');
   if (set === 'pages') return sendXml(res, 200, staticPages(), CACHE_CONTROL);
 
@@ -89,10 +89,10 @@ function siteOrigin() {
   if (configured) {
     try {
       const url = new URL(configured);
-      if (url.protocol === 'https:' && ['matchie.com.br', 'www.matchie.com.br'].includes(url.hostname)) return 'https://matchie.com.br';
+      if (url.protocol === 'https:' && ['matchie.events', 'www.matchie.events'].includes(url.hostname)) return 'https://matchie.events';
     } catch { /* Use the production canonical origin below. */ }
   }
-  return 'https://matchie.com.br';
+  return 'https://matchie.events';
 }
 
 function slugify(value) {

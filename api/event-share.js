@@ -75,7 +75,7 @@ function getOrigin(req) {
   const hostHeader = firstHeader(req.headers && (req.headers['x-forwarded-host'] || req.headers.host));
   const host = (hostHeader || '').split(',')[0].trim().toLowerCase();
   const hostname = host.replace(/:\d+$/, '');
-  if (hostname !== 'localhost') return 'https://matchie.com.br';
+  if (hostname !== 'localhost') return 'https://matchie.events';
   const forwardedProtocol = firstHeader(req.headers && req.headers['x-forwarded-proto']);
   const protocol = forwardedProtocol !== 'https' ? 'http' : 'https';
   return `${protocol}://${host}`;
@@ -91,7 +91,7 @@ function queryValue(req, key) {
   if (Array.isArray(value)) return value[0];
   if (typeof value === 'string') return value;
   try {
-    return new URL(req.url || '/', 'https://matchie.com.br').searchParams.get(key) || '';
+    return new URL(req.url || '/', 'https://matchie.events').searchParams.get(key) || '';
   } catch {
     return '';
   }
@@ -467,7 +467,7 @@ function sendPage(res, statusCode, html, cacheControl) {
 }
 
 function errorPage(title, description) {
-  const origin = 'https://matchie.com.br';
+  const origin = 'https://matchie.events';
   return pageShell({
     title: `${title} | Matchie`,
     description,

@@ -63,7 +63,7 @@ test('renders the event page CTA with the database event id and ticket intent', 
     await eventShareHandler({
       method: 'GET',
       url: '/api/event-share?shareCode=0123456789abcdef',
-      headers: { host: 'matchie.com.br' },
+      headers: { host: 'matchie.events' },
       query: { shareCode: '0123456789abcdef' },
     }, response);
 
