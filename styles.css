@@ -427,3 +427,10 @@
   .events .event-grid>.event-card,.events .event-grid>.event-skeleton{min-width:0;scroll-snap-align:start;scroll-snap-stop:always}
   .events .event-grid>.events-empty-state{width:100%;grid-column:auto}
 }
+
+.event-share-button{position:absolute;top:14px;right:14px;z-index:3;width:44px;height:44px;padding:0;display:grid;place-items:center;border:1px solid rgba(255,255,255,.28);border-radius:14px;background:rgba(9,7,13,.82);backdrop-filter:blur(12px);color:#fff;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
+.event-share-button:hover{transform:translateY(-2px);border-color:rgba(255,43,138,.75);background:rgba(30,12,25,.95)}
+.event-share-button:disabled{cursor:wait;opacity:.7;transform:none}
+.event-share-button:focus-visible{outline:2px solid #ff78ad;outline-offset:3px}
+.event-share-button svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.event-cover .event-share-button{top:15px;right:15px}

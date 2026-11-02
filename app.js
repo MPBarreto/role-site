@@ -123,9 +123,26 @@ function eventSlug(value) {
     .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 96).replace(/-+$/g, '') || 'role';
 }
 
+function createEventShareButton(url, title) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'event-share-button';
+  button.setAttribute('aria-label', `Compartilhar evento ${title}`);
+  button.title = 'Compartilhar evento';
+  button.dataset.shareUrl = new URL(url, window.location.origin).toString();
+  button.dataset.shareTitle = title;
+  button.dataset.shareText = `Confira este evento no Matchie: ${title}`;
+  button.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.7 10.7 6.6-4.4M8.7 13.3l6.6 4.4"></path></svg>';
+  return button;
+}
+
 function renderEvent(event) {
   const article = document.createElement('article');
   article.className = 'event-card reveal visible';
+  const title = event.title || 'Evento no Matchie';
+  const eventUrl = event.publicShareCode
+    ? `/events/${encodeURIComponent(event.publicShareCode)}/${encodeURIComponent(eventSlug(title))}`
+    : null;
 
   const cover = document.createElement('div');
   cover.className = 'event-cover';
@@ -141,11 +158,12 @@ function renderEvent(event) {
     cover.append(image);
   }
   addTextElement(cover, 'span', 'event-date', formatEventDate(event.startsAt));
+  if (eventUrl) cover.append(createEventShareButton(eventUrl, title));
   article.append(cover);
 
   const body = document.createElement('div');
   body.className = 'event-body';
-  addTextElement(body, 'h3', '', event.title || 'Evento no Matchie');
+  addTextElement(body, 'h3', '', title);
   const location = [event.venueName, event.city].filter(Boolean).join(' · ') || 'Local a confirmar';
   addTextElement(body, 'p', 'event-location', location);
   const meta = document.createElement('div');
@@ -161,9 +179,7 @@ function renderEvent(event) {
   body.append(tags);
   const link = document.createElement('a');
   link.className = 'event-cta';
-  link.href = event.publicShareCode
-    ? `/events/${encodeURIComponent(event.publicShareCode)}/${encodeURIComponent(eventSlug(event.title))}`
-    : '/#app';
+  link.href = eventUrl || '/#app';
   addTextElement(link, 'span', '', 'Ver evento');
   body.append(link);
   article.append(body);
