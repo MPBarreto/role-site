@@ -407,7 +407,7 @@ function pageShell({ title, description, image, canonical, body, structuredData 
     <title>${escapeHtml(title)}</title><meta name="description" content="${escapeHtml(description)}"><meta name="robots" content="${escapeHtml(robots)}"><link rel="canonical" href="${escapeHtml(canonical)}">
     <meta property="og:type" content="website"><meta property="og:site_name" content="Matchie"><meta property="og:locale" content="pt_BR"><meta property="og:title" content="${escapeHtml(title)}"><meta property="og:description" content="${escapeHtml(description)}"><meta property="og:url" content="${escapeHtml(canonical)}"><meta property="og:image" content="${escapeHtml(image)}"><meta property="og:image:alt" content="${escapeHtml(title)}">
     <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${escapeHtml(title)}"><meta name="twitter:description" content="${escapeHtml(description)}"><meta name="twitter:image" content="${escapeHtml(image)}">
-    <meta name="theme-color" content="#09070d">${jsonLd}<style>${styles}</style></head><body><div class="site">${body}</div><div class="share-toast" data-share-toast role="status" aria-live="polite"></div><script src="/event-sharing.js" defer></script></body></html>`;
+    <meta name="theme-color" content="#09070d"><link rel="icon" href="/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">${jsonLd}<style>${styles}</style></head><body><div class="site">${body}</div><div class="share-toast" data-share-toast role="status" aria-live="polite"></div><script src="/event-sharing.js" defer></script></body></html>`;
 }
 
 function eventShareButton(url, title) {
