@@ -1,0 +1,3 @@
+export const CONTACT_TOKEN_MIN_AGE_MS = 2500;
+export const CONTACT_TOKEN_MAX_AGE_MS = 2 * 60 * 60 * 1000;
+export const CONTACT_TOKEN_REFRESH_MARGIN_MS = 60 * 1000;

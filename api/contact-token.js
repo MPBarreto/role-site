@@ -1,4 +1,9 @@
 import crypto from 'node:crypto';
+import {
+  CONTACT_TOKEN_MAX_AGE_MS,
+  CONTACT_TOKEN_MIN_AGE_MS,
+  CONTACT_TOKEN_REFRESH_MARGIN_MS
+} from '../contact-token-policy.js';
 
 const SECRET = process.env.CONTACT_SECRET || 'dev-only-change-me-before-production';
 
@@ -18,5 +23,9 @@ export default async function handler(req, res) {
   const signature = sign(payload);
 
   res.setHeader('Cache-Control', 'no-store, max-age=0');
-  return res.status(200).json({ token: `${payload}.${signature}` });
+  return res.status(200).json({
+    token: `${payload}.${signature}`,
+    readyInMs: CONTACT_TOKEN_MIN_AGE_MS,
+    refreshInMs: CONTACT_TOKEN_MAX_AGE_MS - CONTACT_TOKEN_REFRESH_MARGIN_MS
+  });
 }

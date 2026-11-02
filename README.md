@@ -87,8 +87,9 @@ Variáveis necessárias:
 CONTACT_SECRET=uma-chave-longa-e-aleatoria
 WHATSAPP_NUMBER=5511999999999
 WHATSAPP_MESSAGE=Olá! Quero saber como levar o Matchie para minha casa de eventos.
-SITE_HOST=seu-dominio.com
 ```
+
+As rotas protegidas validam o host de `Origin` contra o host encaminhado pela requisição, acompanhando os domínios configurados no Vercel sem depender de um `SITE_HOST` fixo.
 
 ## E-mail de suporte protegido
 

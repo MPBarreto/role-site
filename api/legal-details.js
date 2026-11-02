@@ -1,4 +1,5 @@
 import crypto from 'node:crypto';
+import { sameRequestOrigin } from '../request-origin.js';
 
 const SECRET = process.env.CONTACT_SECRET || (process.env.NODE_ENV === 'production' ? '' : 'dev-only-change-me-before-production');
 const MIN_TOKEN_AGE_MS = 1800;
@@ -49,18 +50,6 @@ function rateLimit(ip) {
   return current.count <= MAX_REQUESTS_PER_WINDOW;
 }
 
-function originAllowed(req) {
-  const expectedHost = process.env.SITE_HOST || 'role.events';
-  const origin = req.headers.origin;
-  if (!origin) return true;
-  try {
-    const host = new URL(origin).host;
-    return host === expectedHost || host === `www.${expectedHost}`;
-  } catch {
-    return false;
-  }
-}
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -73,7 +62,7 @@ export default async function handler(req, res) {
 
   const ip = getIp(req);
   if (!rateLimit(ip)) return res.status(429).json({ error: 'Muitas tentativas.' });
-  if (!originAllowed(req)) return res.status(403).json({ error: 'Origem não autorizada.' });
+  if (!sameRequestOrigin(req, { allowMissingOrigin: true })) return res.status(403).json({ error: 'Origem não autorizada.' });
 
   const { token, website } = req.body || {};
   if (website) return res.status(400).json({ error: 'Solicitação inválida.' });

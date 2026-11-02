@@ -1,8 +1,11 @@
 import crypto from 'node:crypto';
+import {
+  CONTACT_TOKEN_MAX_AGE_MS,
+  CONTACT_TOKEN_MIN_AGE_MS
+} from '../contact-token-policy.js';
+import { sameRequestOrigin } from '../request-origin.js';
 
 const SECRET = process.env.CONTACT_SECRET || 'dev-only-change-me-before-production';
-const MIN_TOKEN_AGE_MS = 2500;
-const MAX_TOKEN_AGE_MS = 2 * 60 * 60 * 1000;
 const WINDOW_MS = 60 * 60 * 1000;
 const MAX_REQUESTS_PER_WINDOW = 6;
 const attempts = globalThis.__roleContactAttempts || new Map();
@@ -28,7 +31,7 @@ function verifyToken(token) {
   const expected = crypto.createHmac('sha256', SECRET).update(payload).digest('base64url');
   if (!timingSafeEqual(signature, expected)) return false;
   const age = Date.now() - Number(timestampRaw);
-  return age >= MIN_TOKEN_AGE_MS && age <= MAX_TOKEN_AGE_MS;
+  return age >= CONTACT_TOKEN_MIN_AGE_MS && age <= CONTACT_TOKEN_MAX_AGE_MS;
 }
 
 function getIp(req) {
@@ -49,18 +52,6 @@ function rateLimit(ip) {
   return current.count <= MAX_REQUESTS_PER_WINDOW;
 }
 
-function originAllowed(req) {
-  const expectedHost = process.env.SITE_HOST;
-  if (!expectedHost) return true;
-  const origin = req.headers.origin;
-  if (!origin) return true;
-  try {
-    return new URL(origin).host === expectedHost;
-  } catch {
-    return false;
-  }
-}
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -71,10 +62,10 @@ export default async function handler(req, res) {
 
   const ip = getIp(req);
   if (!rateLimit(ip)) return res.status(429).json({ error: 'Muitas tentativas. Tente novamente em alguns minutos.' });
-  if (!originAllowed(req)) return res.status(403).json({ error: 'Origem não autorizada.' });
+  if (!sameRequestOrigin(req, { allowMissingOrigin: true })) return res.status(403).json({ error: 'Origem não autorizada.' });
 
-  const { token, website } = req.body || {};
-  if (website) return res.status(400).json({ error: 'Solicitação inválida.' });
+  const { token, company } = req.body || {};
+  if (company) return res.status(400).json({ error: 'Solicitação inválida.' });
   if (!verifyToken(token)) return res.status(403).json({ error: 'Sessão inválida ou muito recente. Aguarde alguns segundos e tente novamente.' });
 
   const rawNumber = process.env.WHATSAPP_NUMBER || '';

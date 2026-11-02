@@ -1,8 +1,8 @@
 import config from './config.js';
 import { initializeTracking } from './tracking.js';
 
-const startedAt = Date.now();
 let contactToken = null;
+let contactTokenPromise = null;
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -237,13 +237,32 @@ async function loadEvents(retryButton = null) {
 }
 
 async function getContactToken() {
-  if (contactToken) return contactToken;
-  const response = await fetch(config.CONTACT_TOKEN_URL, { headers: { Accept: 'application/json' } });
-  if (!response.ok) throw new Error('token');
-  const payload = await response.json();
-  contactToken = payload.token;
-  return contactToken;
+  if (contactToken && Date.now() < contactToken.refreshAt) return contactToken.token;
+  contactToken = null;
+
+  if (!contactTokenPromise) {
+    contactTokenPromise = (async () => {
+      const response = await fetch(config.CONTACT_TOKEN_URL, { headers: { Accept: 'application/json' } });
+      if (!response.ok) throw new Error('token');
+      const payload = await response.json();
+      if (typeof payload.token !== 'string' || !Number.isFinite(payload.readyInMs) || !Number.isFinite(payload.refreshInMs)) {
+        throw new Error('token');
+      }
+      const waitMs = Math.max(0, payload.readyInMs);
+      if (waitMs > 0) await new Promise(resolve => setTimeout(resolve, waitMs));
+      contactToken = { token: payload.token, refreshAt: Date.now() + payload.refreshInMs };
+      return contactToken.token;
+    })();
+  }
+
+  try {
+    return await contactTokenPromise;
+  } finally {
+    contactTokenPromise = null;
+  }
 }
+
+void getContactToken().catch(() => {});
 
 async function openContact() {
   try {
@@ -251,7 +270,7 @@ async function openContact() {
     const response = await fetch(config.CONTACT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token, elapsedMs: Date.now() - startedAt, company: $('[data-honeypot]')?.value || '' })
+      body: JSON.stringify({ token, company: $('[data-honeypot]')?.value || '' })
     });
     if (!response.ok) throw new Error('contact');
     const payload = await response.json();
