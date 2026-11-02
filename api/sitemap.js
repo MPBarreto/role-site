@@ -9,7 +9,7 @@ export default async function sitemapHandler(req, res) {
     return res.status(405).send('Method not allowed.');
   }
 
-  const params = new URL(req.url || '/', 'https://role.events').searchParams;
+  const params = new URL(req.url || '/', 'https://matchie.com.br').searchParams;
   const set = params.get('set');
   if (set === 'pages') return sendXml(res, 200, staticPages(), CACHE_CONTROL);
 
@@ -89,10 +89,10 @@ function siteOrigin() {
   if (configured) {
     try {
       const url = new URL(configured);
-      if (url.protocol === 'https:' && ['role.events', 'www.role.events'].includes(url.hostname)) return 'https://role.events';
+      if (url.protocol === 'https:' && ['matchie.com.br', 'www.matchie.com.br'].includes(url.hostname)) return 'https://matchie.com.br';
     } catch { /* Use the production canonical origin below. */ }
   }
-  return 'https://role.events';
+  return 'https://matchie.com.br';
 }
 
 function slugify(value) {

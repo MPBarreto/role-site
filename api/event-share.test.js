@@ -7,7 +7,7 @@ const eventId = 'c2e7828b-5535-4cc5-8748-253a59392c6b';
 test('builds the canonical app event URL with ticket intent', () => {
   assert.equal(
     buildEventAppUrl(eventId),
-    `https://app.role.events/events/${eventId}?ingressos`,
+    `https://app.matchie.events/events/${eventId}?ingressos`,
   );
 });
 
@@ -21,7 +21,7 @@ test('supports an explicit app origin without changing the event id', () => {
 test('uses the canonical app origin for invalid configuration and rejects invalid event ids', () => {
   assert.equal(
     buildEventAppUrl(eventId, 'javascript:alert(1)'),
-    `https://app.role.events/events/${eventId}?ingressos`,
+    `https://app.matchie.events/events/${eventId}?ingressos`,
   );
   assert.equal(buildEventAppUrl('25846ead121040c5'), null);
 });
@@ -63,12 +63,12 @@ test('renders the event page CTA with the database event id and ticket intent', 
     await eventShareHandler({
       method: 'GET',
       url: '/api/event-share?shareCode=0123456789abcdef',
-      headers: { host: 'role.events' },
+      headers: { host: 'matchie.com.br' },
       query: { shareCode: '0123456789abcdef' },
     }, response);
 
     assert.equal(response.statusCode, 200);
-    assert.ok(response.body.includes('href="https://app.role.events/events/' + eventId + '?ingressos"'));
+    assert.ok(response.body.includes('href="https://app.matchie.events/events/' + eventId + '?ingressos"'));
     assert.match(response.body, /Compre pelo app/);
   } finally {
     globalThis.fetch = originalFetch;

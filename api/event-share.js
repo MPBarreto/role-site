@@ -1,7 +1,7 @@
 const EVENT_COVER_BUCKET = 'role-event-covers';
 const PUBLIC_CODE_PATTERN = /^[0-9a-f]{16}$/;
 const EVENT_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-const DEFAULT_APP_ORIGIN = 'https://app.role.events';
+const DEFAULT_APP_ORIGIN = 'https://app.matchie.events';
 const EVENT_CATEGORIES = [
   ['party', 'Festa'],
   ['concert', 'Show'],
@@ -75,7 +75,7 @@ function getOrigin(req) {
   const hostHeader = firstHeader(req.headers && (req.headers['x-forwarded-host'] || req.headers.host));
   const host = (hostHeader || '').split(',')[0].trim().toLowerCase();
   const hostname = host.replace(/:\d+$/, '');
-  if (hostname !== 'localhost') return 'https://role.events';
+  if (hostname !== 'localhost') return 'https://matchie.com.br';
   const forwardedProtocol = firstHeader(req.headers && req.headers['x-forwarded-proto']);
   const protocol = forwardedProtocol !== 'https' ? 'http' : 'https';
   return `${protocol}://${host}`;
@@ -91,7 +91,7 @@ function queryValue(req, key) {
   if (Array.isArray(value)) return value[0];
   if (typeof value === 'string') return value;
   try {
-    return new URL(req.url || '/', 'https://role.events').searchParams.get(key) || '';
+    return new URL(req.url || '/', 'https://matchie.com.br').searchParams.get(key) || '';
   } catch {
     return '';
   }
@@ -226,7 +226,7 @@ function directoryPage(rows, { origin, search, city, date, category, offset, sup
     description: 'Veja quem vai ao mesmo evento, dê match e comece a conversa antes da pista.',
     image: fallbackCover(origin),
     canonical,
-    body: `<header class="masthead"><a class="brand" href="/" aria-label="Matchie, página inicial"><img src="/assets/logo/matchie-branca-chama-gradiente.png" alt="Matchie" width="142" height="71"></a><a class="top-link" href="/#app">Baixar o app <span aria-hidden="true">↗</span></a></header>
+    body: `<header class="masthead"><a class="brand" href="/" aria-label="Matchie, página inicial"><img src="/assets/logo/matchie-branca-chama-gradiente.webp" alt="Matchie" width="142" height="71"></a><a class="top-link" href="/#app">Baixar o app <span aria-hidden="true">↗</span></a></header>
       <main class="directory-main"><section class="intro"><p class="eyebrow">DESCUBRA SEU PRÓXIMO EVENTO</p><h1>Garanta seu ingresso e o<em> próximo match.</em></h1><p class="lead">Veja quem vai ao mesmo evento, dê match e comece a conversa antes da festa.</p>
       <form class="search" action="/events" method="get"><div class="search-row"><label class="sr-only" for="event-search">Buscar evento, cidade ou casa de show</label><input id="event-search" name="q" value="${escapeHtml(search)}" placeholder="Evento, cidade ou casa de show"><button class="filter-toggle" id="event-filters-toggle" type="button" data-active-count="${activeFilterCount}" aria-label="${filterToggleLabel}" aria-expanded="${filtersOpen}" aria-controls="event-filters" title="Filtrar eventos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9m4 0h3M4 17h3m4 0h9"></path><circle cx="15" cy="7" r="2"></circle><circle cx="9" cy="17" r="2"></circle></svg>${activeFilterCount ? `<span class="filter-active-count" aria-hidden="true">${activeFilterCount}</span>` : ''}</button><button class="search-submit" type="submit">Buscar</button></div>
         <div class="filter-panel" id="event-filters"${filtersOpen ? '' : ' hidden'}><label for="event-city">Cidade<input id="event-city" name="city" value="${escapeHtml(city)}" placeholder="Ex.: Curitiba" autocomplete="address-level2"></label><label for="event-date">Data do evento<input id="event-date" name="date" type="date" value="${escapeHtml(date)}"></label><label for="event-category">Categoria<select id="event-category" name="category"><option value="">Todas as categorias</option>${categoryOptions}</select></label><a class="filter-clear" href="/events">Limpar filtros</a></div>
@@ -264,7 +264,7 @@ function eventPage(event, { origin, supabaseUrl, shareCode, priceMinor }) {
     : event.status === 'completed'
       ? '<p class="status">Este rolê já aconteceu. Confira outros eventos.</p>'
       : '';
-  const body = `<header class="masthead masthead-overlay"><a class="brand" href="/" aria-label="Matchie"><img src="/assets/logo/matchie-branca-chama-gradiente.png" alt="Matchie" width="142" height="71"></a><div class="masthead-actions">${eventShareButton(canonical, title)}<a class="top-link" href="/events">Todos os eventos <span aria-hidden="true">→</span></a></div></header>
+  const body = `<header class="masthead masthead-overlay"><a class="brand" href="/" aria-label="Matchie"><img src="/assets/logo/matchie-branca-chama-gradiente.webp" alt="Matchie" width="142" height="71"></a><div class="masthead-actions">${eventShareButton(canonical, title)}<a class="top-link" href="/events">Todos os eventos <span aria-hidden="true">→</span></a></div></header>
     <main class="event-main"><article class="event-hero"><img class="hero-image" src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(title)}"><div class="hero-shade"></div>
       <div class="hero-content"><p class="eyebrow">${escapeHtml(event.category || 'EVENTO')} · ${escapeHtml(event.city || '')}</p><h1>${escapeHtml(title)}</h1><p class="hero-description">${escapeHtml(description)}</p></div>
     </article><section class="event-details"><div class="details-copy">${state}
@@ -318,7 +318,7 @@ function siteFooter() {
 
   return `<footer class="site-footer">
     <div class="container footer-grid">
-      <div class="footer-brand"><a href="/" aria-label="Matchie — início"><img src="/assets/logo/matchie-branca-chama-gradiente.png" alt="Matchie"></a><p>Vai pelo evento.<br><span>Fica pelas conexões.</span></p></div>
+      <div class="footer-brand"><a href="/" aria-label="Matchie — início"><img src="/assets/logo/matchie-branca-chama-gradiente.webp" alt="Matchie"></a><p>Vai pelo evento.<br><span>Fica pelas conexões.</span></p></div>
       <div class="footer-column"><h2>Matchie</h2><a href="/events">Eventos</a><a href="/#como-funciona">Como funciona</a><a href="/#seguranca">Segurança</a><a href="/produtores">Para produtores</a></div>
       <div class="footer-column"${storesVisible ? '' : ' hidden'}><h2>App</h2>${appStoreLink}${googlePlayLink}</div>
       <div class="footer-column"><h2>Legal</h2><a href="/terms">Termos de Uso</a><a href="/privacy">Privacidade</a><a href="/seguranca-infantil">Segurança infantil</a><a href="/reembolsos">Reembolsos</a></div>
@@ -467,13 +467,13 @@ function sendPage(res, statusCode, html, cacheControl) {
 }
 
 function errorPage(title, description) {
-  const origin = 'https://role.events';
+  const origin = 'https://matchie.com.br';
   return pageShell({
     title: `${title} | Matchie`,
     description,
     image: fallbackCover(origin),
     canonical: `${origin}/events`,
-    body: `<main class="error-page"><a class="brand" href="/events" aria-label="Matchie"><img src="/assets/logo/matchie-branca-chama-gradiente.png" alt="Matchie" width="142" height="71"></a><h1>${escapeHtml(title)}</h1><p>${escapeHtml(description)}</p><a class="button" href="/events">Explorar eventos</a></main>${siteFooter()}`,
+    body: `<main class="error-page"><a class="brand" href="/events" aria-label="Matchie"><img src="/assets/logo/matchie-branca-chama-gradiente.webp" alt="Matchie" width="142" height="71"></a><h1>${escapeHtml(title)}</h1><p>${escapeHtml(description)}</p><a class="button" href="/events">Explorar eventos</a></main>${siteFooter()}`,
   });
 }
 

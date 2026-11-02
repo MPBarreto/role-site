@@ -1,3 +1,5 @@
+> Arquivo histórico de QA anterior ao rebrand para Matchie. As referências a Rolê e às artes do pitch descrevem a identidade vigente na data da revisão.
+
 # Revisão visual — site Rolê
 
 ## Direção aplicada

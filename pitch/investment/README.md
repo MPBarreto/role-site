@@ -1,3 +1,5 @@
+> **Arquivo histórico:** este deck registra a apresentação anterior ao rebrand para Matchie. As artes rasterizadas mantêm a identidade Rolê original como evidência; não representam materiais atuais do produto.
+
 # Rolê · Investor Pitch
 
 Unlisted presentation route: `/pitch/investment`.

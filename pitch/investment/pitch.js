@@ -32,7 +32,7 @@ function showSlide(index, { updateHash = true } = {}) {
   previousButton.disabled = current === 0;
   nextButton.disabled = current === slides.length - 1;
   if (updateHash) history.replaceState(null, '', `#slide-${current + 1}`);
-  document.title = `${shown} · Rolê — Investor Pitch`;
+  document.title = `${shown} · Arquivo histórico Rolê — Investor Pitch`;
 }
 
 previousButton.addEventListener('click', () => showSlide(current - 1));
