@@ -143,6 +143,24 @@ function renderEvent(event) {
   const eventUrl = event.publicShareCode
     ? `/events/${encodeURIComponent(event.publicShareCode)}/${encodeURIComponent(eventSlug(title))}`
     : null;
+  if (eventUrl) {
+    // Makes the card itself a keyboard-accessible shortcut to the public event page.
+    article.classList.add('event-card-clickable');
+    article.tabIndex = 0;
+    article.setAttribute('role', 'link');
+    article.setAttribute('aria-label', `Ver evento ${title}`);
+    const navigateToEvent = () => window.location.assign(eventUrl);
+    article.addEventListener('click', eventClick => {
+      // Keep the share button and the explicit CTA in control of their own actions.
+      if (eventClick.target.closest('a, button')) return;
+      navigateToEvent();
+    });
+    article.addEventListener('keydown', eventKey => {
+      if (eventKey.target !== article || (eventKey.key !== 'Enter' && eventKey.key !== ' ')) return;
+      eventKey.preventDefault();
+      navigateToEvent();
+    });
+  }
 
   const cover = document.createElement('div');
   cover.className = 'event-cover';
