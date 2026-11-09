@@ -541,5 +541,6 @@ const styles = `
   .share-toast{position:fixed;left:50%;bottom:26px;z-index:100;max-width:min(90vw,520px);padding:13px 18px;border:1px solid rgba(255,255,255,.16);border-radius:14px;background:#171119;box-shadow:0 24px 60px rgba(0,0,0,.45);color:#fff;text-align:center;transform:translate(-50%,140%);transition:transform .3s}
   .share-toast.show{transform:translate(-50%,0)}
   .event-category-badge{position:absolute;top:14px;left:14px;z-index:1;max-width:calc(100% - 28px);padding:7px 11px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(9,7,13,.82);backdrop-filter:blur(12px);color:#fff;font-size:11px;font-weight:850;line-height:1.2;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+  @media(max-width:600px){.event-grid{grid-template-columns:1fr;max-width:640px;margin-inline:auto}.event-card img{aspect-ratio:1.7}}
 
 `;

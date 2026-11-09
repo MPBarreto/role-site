@@ -244,6 +244,7 @@ async function loadEvents(retryButton = null) {
     const payload = await response.json();
     if (!response.ok || payload?.source === 'unavailable') throw new Error('events_unavailable');
     const events = Array.isArray(payload) ? payload : (payload.events || payload.data || []);
+    grid.classList.toggle('has-multiple-events', events.length > 1);
     if (!events.length) {
       renderEmptyEvents(grid);
       return;
