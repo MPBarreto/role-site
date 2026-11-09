@@ -32,7 +32,13 @@ if (nav && chapters && pending) {
       </div>
     </section>`).join('');
 
-  pending.innerHTML = pendingFeatures.map((feature, index) => `<span><i>${String(index + 1).padStart(2, '0')}</i>${feature}</span>`).join('');
+  pending.innerHTML = pendingFeatures.map((feature, index) => `
+    <article class="tutorial-next-feature">
+      <div class="tutorial-next-feature-heading"><i>${String(index + 1).padStart(2, '0')}</i><h3>${feature.title}</h3></div>
+      <p>${feature.description}</p>
+      <ul>${feature.actions.map(action => `<li>${action}</li>`).join('')}</ul>
+      <aside>${feature.tip}</aside>
+    </article>`).join('');
 
   const sections = [...document.querySelectorAll('.tutorial-chapter[id]')];
   const links = [...nav.querySelectorAll('a[href^="#"]')];

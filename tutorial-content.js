@@ -104,12 +104,58 @@ export const tutorialSections = [
 ];
 
 export const pendingFeatures = [
-  'Tickets',
-  'Deslizar / Acender',
-  'Match',
-  'Chat',
-  'Perfil',
-  'Notificações',
-  'Segurança',
-  'Configurações'
+  {
+    title: 'Tickets',
+    description: 'A carteira organiza ingressos próximos, passados e cancelados. Abra um ingresso para consultar os dados do evento e o QR de acesso.',
+    actions: ['Abrir ingresso', 'Ver pedido e comprovante', 'Ativar ou editar o modo social'],
+    tip: 'Transferência e reembolso seguem as regras e os prazos do pedido e do evento.'
+  },
+  {
+    title: 'Deslizar e Acender',
+    description: 'Conheça participantes elegíveis dos eventos em que você ativou o modo social. Apagar remove o perfil atual do deck; Acender demonstra interesse.',
+    actions: ['Filtrar por evento, cidade ou data', 'Abrir perfil', 'Apagar', 'Acender'],
+    tip: 'A prévia de demonstração não registra decisões. No app, a visibilidade depende do ingresso e das preferências sociais do evento.'
+  },
+  {
+    title: 'Match',
+    description: 'Quando duas pessoas demonstram interesse uma pela outra, o Matchie cria um match e permite iniciar uma conversa.',
+    actions: ['Ver matches', 'Buscar por pessoa ou evento', 'Abrir perfil ou conversa'],
+    tip: 'Um match depende do interesse mútuo; sem matches, a tela oferece um atalho para continuar descobrindo pessoas.'
+  },
+  {
+    title: 'Chat',
+    description: 'As conversas aparecem depois de um match. Na conversa, participantes podem trocar mensagens e consultar as informações disponíveis sobre o rolê.',
+    actions: ['Ler e enviar mensagens', 'Compartilhar mídia compatível', 'Abrir informações da conversa'],
+    tip: 'O chat fica disponível após o interesse mútuo no mesmo evento. A rota de demonstração usa uma conversa fictícia.'
+  },
+  {
+    title: 'Perfil',
+    description: 'Consulte e atualize seus dados, fotos e interesses. A área também reúne atalhos para ingressos, pagamentos, notificações, privacidade, segurança e suporte.',
+    actions: ['Editar informações e fotos', 'Abrir atalhos da conta', 'Consultar dados e preferências'],
+    tip: 'O que outras pessoas podem ver depende das suas configurações de privacidade e visibilidade.'
+  },
+  {
+    title: 'Notificações',
+    description: 'A caixa de entrada separa novidades de matches, chats, eventos e segurança. Preferências permitem ajustar push, prévia, som, vibração, badges, e-mail e categorias.',
+    actions: ['Filtrar por categoria', 'Abrir uma notificação', 'Ajustar preferências e modo silencioso'],
+    tip: 'A disponibilidade de push também depende das permissões do dispositivo.'
+  },
+  {
+    title: 'Segurança',
+    description: 'Revise as proteções da conta, configure a autenticação em duas etapas e consulte dispositivos, sessões e opções de denúncia.',
+    actions: ['Configurar duas etapas', 'Revisar dispositivos e sessões', 'Consultar central de segurança'],
+    tip: 'A exclusão da conta é uma ação separada e pode encerrar o acesso aos dados, matches e conversas.'
+  },
+  {
+    title: 'Privacidade e ajustes da conta',
+    description: 'Não há uma tela única chamada Configurações para participantes. Os atalhos da conta levam a áreas separadas para visibilidade, interações, pessoas bloqueadas, dados, notificações e pagamentos.',
+    actions: ['Gerenciar visibilidade do perfil', 'Consultar regras de interação', 'Revisar bloqueios e permissões de dados'],
+    tip: 'As opções disponíveis variam conforme a versão do app e a situação da conta.'
+  },
+  {
+    title: 'Central do produtor',
+    description: 'Contas de produtor têm uma área própria para administrar organizações, eventos, participantes, cupons e check-in.',
+    actions: ['Gerenciar eventos e locais', 'Acompanhar participantes', 'Validar ingressos no check-in'],
+    tip: 'Esta área é exclusiva para contas com acesso de produtor.'
+  }
 ];
