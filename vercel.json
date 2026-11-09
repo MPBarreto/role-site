@@ -94,6 +94,10 @@
       "destination": "/produtores.html"
     },
     {
+      "source": "/tutorial",
+      "destination": "/tutorial.html"
+    },
+    {
       "source": "/pitch/investment",
       "destination": "/pitch/investment/index.html"
     }

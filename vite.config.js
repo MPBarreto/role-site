@@ -15,6 +15,7 @@ export default defineConfig({
         childSafety: resolve(projectRoot, 'child-safety.html'),
         refunds: resolve(projectRoot, 'reembolsos.html'),
         producers: resolve(projectRoot, 'produtores.html'),
+        tutorial: resolve(projectRoot, 'tutorial.html'),
         investmentPitch: resolve(projectRoot, 'pitch/investment/index.html')
       }
     }
