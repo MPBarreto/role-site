@@ -100,62 +100,149 @@ export const tutorialSections = [
         tip: 'Este guia para no acesso: nenhuma compra ou pagamento foi concluído.'
       }
     ]
+  },
+  {
+    id: 'tickets',
+    nav: 'Tickets',
+    number: '04',
+    eyebrow: 'Depois da compra',
+    title: 'Acompanhe seus ingressos na carteira.',
+    intro: 'Os tickets ficam na conta depois da confirmação do pagamento. A carteira separa os próximos eventos, os passados e os cancelados.',
+    screens: [
+      {
+        id: 'carteira-de-tickets',
+        title: 'Consulte seus tickets',
+        description: 'Na carteira, confira os ingressos por situação. Quando houver um ingresso confirmado, abra-o para consultar os dados do pedido e as informações de entrada disponíveis.',
+        image: '/assets/tutorial/matchie/screens/matchie-tickets-empty-iphone16.png',
+        imageAlt: 'Tela Meus ingressos do Matchie, com abas Próximos, Passados e Cancelados e uma mensagem de que os ingressos aparecem após a confirmação do pagamento.',
+        actions: ['Ver próximos ingressos', 'Consultar passados', 'Ver cancelados'],
+        tip: 'Esta conta de demonstração não tem pedidos; por isso a captura mostra a carteira vazia. Nenhuma compra foi realizada para este guia.',
+        captureLabel: 'Conta de demonstração · iPhone 16 emulado'
+      }
+    ]
+  },
+  {
+    id: 'deslizar',
+    nav: 'Deslizar',
+    number: '05',
+    eyebrow: 'Conhecer pessoas',
+    title: 'Descubra quem vai aos mesmos rolês.',
+    intro: 'Com o modo social disponível no evento, a área Deslizar apresenta perfis de participantes elegíveis para que você escolha se quer demonstrar interesse.',
+    screens: [
+      {
+        id: 'deslizar-e-acender',
+        title: 'Demonstre interesse no seu ritmo',
+        description: 'A tela reúne perfis ligados aos eventos elegíveis. Use os controles para passar por um perfil ou demonstrar interesse com Acender.',
+        image: '/assets/tutorial/matchie/screens/matchie-swipe-empty-iphone16.png',
+        imageAlt: 'Estado vazio do Deslizar no Matchie, com uma mensagem sobre encontrar participantes dos mesmos eventos e botão para encontrar um evento.',
+        actions: ['Filtrar por evento', 'Abrir um perfil', 'Apagar ou passar', 'Acender para demonstrar interesse'],
+        tip: 'É preciso ter um ingresso elegível e o modo social liberado para o evento. A captura mostra o estado sem participantes disponíveis.',
+        captureLabel: 'Conta de demonstração · iPhone 16 emulado'
+      }
+    ]
+  },
+  {
+    id: 'matches',
+    nav: 'Match',
+    number: '06',
+    eyebrow: 'Interesse mútuo',
+    title: 'O Match acontece quando o interesse é recíproco.',
+    intro: 'Quando duas pessoas demonstram interesse uma pela outra no contexto de um evento, o Matchie registra o match e abre caminho para conversar.',
+    screens: [
+      {
+        id: 'lista-de-matches',
+        title: 'Encontre seus matches',
+        description: 'A aba Matches reúne as conexões confirmadas. Toque na foto para abrir o perfil e iniciar uma conversa.',
+        image: '/assets/tutorial/matchie/screens/matchie-matches-empty-iphone16.png',
+        imageAlt: 'Aba Matches do Matchie no estado vazio, explicando que o match surge com interesse mútuo e oferecendo um atalho para Deslizar.',
+        actions: ['Ver matches confirmados', 'Buscar por pessoa ou evento', 'Abrir perfil ou conversa'],
+        tip: 'Sem interesse mútuo, a lista permanece vazia. O botão Deslizar leva de volta à descoberta de participantes.',
+        captureLabel: 'Conta de demonstração · iPhone 16 emulado'
+      }
+    ]
+  },
+  {
+    id: 'chat',
+    nav: 'Chat',
+    number: '07',
+    eyebrow: 'Conversar',
+    title: 'Continue a conexão antes do próximo rolê.',
+    intro: 'As conversas aparecem depois de um match. Use o chat para trocar mensagens e combinar detalhes com a outra pessoa.',
+    screens: [
+      {
+        id: 'lista-de-conversas',
+        title: 'Abra suas conversas',
+        description: 'A lista reúne as conversas iniciadas a partir de matches. Ao abrir uma conversa, você pode enviar mensagens e consultar as informações disponíveis do evento.',
+        image: '/assets/tutorial/matchie/screens/matchie-chat-empty-iphone16.png',
+        imageAlt: 'Aba Chat do Matchie no estado vazio, com a mensagem de que uma conversa fica disponível após interesse mútuo no mesmo rolê.',
+        actions: ['Ver conversas', 'Abrir mensagens', 'Consultar informações do rolê'],
+        tip: 'É necessário um match relacionado ao mesmo evento para iniciar uma conversa. Esta captura não contém mensagens ou perfis.',
+        captureLabel: 'Conta de demonstração · iPhone 16 emulado'
+      }
+    ]
+  },
+  {
+    id: 'perfil-configuracoes',
+    nav: 'Perfil e ajustes',
+    number: '08',
+    eyebrow: 'Sua conta',
+    title: 'Mantenha seus dados e preferências em dia.',
+    intro: 'Na aba Perfil, atualize sua apresentação e encontre atalhos para tickets, pagamentos, notificações, privacidade, segurança e suporte.',
+    screens: [],
+    details: {
+      title: 'Atalhos da conta',
+      description: 'As opções de conta ficam distribuídas em áreas próprias; não existe uma tela única chamada Configurações. Edite seu perfil, revise quem pode ver você e acesse os controles de segurança quando precisar.',
+      actions: ['Editar dados e fotos', 'Gerenciar tickets e pagamentos', 'Ajustar privacidade e notificações', 'Abrir segurança e suporte'],
+      tip: 'A visibilidade do perfil e as opções sociais dependem das preferências escolhidas para cada evento.'
+    }
+  },
+  {
+    id: 'notificacoes',
+    nav: 'Notificações',
+    number: '09',
+    eyebrow: 'Ficar por dentro',
+    title: 'Escolha como receber novidades.',
+    intro: 'A central de notificações separa avisos de matches, chats, eventos e segurança. Nas preferências, ajuste como e quando o app pode avisar você.',
+    screens: [
+      {
+        id: 'preferencias-notificacoes',
+        title: 'Ajuste as notificações',
+        description: 'Configure push, prévia na tela bloqueada, som, vibração, badges, resumo por e-mail, modo silencioso e categorias de avisos.',
+        image: '/assets/tutorial/matchie/screens/matchie-notification-preferences-iphone16.png',
+        imageAlt: 'Tela Preferências de notificações do Matchie com opções de push, prévia, som, vibração, resumo por e-mail, modo silencioso e categorias.',
+        actions: ['Ativar ou desativar push', 'Ajustar som e prévia', 'Definir modo silencioso', 'Escolher categorias'],
+        tip: 'A opção de push também depende da permissão de notificações do dispositivo. Os valores visíveis na captura são os da conta de demonstração.',
+        captureLabel: 'Conta de demonstração · iPhone 16 emulado'
+      }
+    ]
+  },
+  {
+    id: 'seguranca',
+    nav: 'Segurança',
+    number: '10',
+    eyebrow: 'Conta protegida',
+    title: 'Encontre ajuda e recursos de segurança.',
+    intro: 'A área Segurança reúne atalhos para proteção da conta e uma central com orientações sobre acesso, privacidade, denúncias e encontros seguros.',
+    screens: [
+      {
+        id: 'central-seguranca',
+        title: 'Use a Central de segurança',
+        description: 'A central reúne atalhos de ajuda para login e recuperação de conta, privacidade, assédio e golpes, além de guias de bloqueio, denúncia e encontros seguros.',
+        image: '/assets/tutorial/matchie/screens/matchie-security-center-iphone16.png',
+        imageAlt: 'Central de segurança do Matchie, com acesso rápido a ajuda de login, recuperação de conta, privacidade, combate a assédio, golpes e suporte.',
+        actions: ['Consultar ajuda de login', 'Recuperar a conta', 'Aprender a bloquear ou denunciar', 'Falar com o suporte'],
+        tip: 'Na tela Segurança da conta também há opções de autenticação em duas etapas, dispositivos e sessões. Revise-as sem compartilhar códigos de acesso.',
+        captureLabel: 'Conta autenticada · iPhone 16 emulado'
+      }
+    ]
   }
 ];
 
 export const pendingFeatures = [
   {
-    title: 'Tickets',
-    description: 'A carteira organiza ingressos próximos, passados e cancelados. Abra um ingresso para consultar os dados do evento e o QR de acesso.',
-    actions: ['Abrir ingresso', 'Ver pedido e comprovante', 'Ativar ou editar o modo social'],
-    tip: 'Transferência e reembolso seguem as regras e os prazos do pedido e do evento.'
-  },
-  {
-    title: 'Deslizar e Acender',
-    description: 'Conheça participantes elegíveis dos eventos em que você ativou o modo social. Apagar remove o perfil atual do deck; Acender demonstra interesse.',
-    actions: ['Filtrar por evento, cidade ou data', 'Abrir perfil', 'Apagar', 'Acender'],
-    tip: 'A prévia de demonstração não registra decisões. No app, a visibilidade depende do ingresso e das preferências sociais do evento.'
-  },
-  {
-    title: 'Match',
-    description: 'Quando duas pessoas demonstram interesse uma pela outra, o Matchie cria um match e permite iniciar uma conversa.',
-    actions: ['Ver matches', 'Buscar por pessoa ou evento', 'Abrir perfil ou conversa'],
-    tip: 'Um match depende do interesse mútuo; sem matches, a tela oferece um atalho para continuar descobrindo pessoas.'
-  },
-  {
-    title: 'Chat',
-    description: 'As conversas aparecem depois de um match. Na conversa, participantes podem trocar mensagens e consultar as informações disponíveis sobre o rolê.',
-    actions: ['Ler e enviar mensagens', 'Compartilhar mídia compatível', 'Abrir informações da conversa'],
-    tip: 'O chat fica disponível após o interesse mútuo no mesmo evento. A rota de demonstração usa uma conversa fictícia.'
-  },
-  {
-    title: 'Perfil',
-    description: 'Consulte e atualize seus dados, fotos e interesses. A área também reúne atalhos para ingressos, pagamentos, notificações, privacidade, segurança e suporte.',
-    actions: ['Editar informações e fotos', 'Abrir atalhos da conta', 'Consultar dados e preferências'],
-    tip: 'O que outras pessoas podem ver depende das suas configurações de privacidade e visibilidade.'
-  },
-  {
-    title: 'Notificações',
-    description: 'A caixa de entrada separa novidades de matches, chats, eventos e segurança. Preferências permitem ajustar push, prévia, som, vibração, badges, e-mail e categorias.',
-    actions: ['Filtrar por categoria', 'Abrir uma notificação', 'Ajustar preferências e modo silencioso'],
-    tip: 'A disponibilidade de push também depende das permissões do dispositivo.'
-  },
-  {
-    title: 'Segurança',
-    description: 'Revise as proteções da conta, configure a autenticação em duas etapas e consulte dispositivos, sessões e opções de denúncia.',
-    actions: ['Configurar duas etapas', 'Revisar dispositivos e sessões', 'Consultar central de segurança'],
-    tip: 'A exclusão da conta é uma ação separada e pode encerrar o acesso aos dados, matches e conversas.'
-  },
-  {
-    title: 'Privacidade e ajustes da conta',
-    description: 'Não há uma tela única chamada Configurações para participantes. Os atalhos da conta levam a áreas separadas para visibilidade, interações, pessoas bloqueadas, dados, notificações e pagamentos.',
-    actions: ['Gerenciar visibilidade do perfil', 'Consultar regras de interação', 'Revisar bloqueios e permissões de dados'],
-    tip: 'As opções disponíveis variam conforme a versão do app e a situação da conta.'
-  },
-  {
-    title: 'Central do produtor',
-    description: 'Contas de produtor têm uma área própria para administrar organizações, eventos, participantes, cupons e check-in.',
-    actions: ['Gerenciar eventos e locais', 'Acompanhar participantes', 'Validar ingressos no check-in'],
-    tip: 'Esta área é exclusiva para contas com acesso de produtor.'
+    title: 'Área do produtor',
+    description: 'Contas autorizadas de produtor têm atalhos próprios para administrar a organização e os eventos. Este fluxo requer acesso de produtor e ainda não tem uma captura segura incluída no guia.',
+    actions: ['Gerenciar eventos', 'Acompanhar participantes', 'Fazer check-in'],
+    tip: 'A área é exclusiva para contas com permissão de produtor.'
   }
 ];
