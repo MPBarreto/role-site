@@ -8,7 +8,7 @@ Em 8 de novembro de 2026 foram capturadas telas de boas-vindas, cadastro e login
 
 ## Capturas autenticadas
 
-Em 9 de novembro de 2026 foram capturados os estados vazios de tickets, Deslizar, Matches e Chat, além das preferências de notificações e da Central de segurança. As capturas usam a conta QA de demonstração sem mostrar identificador, cidade, mensagens, participantes, dispositivos ou detalhes de pedidos. A carteira estava vazia e nenhuma transação foi feita.
+Em 9 de novembro de 2026 foram capturados os estados vazios de tickets, Deslizar, Matches e Chat, além das preferências de notificações, da Central de segurança e da área Privacidade. As capturas usam a conta QA de demonstração sem mostrar identificador, cidade, mensagens, participantes, dispositivos ou detalhes de pedidos. A carteira estava vazia e nenhuma transação foi feita.
 
 A tela de perfil autenticado foi excluída porque exibia informações específicas da conta. A caixa de entrada de notificações e a tela de dispositivos também não foram incluídas porque mostram dados de segurança particulares.
 

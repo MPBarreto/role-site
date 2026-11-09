@@ -235,6 +235,26 @@ export const tutorialSections = [
         captureLabel: 'Conta autenticada · iPhone 16 emulado'
       }
     ]
+  },
+  {
+    id: 'configuracoes',
+    nav: 'Configurações',
+    number: '11',
+    eyebrow: 'Preferências da conta',
+    title: 'Ajuste como você aparece e interage.',
+    intro: 'Os controles da conta ficam organizados por área. Em Privacidade, revise sua visibilidade, as regras de interação, os bloqueios e o uso dos dados.',
+    screens: [
+      {
+        id: 'ajustes-de-privacidade',
+        title: 'Revise suas configurações de privacidade',
+        description: 'A área Privacidade reúne opções para escolher quem encontra seu perfil, quando conexões e conversas ficam disponíveis, além de gerenciar pessoas bloqueadas e permissões de dados.',
+        image: '/assets/tutorial/matchie/screens/matchie-privacy-settings-iphone16.png',
+        imageAlt: 'Tela Privacidade do Matchie com atalhos para visibilidade do perfil, regras de interação, pessoas bloqueadas e dados e permissões.',
+        actions: ['Definir visibilidade do perfil', 'Consultar regras de interação', 'Gerenciar pessoas bloqueadas', 'Revisar dados e permissões'],
+        tip: 'A visibilidade no Deslizar depende também de um ingresso elegível e da liberação social do evento.',
+        captureLabel: 'Conta autenticada · iPhone 16 emulado'
+      }
+    ]
   }
 ];
 
