@@ -1,6 +1,6 @@
 const config = {
   APP_STORE_URL: import.meta.env.VITE_APP_STORE_URL || '',
-  GOOGLE_PLAY_URL: import.meta.env.VITE_GOOGLE_PLAY_URL || '',
+  GOOGLE_PLAY_URL: import.meta.env.VITE_GOOGLE_PLAY_URL || 'https://play.google.com/store/apps/details?id=com.matchie.mobile',
   SHOW_APP_STORE_BADGE: import.meta.env.VITE_SHOW_APP_STORE_BADGE !== 'false',
   SHOW_GOOGLE_PLAY_BADGE: import.meta.env.VITE_SHOW_GOOGLE_PLAY_BADGE !== 'false',
   PRODUCER_SIGNUP_URL: import.meta.env.VITE_PRODUCER_SIGNUP_URL || '',

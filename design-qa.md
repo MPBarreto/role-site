@@ -68,3 +68,22 @@
 - `npm run build`: aprovado.
 
 **final result: passed** — as 12 composições e a navegação foram verificadas; o gráfico financeiro do slide 11 agora reflete a planilha indicada.
+
+## Matchie — seção “Seu rolê, sua vibe” — 13/11/2026
+
+**Referência e capturas**
+
+- Referência aprovada: `/Users/mb/.codex/generated_images/01a1d77b-7a78-7933-b7c2-9444a6392424/exec-7a67cb6d-09a7-4cb6-8089-2200fbcab435.png` (1672 × 941 px).
+- Desktop: `/private/tmp/matchie-vibes-qa.png` (1672 × 941 px), comparada lado a lado com a referência.
+- Mobile: `/private/tmp/matchie-vibes-mobile-final.png` (500 × 1082 px). O Chrome headless manteve viewport CSS de 500 × 757 px mesmo com solicitação de 390 × 844; a quebra em coluna única da faixa mobile foi conferida nessa largura.
+
+**Resultado**
+
+- A seção usa o fundo escuro, gradiente rosa/coral, tipografia e cards do sistema visual do site. O container segue a largura já usada pelas outras seções.
+- Os três cards têm imagem horizontal e proporção consistente; “Fazer amigos” mostra dois homens. Cada intenção inclui um texto curto.
+- No mobile, o título divide em duas linhas e os cards passam para uma coluna. A viewport medida não apresentou largura de página além dos 500 px.
+- O título principal, os metadados sociais e a seção “Como funciona” também comunicam que a conexão no Matchie pode seguir diferentes intenções.
+- O badge do Google Play abre a página oficial do Matchie (`com.matchie.mobile`), confirmada na loja em 13/11/2026.
+- `git diff --check`: aprovado. Build e testes não foram executados.
+
+**final result: passed** — a seção aprovada foi implementada e conferida em desktop e em viewport mobile de 500 px; a captura exata em 390 px não ficou disponível pelo Chrome headless deste ambiente.

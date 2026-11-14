@@ -28,11 +28,10 @@ As rotas `/api/*` continuam como Vercel Functions. O servidor do Vite não execu
 
 ## Configuração das lojas
 
-Configure as URLs oficiais no arquivo local `.env` (ignorado pelo Git) e também nos ambientes Preview/Production da Vercel. Os badges da App Store e do Google Play aparecem por padrão:
+O badge do Google Play já aponta para a página oficial do Matchie. Configure `VITE_GOOGLE_PLAY_URL` no `.env` local (ignorado pelo Git) ou nos ambientes Preview/Production da Vercel apenas se precisar substituir esse destino. Para a App Store, configure a URL oficial para ativar o link:
 
 ```env
 VITE_APP_STORE_URL=https://apps.apple.com/...
-VITE_GOOGLE_PLAY_URL=https://play.google.com/store/apps/...
 ```
 
 Os controles continuam independentes: defina `VITE_SHOW_APP_STORE_BADGE=false` ou `VITE_SHOW_GOOGLE_PLAY_BADGE=false` para ocultar uma loja. Nunca versione o arquivo `.env`; use as variáveis de ambiente da Vercel para os deploys.
@@ -97,7 +96,7 @@ Configure `EMAIL_SUPORTE` e `CONTACT_SECRET` como variáveis **server-only** em 
 
 ## Antes de publicar
 
-- Inserir URLs oficiais da App Store e Google Play em `.env.local`.
+- Inserir a URL oficial da App Store em `.env.local` quando estiver disponível. O Google Play já tem destino padrão no código.
 - Configurar as variáveis do WhatsApp e do Supabase no ambiente server-side.
 - Substituir as páginas legais provisórias pelo texto jurídico aprovado.
 

@@ -114,7 +114,7 @@ export const tutorialSections = [
         title: 'Consulte seus tickets',
         description: 'Na carteira, confira os ingressos por situação. Quando houver um ingresso confirmado, abra-o para consultar os dados do pedido e as informações de entrada disponíveis.',
         image: '/assets/telas/ingresso/igresso-5.webp',
-        imageAlt: 'Mockup da carteira Meus ingressos do Matchie, com ingressos ativos, próximos eventos e ações rápidas.',
+        imageAlt: 'Tela Meus ingressos do Matchie, com abas Próximos, Passados e Cancelados e uma mensagem de que os ingressos aparecem após a confirmação do pagamento.',
         actions: ['Ver próximos ingressos', 'Consultar passados', 'Ver cancelados'],
         tip: 'Os eventos e ingressos exibidos são conteúdo de demonstração do mockup.',
         captureLabel: 'Mockup de interface'
@@ -134,7 +134,7 @@ export const tutorialSections = [
         title: 'Demonstre interesse no seu ritmo',
         description: 'A tela reúne perfis ligados aos eventos elegíveis. Use os controles para passar por um perfil ou demonstrar interesse com Acender.',
         image: '/assets/telas/deslizar.webp',
-        imageAlt: 'Mockup da tela Deslizar do Matchie, com perfil de participante, evento, controles de interesse e navegação inferior.',
+        imageAlt: 'Estado vazio do Deslizar no Matchie, com uma mensagem sobre encontrar participantes dos mesmos eventos e botão para encontrar um evento.',
         actions: ['Filtrar por evento', 'Abrir um perfil', 'Apagar ou passar', 'Acender para demonstrar interesse'],
         tip: 'É preciso ter um ingresso elegível e o modo social liberado para o evento. O perfil e o evento exibidos são conteúdo de demonstração do mockup.',
         captureLabel: 'Mockup de interface'
@@ -153,8 +153,8 @@ export const tutorialSections = [
         id: 'lista-de-matches',
         title: 'Encontre seus matches',
         description: 'A aba Matches reúne as conexões confirmadas. Toque na foto para abrir o perfil e iniciar uma conversa.',
-        image: '/assets/telas/matches.webp',
-        imageAlt: 'Mockup da aba Matches do Matchie, com uma grade de perfis e detalhes de uma conexão por interesse mútuo.',
+        image: '/assets/telas/Match/matches.webp',
+        imageAlt: 'Aba Matches do Matchie no estado vazio, explicando que o match surge com interesse mútuo e oferecendo um atalho para Deslizar.',
         actions: ['Ver matches confirmados', 'Buscar por pessoa ou evento', 'Abrir perfil ou conversa'],
         tip: 'O evento e os perfis exibidos são conteúdo de demonstração do mockup.',
         captureLabel: 'Mockup de interface'
@@ -173,8 +173,8 @@ export const tutorialSections = [
         id: 'lista-de-conversas',
         title: 'Abra suas conversas',
         description: 'A lista reúne as conversas iniciadas a partir de matches. Ao abrir uma conversa, você pode enviar mensagens e consultar as informações disponíveis do evento.',
-        image: '/assets/telas/chat/chat-1.webp',
-        imageAlt: 'Mockup de conversa no Chat do Matchie, com mensagens, informações do evento e campo para enviar mensagem.',
+        image: 'public/assets/telas/chat/chat-1.webp',
+        imageAlt: 'Aba Chat do Matchie no estado vazio, com a mensagem de que uma conversa fica disponível após interesse mútuo no mesmo rolê.',
         actions: ['Ver conversas', 'Abrir mensagens', 'Consultar informações do rolê'],
         tip: 'A conversa e os participantes exibidos são conteúdo de demonstração do mockup.',
         captureLabel: 'Mockup de interface'
