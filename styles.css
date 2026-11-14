@@ -448,3 +448,27 @@
 .event-share-button:focus-visible{outline:2px solid #ff78ad;outline-offset:3px}
 .event-share-button svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .event-cover .event-share-button{top:15px;right:15px}
+
+.vibes{scroll-margin-top:90px;background:radial-gradient(circle at 10% 10%,rgba(138,77,255,.12),transparent 30%),#0c090f}
+.vibe-heading{max-width:900px;margin-bottom:42px}
+.vibe-heading p:not(.eyebrow){max-width:830px}
+.vibe-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.vibe-card{min-width:0}
+.vibe-cover{height:270px}
+.vibe-description{margin:0;color:var(--muted);font-size:.92rem;line-height:1.5}
+@media(max-width:1040px) and (min-width:761px){
+  .vibe-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .vibe-card:last-child{grid-column:1/-1;width:calc((100% - 20px)/2);justify-self:center}
+  .vibe-cover{height:clamp(220px,28vw,270px)}
+}
+@media(max-width:760px){
+  .vibe-heading{margin-bottom:30px}
+  .vibe-heading h2 span{display:block}
+  .vibe-grid{grid-template-columns:1fr;gap:14px}
+  .vibe-card:last-child{grid-column:auto;width:auto}
+  .vibe-cover{height:clamp(210px,60vw,300px)}
+  .vibe-body{padding:18px}
+}
+@media(max-width:430px){
+  .vibe-cover{height:clamp(210px,62vw,260px)}
+}
