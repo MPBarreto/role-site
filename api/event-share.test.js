@@ -26,7 +26,25 @@ test('uses the canonical app origin for invalid configuration and rejects invali
   assert.equal(buildEventAppUrl('25846ead121040c5'), null);
 });
 
-test('renders the event page CTA with the database event id and ticket intent', async () => {
+test('renders the event page CTA and venue map after the event description', async () => {
+  const response = await renderEventSharePage('org-1/venues/venue-1/venue-map/map-1.jpg');
+
+  assert.equal(response.statusCode, 200);
+  assert.ok(response.body.includes('href="https://app.matchie.events/events/' + eventId + '?ingressos"'));
+  assert.match(response.body, /Compre pelo app/);
+  assert.match(response.body, /<h2>Sobre o evento<\/h2>[\s\S]*<section class="venue-map"/);
+  assert.match(response.body, /Mapa do local/);
+  assert.match(response.body, /src="https:\/\/database\.example\/storage\/v1\/object\/public\/role-event-covers\/org-1\/venues\/venue-1\/venue-map\/map-1\.jpg"/);
+});
+
+test('omits the venue map section when the venue has no map', async () => {
+  const response = await renderEventSharePage(null);
+
+  assert.equal(response.statusCode, 200);
+  assert.doesNotMatch(response.body, /class="venue-map"/);
+});
+
+async function renderEventSharePage(venueMapImagePath) {
   const originalFetch = globalThis.fetch;
   const originalEnvironment = {
     supabaseUrl: process.env.SUPABASE_URL,
@@ -36,7 +54,7 @@ test('renders the event page CTA with the database event id and ticket intent', 
   process.env.SUPABASE_PUBLISHABLE_KEY = 'test-publishable-key';
 
   globalThis.fetch = async (url) => {
-    const rpc = String(url).split('/').at(-1);
+    const rpc = new URL(url).pathname.split('/').at(-1);
     const responseBody = rpc === 'get_public_event_share_page'
       ? [{
         event_id: eventId,
@@ -47,7 +65,9 @@ test('renders the event page CTA with the database event id and ticket intent', 
         currency: 'BRL',
         public_share_code: '0123456789abcdef',
       }]
-      : [{ id: eventId, lowest_price_minor: 10000 }];
+      : rpc === 'get_public_event_detail'
+        ? [{ venue_map_image_path: venueMapImagePath }]
+        : [{ id: eventId, lowest_price_minor: 10000 }];
     return { ok: true, json: async () => responseBody };
   };
 
@@ -66,10 +86,7 @@ test('renders the event page CTA with the database event id and ticket intent', 
       headers: { host: 'matchie.events' },
       query: { shareCode: '0123456789abcdef' },
     }, response);
-
-    assert.equal(response.statusCode, 200);
-    assert.ok(response.body.includes('href="https://app.matchie.events/events/' + eventId + '?ingressos"'));
-    assert.match(response.body, /Compre pelo app/);
+    return response;
   } finally {
     globalThis.fetch = originalFetch;
     if (originalEnvironment.supabaseUrl === undefined) delete process.env.SUPABASE_URL;
@@ -77,4 +94,4 @@ test('renders the event page CTA with the database event id and ticket intent', 
     if (originalEnvironment.publishableKey === undefined) delete process.env.SUPABASE_PUBLISHABLE_KEY;
     else process.env.SUPABASE_PUBLISHABLE_KEY = originalEnvironment.publishableKey;
   }
-});
+}
