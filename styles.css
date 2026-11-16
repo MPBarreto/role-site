@@ -483,10 +483,15 @@
 .producer-connection-step-number{position:relative;z-index:1;display:grid;width:42px;height:42px;margin:0 0 22px;place-items:center;border:1px solid rgba(255,91,154,.8);border-radius:50%;background:#0c0810;color:#fff;font-size:.82rem;font-weight:850;box-shadow:0 0 0 7px #0c0810,0 0 26px rgba(255,43,138,.18)}
 .producer-connection-copy h3{max-width:250px;margin:0 0 10px;font-size:clamp(1.15rem,1.55vw,1.45rem);line-height:1.08;letter-spacing:-.035em}
 .producer-connection-copy p{max-width:260px;margin:0;color:var(--muted);font-size:.88rem;line-height:1.5}
-.producer-connection-benefits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:54px}
+.producer-connection-outcomes{margin-top:76px;padding-top:38px;border-top:1px solid rgba(255,255,255,.14)}
+.producer-connection-outcomes-heading{max-width:760px}
+.producer-connection-outcomes-heading .eyebrow{margin-bottom:10px}
+.producer-connection-outcomes-heading h3{margin:0 0 10px;font-size:clamp(1.7rem,3vw,2.45rem);line-height:1.04;letter-spacing:-.045em}
+.producer-connection-outcomes-heading>p:last-child{max-width:680px;margin:0;color:var(--muted);font-size:.98rem;line-height:1.55}
+.producer-connection-benefits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:28px}
 .producer-connection-benefit{min-width:0;padding:23px;border:1px solid rgba(255,255,255,.12);border-radius:20px;background:linear-gradient(145deg,rgba(24,13,29,.76),rgba(12,8,16,.92))}
 .producer-connection-benefit .eyebrow{margin-bottom:11px;color:#ff78ad;font-size:.68rem}
-.producer-connection-benefit h3{margin:0 0 9px;font-size:1.12rem;line-height:1.1;letter-spacing:-.025em}
+.producer-connection-benefit h4{margin:0 0 9px;font-size:1.12rem;line-height:1.1;letter-spacing:-.025em}
 .producer-connection-benefit>p:last-child{margin:0;color:var(--muted);font-size:.88rem;line-height:1.5}
 .producer-connection-note{margin:26px 0 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);color:#b9b2bf;font-size:.88rem;line-height:1.5}
 .producer-connection-note strong{color:#ff789d}
@@ -505,7 +510,9 @@
   .producer-connection-step-number{width:42px;height:42px;margin:0}
   .producer-connection-copy{padding-top:2px}
   .producer-connection-copy h3{font-size:1.2rem}
-  .producer-connection-benefits{margin-top:32px}
+  .producer-connection-outcomes{margin-top:46px;padding-top:27px}
+  .producer-connection-outcomes-heading h3{font-size:1.7rem}
+  .producer-connection-benefits{margin-top:22px}
   .producer-connection-benefit{padding:19px}
   .producer-connection-note{margin-top:22px;padding-top:15px;font-size:.82rem}
 }
