@@ -1,6 +1,7 @@
 import config from './config.js';
 
 const CONSENT_KEY = 'role-site-tracking-consent-v1';
+const CONSENT_MAX_AGE = 60 * 60 * 24 * 365;
 const configuredAnalyticsId = config.GA4_MEASUREMENT_ID.trim();
 const configuredTagManagerId = config.GTM_ID.trim();
 const configuredMetaPixelId = config.META_PIXEL_ID.trim();
@@ -16,21 +17,44 @@ const marketingInput = document.querySelector('[data-consent-marketing]');
 const settingsButtons = [...document.querySelectorAll('[data-consent-settings]')];
 
 function readConsent() {
+  const parseConsent = (raw) => {
+    try {
+      const value = JSON.parse(raw || 'null');
+      if (value?.version !== 1 || typeof value.analytics !== 'boolean' || typeof value.marketing !== 'boolean') return null;
+      return { analytics: value.analytics, marketing: value.marketing };
+    } catch {
+      return null;
+    }
+  };
+
   try {
-    const value = JSON.parse(localStorage.getItem(CONSENT_KEY) || 'null');
-    if (value?.version !== 1 || typeof value.analytics !== 'boolean' || typeof value.marketing !== 'boolean') return null;
-    return { analytics: value.analytics, marketing: value.marketing };
+    const stored = parseConsent(localStorage.getItem(CONSENT_KEY));
+    if (stored) return stored;
+  } catch {}
+
+  const cookie = document.cookie
+    .split('; ')
+    .find((entry) => entry.startsWith(`${CONSENT_KEY}=`))
+    ?.slice(CONSENT_KEY.length + 1);
+  if (!cookie) return null;
+
+  try {
+    return parseConsent(decodeURIComponent(cookie));
   } catch {
     return null;
   }
 }
 
 function saveConsent(consent) {
+  const value = JSON.stringify({ ...consent, version: 1, updatedAt: new Date().toISOString() });
   try {
-    localStorage.setItem(CONSENT_KEY, JSON.stringify({ ...consent, version: 1, updatedAt: new Date().toISOString() }));
-  } catch {
-    // Tracking remains limited to this page when browser storage is unavailable.
-  }
+    localStorage.setItem(CONSENT_KEY, value);
+  } catch {}
+
+  const secure = window.location.protocol === 'https:' ? '; Secure' : '';
+  try {
+    document.cookie = `${CONSENT_KEY}=${encodeURIComponent(value)}; Max-Age=${CONSENT_MAX_AGE}; Path=/; SameSite=Lax${secure}`;
+  } catch {}
 }
 
 function openPanel({ focus = false } = {}) {
