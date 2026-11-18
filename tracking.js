@@ -1,7 +1,7 @@
 import config from './config.js';
 
 const CONSENT_KEY = 'role-site-tracking-consent-v1';
-const CONSENT_MAX_AGE = 60 * 60 * 24 * 30;
+const CONSENT_MAX_AGE = 60 * 60 * 24 * 45;
 const configuredAnalyticsId = config.GA4_MEASUREMENT_ID.trim();
 const configuredTagManagerId = config.GTM_ID.trim();
 const configuredMetaPixelId = config.META_PIXEL_ID.trim();
