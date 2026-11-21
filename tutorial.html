@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Tutorial do Matchie — Guia visual</title>
-  <meta name="description" content="Guia visual do Matchie: conheça eventos, compra, tickets, conexões, chat e recursos da conta." />
+  <meta name="description" content="Guia visual do Matchie para usuários e produtores: eventos, cadastro da organização, painel e conta Stripe." />
   <meta name="theme-color" content="#09070D" />
   <link rel="canonical" href="https://matchie.events/tutorial" />
   <link rel="icon" href="/favicon.ico" />
@@ -41,52 +41,40 @@
         <div class="tutorial-hero-copy">
           <p class="eyebrow">Guia visual do app</p>
           <h1 id="tutorial-title">Seu próximo rolê começa <span>aqui.</span></h1>
-          <p class="tutorial-hero-lead">Da descoberta de eventos ao próximo Match: percorra os principais caminhos do app e entenda o que fazer em cada etapa.</p>
+          <p class="tutorial-hero-lead">Escolha seu caminho no Matchie: veja como aproveitar eventos ou preparar sua organização para produzir e vender.</p>
           <div class="tutorial-hero-actions">
-            <a class="btn btn-primary" href="#jornada">Percorrer o guia <span aria-hidden="true">↓</span></a>
+            <a class="btn btn-primary" href="#tutorial-nav">Escolher meu guia <span aria-hidden="true">↓</span></a>
             <a class="btn btn-ghost" href="/events">Ver eventos</a>
           </div>
-          <div class="tutorial-capture-note"><span aria-hidden="true">●</span> Capturas reais do app web · iPhone 16 emulado no Chrome</div>
+          <div class="tutorial-capture-note"><span aria-hidden="true">●</span> Telas do app e prévias dos campos · sem dados pessoais</div>
         </div>
         <figure class="tutorial-hero-image">
-          <img src="/assets/tutorial/matchie/screens/matchie-events.jpg" alt="Lista de eventos reais disponíveis no Matchie, com filtros de data e preço." width="1179" height="2556" fetchpriority="high" />
+          <img src="/assets/tutorial/matchie/screens/matchie-events.png" alt="Lista de eventos do Matchie com filtros de data e eventos em destaque." width="863" height="1822" fetchpriority="high" />
           <figcaption>Uma prévia da lista de eventos</figcaption>
         </figure>
         <div class="tutorial-hero-stamp" aria-hidden="true"><span>do evento</span><b>ao encontro</b><i>✳</i></div>
       </div>
     </section>
 
-    <nav class="tutorial-nav" aria-label="Seções do tutorial" data-tutorial-nav></nav>
+    <nav class="tutorial-nav" id="tutorial-nav" aria-label="Público e seções do tutorial" data-tutorial-nav></nav>
 
     <section class="tutorial-intro container" aria-labelledby="journey-title">
-      <div class="tutorial-intro-number" aria-hidden="true">01–11</div>
+      <div class="tutorial-intro-number" aria-hidden="true" data-tutorial-intro-number>01–11</div>
       <div>
-        <p class="eyebrow">Da descoberta às conexões</p>
-        <h2 id="journey-title">Entenda o caminho até o rolê.</h2>
-        <p>Você pode consultar eventos, ver detalhes e escolher ingressos sem entrar. Para concluir a compra, o Matchie pede uma conta; depois, tickets, conexões e ajustes ficam reunidos nas áreas da sua conta.</p>
+        <p class="eyebrow" data-tutorial-intro-eyebrow>Da descoberta às conexões</p>
+        <h2 id="journey-title" data-tutorial-intro-title>Entenda o caminho até o rolê.</h2>
+        <p data-tutorial-intro-copy>Você pode consultar eventos, ver detalhes e escolher ingressos sem entrar. Para concluir a compra, o Matchie pede uma conta; depois, tickets, conexões e ajustes ficam reunidos nas áreas da sua conta.</p>
       </div>
-      <a class="tutorial-inline-link" href="/events">Abrir eventos <span aria-hidden="true">↗</span></a>
+      <a class="tutorial-inline-link" href="/events" data-tutorial-intro-link>Abrir eventos <span aria-hidden="true">↗</span></a>
     </section>
 
     <div class="tutorial-chapters" id="jornada" data-tutorial-chapters></div>
 
-    <section class="tutorial-next" id="proximas-etapas" aria-labelledby="next-title">
-      <div class="container tutorial-next-inner">
-        <div class="tutorial-next-copy">
-          <p class="eyebrow">Para quem organiza</p>
-          <h2 id="next-title">A área do produtor tem seu próprio caminho.</h2>
-          <p>Além da jornada de participantes, contas autorizadas acessam atalhos para administrar eventos e acompanhar a entrada. O acesso depende da permissão de produtor.</p>
-        </div>
-        <div class="tutorial-next-list" data-tutorial-pending></div>
-        <div class="tutorial-next-footnote"><span aria-hidden="true">↗</span><p>As capturas autenticadas usam estados de demonstração sem mensagens, matches ou compras. A área do produtor continua sem captura neste guia.</p></div>
-      </div>
-    </section>
-
     <section class="tutorial-end" aria-labelledby="end-title">
       <div class="container tutorial-end-inner">
         <p class="eyebrow">Escolha seu próximo passo</p>
-        <h2 id="end-title">O próximo Match pode começar com um evento.</h2>
-        <a class="btn btn-primary" href="/events">Encontrar meu próximo rolê <span aria-hidden="true">→</span></a>
+        <h2 id="end-title" data-tutorial-end-title>O próximo Match pode começar com um evento.</h2>
+        <a class="btn btn-primary" href="/events" data-tutorial-end-link>Encontrar meu próximo rolê <span aria-hidden="true">→</span></a>
       </div>
     </section>
   </main>
