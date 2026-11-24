@@ -278,7 +278,10 @@
 .producer-outcomes li>span{padding-top:2px;color:#ff74aa;font-size:.8rem;font-weight:900;letter-spacing:.08em}
 .producer-outcomes h3{margin:0;font-size:1.05rem;line-height:1.2}
 .producer-outcomes p{margin:6px 0 0;color:#aaa2ad;font-size:.9rem;line-height:1.5}
-.producer-outcome-primary{border-color:rgba(255,43,138,.5)!important;background:linear-gradient(110deg,rgba(255,43,138,.12),rgba(255,95,116,.035))}
+.producer-outcomes li.producer-outcome-primary{border-color:rgba(255,255,255,.45)!important;background:var(--pink);box-shadow:0 18px 42px rgba(255,43,138,.24);color:var(--bg)}
+.producer-outcomes li.producer-outcome-primary>span{color:#fff}
+.producer-outcomes li.producer-outcome-primary h3{color:#fff}
+.producer-outcome-primary>div p{color:#fff}
 .producer-outcome-primary>span{font-size:.9rem}
 .producer-outcome-primary h3{font-size:1.12rem}
 .producer-faq{padding-block:96px;background:linear-gradient(180deg,#100b14,#09070d);border-top:1px solid rgba(255,255,255,.08)}
