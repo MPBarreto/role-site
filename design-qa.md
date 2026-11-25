@@ -87,3 +87,28 @@
 - `git diff --check`: aprovado. Build e testes não foram executados.
 
 **final result: passed** — a seção aprovada foi implementada e conferida em desktop e em viewport mobile de 500 px; a captura exata em 390 px não ficou disponível pelo Chrome headless deste ambiente.
+
+## Matchie — `/produtores` — 24/11/2026
+
+**Referências e direção**
+
+- Slides anexados `Foto 1` a `Foto 7`: narrativa de venda antecipada, produto, jornada do público, benefícios financeiros, modo social, operação e próximo passo.
+- Home em `localhost:3000` usada como referência visual. Depois, a jornada “Do ingresso à conexão” foi alinhada à versão publicada; o quarto passo usa `chat-1.webp`.
+- Hero restaurado com a imagem de palco já usada pelo site e o título com gradiente rosa/coral.
+
+**Implementação**
+
+- Troquei as grades de cartões simples por uma sequência editorial com telas reais do app, lista financeira aberta, fotografia social e ilustração de operação.
+- FAQ, navegação, chamada de contato e textos funcionais foram preservados.
+- A primeira geração da imagem de operação acrescentou uma chama no cenário que podia ser confundida com outra marca; a versão aplicada remove esse emblema.
+- Ícones da seção usam Phosphor Icons; ilustrações geradas estão em `public/assets/generated/produtores-*.jpg`.
+- A jornada de `/produtores` usa as mesmas quatro imagens da home, incluindo `chat-1.webp` na etapa de conversa. Os títulos das seções seguem a escala tipográfica anterior da página.
+
+**Verificação visual e funcional**
+
+- Página conferida em `http://localhost:3000/produtores` em desktop (775 × 720) e mobile (390 × 844), comparando a narrativa com os slides anexados.
+- Hero, timeline do público, seção financeira, modo social, operação, FAQ e chamada final foram inspecionados; a página não mostrou rolagem horizontal no mobile.
+- FAQ foi expandido e recolhido no navegador. A página ficou aberta em `/produtores` e o servidor local permaneceu ativo.
+- As imagens da jornada foram conferidas no código e a imagem de conversa responde no localhost. Build e testes automatizados não foram executados.
+
+**final result: passed** — a página de produtores segue o storytelling dos sete slides com o estilo visual do site; a jornada correspondente da home também foi atualizada conforme a versão publicada.
